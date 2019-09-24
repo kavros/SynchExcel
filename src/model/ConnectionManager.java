@@ -38,7 +38,6 @@ public class ConnectionManager
             {
                 System.out.println("Database connection failed. Please enter credentials again.");
                 RetrieveAndStoreCredentials();
-
             }
         }
     }

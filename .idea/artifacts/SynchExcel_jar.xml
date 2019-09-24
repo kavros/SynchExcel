@@ -15,9 +15,9 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-codec-1.13/commons-codec-1.13-test-sources.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-codec-1.13/commons-codec-1.13-sources.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/jdbc/sqljdbc_6.0/enu/jre8/sqljdbc42.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jdbc/sqljdbc_6.0/enu/jre7/sqljdbc41.jar" path-in-jar="/" />
       <element id="file-copy" path="$PROJECT_DIR$/libs/jdbc/sqljdbc_6.0/enu/jre7/sqljdbc41.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/libs/jdbc/sqljdbc_6.0/enu/jre8/sqljdbc42.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/libs/jdbc/sqljdbc_6.0/enu/auth/x86/sqljdbc_auth.dll" />
     </root>
   </artifact>
 </component>

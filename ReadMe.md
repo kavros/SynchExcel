@@ -1,5 +1,6 @@
 # Overview
-
+This application updates the product fields inside an Excel document based on a MYSQL table.
+ 
 ## Build and run
 * Open and build project using IntelliJ.
 * Run application.
@@ -12,3 +13,6 @@
 ## External libraries
 * JDBC
 * Apache Commons Codec
+
+## Useful Links
+* [Fix for "invalid signature file digest.."](https://stackoverflow.com/questions/34855649/invalid-signature-file-digest-for-manifest-main-attributes-exception-while-tryin/34856095#34856095)
