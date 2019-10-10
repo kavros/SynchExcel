@@ -2,6 +2,7 @@ package main;
 import model.ConnectionManager;
 
 
+import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,16 +21,11 @@ public class Main
 
     public static void main(String[] args)
     {
-
-
         try
         {
-
             ConnectionManager conn=new ConnectionManager( "./data/credentials.txt");
-
-
-            HashMap<Double,Double> excelData = new HashMap<Double, Double>();
-
+            HashMap<String,Double> databaseData = conn.GetWarehouseData();
+            HashMap<String,Double> excelData = new HashMap<String, Double>();
 
             FileInputStream file = new FileInputStream(new File("./excel/a.xlsx"));
 
@@ -54,27 +50,67 @@ public class Main
                 Cell quantity = row.getCell(4);
 
                 // if a cell is blank then it's null
-                if(barcode==null || quantity == null)
-                {
+                if (barcode == null || quantity == null) {
                     continue;
                 }
 
                 CellType bt = barcode.getCellType();
                 CellType qt = quantity.getCellType();
-
-                if( bt == CellType.NUMERIC && qt == CellType.NUMERIC)
+                String btVal = null;
+                double qtVal = -1;
+                if (bt == CellType.NUMERIC && qt == CellType.NUMERIC)
                 {
-                    //System.out.printf("%.0f\n",barcode.getNumericCellValue() );
-                    excelData.put(barcode.getNumericCellValue(),quantity.getNumericCellValue());
+                    btVal = String.format ("%.0f",barcode.getNumericCellValue());
+                    qtVal = quantity.getNumericCellValue();
                 }
-                else if(bt == CellType.STRING)
+                else if (bt == CellType.STRING)
                 {
-
-                //    System.out.println("Error: Cell type"+bt.name() +" is not valid.--"+cnt);
-
+                    //System.out.println(barcode.getStringCellValue() );
+                    btVal = barcode.getStringCellValue();
+                    //System.out.println("Error: Cell type"+bt.name() +" is not valid.--"+cnt);
                 }
 
-                    /*if (bt == CellType.STRING)
+                if (    btVal ==  "ΒΟΗΘΗΤΙΚΟΣ ΚΩΔΙΚΟΣ"  ||
+                        btVal == "ΣΥΝΟΛΟ" ||
+                        qtVal ==-1)
+                {
+                    continue;
+                }
+
+                excelData.put(btVal,qtVal);
+
+                if(databaseData.get(btVal) != null)
+                {
+                    System.out.println("Found");
+                }
+
+            }
+
+            for (String i : excelData.keySet())
+            {
+                //System.out.printf( "%s, %.0f \n",i, excelData.get(i));
+                System.out.println( i +","+excelData.get(i));
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: "+e);
+        }
+
+
+
+
+
+
+
+
+
+    }
+}
+
+
+     /*if (bt == CellType.STRING)
                 {
                     //System.out.println(barcode.getStringCellValue() );
                 }
@@ -94,26 +130,4 @@ public class Main
                 {
 
                 }*/
-            }
 
-            for (double i : excelData.keySet())
-            {
-                System.out.printf( "%.0f,%.0f \n",i, excelData.get(i));
-            }
-
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error: "+e);
-        }
-
-
-
-
-
-
-
-
-
-    }
-}

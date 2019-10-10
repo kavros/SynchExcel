@@ -2,11 +2,13 @@ package model;
 
 import java.io.*;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ConnectionManager
 {
-    enum state {
+    enum state
+    {
         SUCCESS,
         FAILURE
     };
@@ -122,6 +124,53 @@ public class ConnectionManager
         return  state.SUCCESS;
     }
 
+    public HashMap<String,Double> GetWarehouseData()
+    {
+        HashMap<String,Double> barcodeToQuantity = new HashMap<>();
+        String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
+        Connection conn = null;
+        try
+        {
+            conn = DriverManager.getConnection(dbURL, username, pass);
+            if (conn != null)
+            {
+                Statement st = conn.createStatement();
+                ResultSet res = st.executeQuery(
+                        "select sFactCode,sstRemain1 " +
+                        "        FROM SSTORE " +
+                        "        JOIN smast on sstore.sfileId=smast.sfileid " +
+                        "        where spaFileIdNo=2;");
+                while (res.next())
+                {
+                    double quantity = res.getDouble(2);
+                    String barcode = res.getString(1);
+                    barcodeToQuantity.put(barcode,quantity);
+                    System.out.println(barcode+","+barcodeToQuantity.get(barcode));
+                }
+                conn.commit();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            try
+            {
+                if (conn != null && !conn.isClosed())
+                {
+                    conn.close();
+                }
+            }
+            catch (SQLException ex)
+            {
+                ex.printStackTrace();
+
+            }
+        }
+        return  barcodeToQuantity;
+    }
     state TestConnection()
     {
         String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
@@ -129,16 +178,7 @@ public class ConnectionManager
         try
         {
             conn = DriverManager.getConnection(dbURL, username, pass);
-            /*if (conn != null)
-            {
-                Statement st = conn.createStatement();
-                ResultSet res = st.executeQuery("select * from sstore");
-                while (res.next()) {
-                    String answer = res.getString(2);
-                    System.out.println(answer);
-                }
-                conn.commit();
-            }*/
+
             if(conn == null)
             {
                 System.out.println("conn is null");
