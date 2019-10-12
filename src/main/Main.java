@@ -2,30 +2,78 @@ package main;
 import model.ConnectionManager;
 
 
-import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class Main
 {
+    static private Row getRow(XSSFSheet sheet,int index)
+    {
+        Row r = sheet.getRow(index);
+        if (r == null)
+        {
+            r = sheet.createRow(index);
+        }
+        return r;
+    }
 
 
+    static private Cell getCell(Row r,int index)
+    {
+        Cell c = r.getCell(index);
+        if(c == null)
+        {
+            c = r.createCell(index);
+        }
+        return  c;
+    }
+
+    static private String getBarcode(Cell c)
+    {
+        String btVal = null;
+
+        if(c == null)
+            return  null;
+
+        if (c.getCellType() == CellType.NUMERIC )
+        {
+            btVal = String.format ("%.0f",c.getNumericCellValue());
+        }
+        else if (c.getCellType() == CellType.STRING)
+        {
+            btVal = c.getStringCellValue();
+        }
+
+        return btVal;
+    }
+
+    static private Double getQuantity(Cell c)
+    {
+        Double qtVal =null;
+        if(c==null)
+            return null;
+
+        if (c.getCellType() == CellType.NUMERIC )
+        {
+            qtVal = c.getNumericCellValue();
+        }
+        return qtVal;
+    }
 
     public static void main(String[] args)
     {
         try
         {
             ConnectionManager conn=new ConnectionManager( "./data/credentials.txt");
-            HashMap<String,Double> databaseData = conn.GetWarehouseData();
-            HashMap<String,Double> excelData = new HashMap<String, Double>();
+            HashMap<String,Double> dbData = conn.GetWarehouseData();
+            //HashMap<String,Double> excelData = new HashMap<String, Double>();
 
             FileInputStream file = new FileInputStream(new File("./excel/a.xlsx"));
 
@@ -37,60 +85,51 @@ public class Main
 
             //Get iterator to all the rows in current sheet
             Iterator<Row> rowIterator = sheet.iterator();
-            System.out.println( );
+            /*Row r = getRow(sheet,0);
+            Cell ce = getCell(r,0);
+            ce.setCellValue("LALA");*/
 
+            int cnt=0;
             while(rowIterator.hasNext())
             {
+                cnt++;
                 Row row = rowIterator.next();
 
-                //For each row, iterate through each columns
-                //Iterator<Cell> cellIterator = row.cellIterator();
-                //Cell cell = cellIterator.next();
-                Cell barcode = row.getCell(2);
-                Cell quantity = row.getCell(4);
+                Cell bCell = row.getCell(3);
+                Cell qCell = row.getCell(5);
 
-                // if a cell is blank then it's null
-                if (barcode == null || quantity == null) {
-                    continue;
-                }
+                String bVal = getBarcode(bCell);
+                Double qVal = getQuantity(qCell);
+                if (bVal == null || qVal == null) continue;
 
-                CellType bt = barcode.getCellType();
-                CellType qt = quantity.getCellType();
-                String btVal = null;
-                double qtVal = -1;
-                if (bt == CellType.NUMERIC && qt == CellType.NUMERIC)
+                //excelData.put(bVal,qVal);
+
+                if(dbData.get(bVal) != null )
                 {
-                    btVal = String.format ("%.0f",barcode.getNumericCellValue());
-                    qtVal = quantity.getNumericCellValue();
-                }
-                else if (bt == CellType.STRING)
-                {
-                    //System.out.println(barcode.getStringCellValue() );
-                    btVal = barcode.getStringCellValue();
-                    //System.out.println("Error: Cell type"+bt.name() +" is not valid.--"+cnt);
-                }
+                    Double qValDb = dbData.get(bVal);
 
-                if (    btVal ==  "ΒΟΗΘΗΤΙΚΟΣ ΚΩΔΙΚΟΣ"  ||
-                        btVal == "ΣΥΝΟΛΟ" ||
-                        qtVal ==-1)
-                {
-                    continue;
-                }
+                    System.out.println("Database qt "+qValDb);
+                    System.out.println("Excel qt "+ qVal);
+                    if(qValDb != qVal)
+                    {
+                        System.out.println("Update "+bVal+" from "+qVal+" to "+qValDb);
+                        Cell c = getCell(row,5);
+                        c.setCellValue(qValDb);
 
-                excelData.put(btVal,qtVal);
-
-                if(databaseData.get(btVal) != null)
-                {
-                    System.out.println("Found");
+                        Cell c2 = getCell(row,1);
+                        c2.setCellValue("Updated");
+                    }
                 }
 
             }
+            System.out.println(cnt);
 
-            for (String i : excelData.keySet())
-            {
-                //System.out.printf( "%s, %.0f \n",i, excelData.get(i));
-                System.out.println( i +","+excelData.get(i));
-            }
+
+            file.close();
+
+            FileOutputStream output_file =new FileOutputStream(new File("./excel/b.xlsx"));
+            //write changes
+            workbook.write(output_file);
 
         }
         catch (Exception e)
@@ -131,3 +170,8 @@ public class Main
 
                 }*/
 
+     /*CellStyle style = workbook.createCellStyle();
+                    Font font = workbook.createFont();
+                    font.setColor(IndexedColors.RED.getIndex());
+                    style.setFont(font);
+                    sheet.getRow(rCnt).setRowStyle(style);*/
