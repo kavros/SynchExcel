@@ -1,8 +1,7 @@
 package main;
-import model.ConnectionManager;
+import model.DatabaseManager;
 
 
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -66,14 +65,19 @@ public class Main
         }
         return qtVal;
     }
+    static class Value
+    {
+        int row;
+        Double quantity;
+    }
 
     public static void main(String[] args)
     {
         try
         {
-            ConnectionManager conn=new ConnectionManager( "./data/credentials.txt");
+            DatabaseManager conn=new DatabaseManager( "./data/credentials.txt");
             HashMap<String,Double> dbData = conn.GetWarehouseData();
-            //HashMap<String,Double> excelData = new HashMap<String, Double>();
+            HashMap<String,Value> excelData = new HashMap<String, Value>();
 
             FileInputStream file = new FileInputStream(new File("./excel/a.xlsx"));
 
@@ -89,10 +93,10 @@ public class Main
             Cell ce = getCell(r,0);
             ce.setCellValue("LALA");*/
 
-            int cnt=0;
+            int rCnt=0;
             while(rowIterator.hasNext())
             {
-                cnt++;
+                rCnt++;
                 Row row = rowIterator.next();
 
                 Cell bCell = row.getCell(3);
@@ -102,28 +106,43 @@ public class Main
                 Double qVal = getQuantity(qCell);
                 if (bVal == null || qVal == null) continue;
 
-                //excelData.put(bVal,qVal);
+                Value v =  new Value();
+                v.quantity=qVal;
+                v.row=rCnt;
+                excelData.put(bVal,v);
+            }
+            int lastRow=rCnt;
 
-                if(dbData.get(bVal) != null )
+            for(String bDbVal:dbData.keySet())
+            {
+                Double qValDb = dbData.get(bDbVal);
+                Value exlEntry = excelData.get(bDbVal);
+
+                if (excelData.get(bDbVal) != null)
                 {
-                    Double qValDb = dbData.get(bVal);
 
-                    System.out.println("Database qt "+qValDb);
-                    System.out.println("Excel qt "+ qVal);
-                    if(qValDb != qVal)
+                    if (qValDb != exlEntry.quantity)
                     {
-                        System.out.println("Update "+bVal+" from "+qVal+" to "+qValDb);
-                        Cell c = getCell(row,5);
+
+                        Cell c = getCell(sheet.getRow(exlEntry.row), 5);
                         c.setCellValue(qValDb);
 
-                        Cell c2 = getCell(row,1);
+                        Cell c2 = getCell(sheet.getRow(exlEntry.row), 1);
                         c2.setCellValue("Updated");
+                        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
                     }
+
                 }
+                else
+                {
+                    if(qValDb == 0) continue;
 
+                    sheet.createRow(lastRow+1).createCell(3).setCellValue(bDbVal);
+                    sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
+                    lastRow++;
+                    System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
+                }
             }
-            System.out.println(cnt);
-
 
             file.close();
 
@@ -147,31 +166,3 @@ public class Main
 
     }
 }
-
-
-     /*if (bt == CellType.STRING)
-                {
-                    //System.out.println(barcode.getStringCellValue() );
-                }
-                else if(bt == CellType.BLANK)
-                {
-
-                }
-                else if(bt == CellType.ERROR)
-                {
-
-                }
-                else if(bt == CellType.FORMULA)
-                {
-
-                }
-                else if(bt == CellType._NONE)
-                {
-
-                }*/
-
-     /*CellStyle style = workbook.createCellStyle();
-                    Font font = workbook.createFont();
-                    font.setColor(IndexedColors.RED.getIndex());
-                    style.setFont(font);
-                    sheet.getRow(rCnt).setRowStyle(style);*/

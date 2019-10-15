@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ConnectionManager
+public class DatabaseManager
 {
     enum state
     {
@@ -18,7 +18,7 @@ public class ConnectionManager
     private String databaseName;
     private String credFilePath;
 
-    public ConnectionManager(String filePath)
+    public DatabaseManager(String filePath)
     {
         /*try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -93,6 +93,11 @@ public class ConnectionManager
 
     }
 
+    String getProductName(String barcode)
+    {
+
+        return null;
+    }
     state GetCredentialsFromFile() {
         try
         {
@@ -145,7 +150,6 @@ public class ConnectionManager
                     double quantity = res.getDouble(2);
                     String barcode = res.getString(1);
                     barcodeToQuantity.put(barcode,quantity);
-                    System.out.println(barcode+","+barcodeToQuantity.get(barcode));
                 }
                 conn.commit();
             }
