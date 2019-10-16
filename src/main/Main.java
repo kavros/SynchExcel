@@ -71,6 +71,26 @@ public class Main
         Double quantity;
     }
 
+    static private void updateRow(XSSFSheet sheet,Value exlEntry,Double qValDb,String bDbVal)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), 5);
+        c.setCellValue(qValDb);
+
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), 1);
+        c2.setCellValue("Updated");
+        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
+    }
+
+    static private void insertRowLast(XSSFSheet sheet,int lastRow,String bDbVal,Double qValDb,HashMap<String,Double>  dbData,String pName)
+    {
+
+        sheet.createRow(lastRow+1).createCell(3).setCellValue(bDbVal);
+        sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
+        sheet.getRow(lastRow+1).createCell(4).setCellValue(pName);
+
+        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
+    }
+
     public static void main(String[] args)
     {
         try
@@ -89,9 +109,6 @@ public class Main
 
             //Get iterator to all the rows in current sheet
             Iterator<Row> rowIterator = sheet.iterator();
-            /*Row r = getRow(sheet,0);
-            Cell ce = getCell(r,0);
-            ce.setCellValue("LALA");*/
 
             int rCnt=0;
             while(rowIterator.hasNext())
@@ -117,37 +134,27 @@ public class Main
             {
                 Double qValDb = dbData.get(bDbVal);
                 Value exlEntry = excelData.get(bDbVal);
+                boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
 
-                if (excelData.get(bDbVal) != null)
+                if (isBarcodeInExcel)
                 {
-
-                    if (qValDb != exlEntry.quantity)
+                    boolean isQuantityChanged = (qValDb != exlEntry.quantity);
+                    if ( isQuantityChanged )
                     {
-
-                        Cell c = getCell(sheet.getRow(exlEntry.row), 5);
-                        c.setCellValue(qValDb);
-
-                        Cell c2 = getCell(sheet.getRow(exlEntry.row), 1);
-                        c2.setCellValue("Updated");
-                        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
+                        updateRow(sheet,exlEntry,qValDb,bDbVal);
                     }
-
                 }
                 else
                 {
                     if(qValDb == 0) continue;
-
-                    sheet.createRow(lastRow+1).createCell(3).setCellValue(bDbVal);
-                    sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
+                    String pName = conn.getProductName(bDbVal);
+                    insertRowLast(sheet, lastRow, bDbVal,qValDb,dbData,pName);
                     lastRow++;
-                    System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
                 }
             }
 
             file.close();
-
             FileOutputStream output_file =new FileOutputStream(new File("./excel/b.xlsx"));
-            //write changes
             workbook.write(output_file);
 
         }

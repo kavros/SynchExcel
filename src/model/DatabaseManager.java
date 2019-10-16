@@ -93,10 +93,49 @@ public class DatabaseManager
 
     }
 
-    String getProductName(String barcode)
+    public String getProductName(String barcode)
     {
+        String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
+        Connection conn = null;
+        String productName = null;
+        try
+        {
+            conn = DriverManager.getConnection(dbURL, username, pass);
+            if (conn != null)
+            {
+                Statement st = conn.createStatement();
+                ResultSet res = st.executeQuery(
+                        "select sname " +
+                            "FROM SMAST " +
+                            "where sfactCode="+"'"+barcode+"';");
+                while (res.next())
+                {
+                    productName = res.getString(1);
 
-        return null;
+                }
+                conn.commit();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            try
+            {
+                if (conn != null && !conn.isClosed())
+                {
+                    conn.close();
+                }
+            }
+            catch (SQLException ex)
+            {
+                ex.printStackTrace();
+
+            }
+        }
+        return productName;
     }
     state GetCredentialsFromFile() {
         try
