@@ -9,43 +9,30 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 
 
 
-public class ExcelParser {
+public class ExcelGenerator {
     public class RowData
     {
-        public int row;
-        public Double quantity;
+        int row;
+        Double quantity;
     }
     private HashMap<String,RowData> excelData ;
     private int lastRow;
     XSSFWorkbook workbook;
 
-    public ExcelParser()
+    public ExcelGenerator()
     {
         excelData = new HashMap<String, RowData>();
         lastRow = 0;
         Init();
     }
 
-    public HashMap<String,RowData> GetExcelData()
-    {
-        return excelData;
-    }
-
-    public int GetLastRow()
-    {
-        return lastRow;
-    }
-
-    public XSSFWorkbook GetWorkBook()
-    {
-        return  workbook;
-    }
-
+   
     private void Init()
     {
         try
@@ -119,5 +106,72 @@ public class ExcelParser {
         }
         return qtVal;
     }
+
+    private Cell getCell(Row r,int index)
+    {
+        Cell c = r.getCell(index);
+        if(c == null)
+        {
+            c = r.createCell(index);
+        }
+        return  c;
+    }
+
+
+    private void updateRow(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb, String bDbVal)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), 5);
+        c.setCellValue(qValDb);
+
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), 1);
+        c2.setCellValue("Updated");
+        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
+    }
+
+    private void insertRowLast(XSSFSheet sheet,int lastRow,String bDbVal,Double qValDb,HashMap<String,Double>  dbData,String pName)
+    {
+
+        sheet.createRow(lastRow+1).createCell(3).setCellValue(bDbVal);
+        sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
+        sheet.getRow(lastRow+1).createCell(4).setCellValue(pName);
+
+        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
+    }
+
+    public void GenerateExcel() throws  Exception
+    {
+        DatabaseManager conn=new DatabaseManager( "./data/credentials.txt");
+        HashMap<String,Double> dbData = conn.GetWarehouseData();
+
+        XSSFSheet sheet =workbook.getSheetAt(0);
+
+        for(String bDbVal:dbData.keySet())
+        {
+            Double qValDb = dbData.get(bDbVal);
+            ExcelGenerator.RowData exlEntry = excelData.get(bDbVal);
+            boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
+
+            if (isBarcodeInExcel)
+            {
+                boolean isQuantityChanged = (qValDb != exlEntry.quantity);
+                if ( isQuantityChanged )
+                {
+                    updateRow(sheet,exlEntry,qValDb,bDbVal);
+                }
+            }
+            else
+            {
+                if(qValDb == 0) continue;
+                String pName = conn.getProductName(bDbVal);
+                insertRowLast(sheet, lastRow, bDbVal,qValDb,dbData,pName);
+                lastRow++;
+            }
+        }
+
+
+        FileOutputStream output_file =new FileOutputStream(new File("./excel/b.xlsx"));
+        workbook.write(output_file);
+    }
+
 
 }
