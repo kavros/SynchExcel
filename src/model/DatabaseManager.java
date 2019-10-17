@@ -20,11 +20,6 @@ public class DatabaseManager
 
     public DatabaseManager(String filePath)
     {
-        /*try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
         credFilePath =filePath;
         if(GetCredentialsFromFile() == state.FAILURE)
         {

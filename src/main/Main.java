@@ -2,6 +2,7 @@ package main;
 import model.DatabaseManager;
 
 
+import model.ExcelParser;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -65,13 +66,8 @@ public class Main
         }
         return qtVal;
     }
-    static class Value
-    {
-        int row;
-        Double quantity;
-    }
 
-    static private void updateRow(XSSFSheet sheet,Value exlEntry,Double qValDb,String bDbVal)
+    static private void updateRow(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb, String bDbVal)
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), 5);
         c.setCellValue(qValDb);
@@ -91,49 +87,27 @@ public class Main
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
     }
 
+
+
     public static void main(String[] args)
     {
         try
         {
             DatabaseManager conn=new DatabaseManager( "./data/credentials.txt");
             HashMap<String,Double> dbData = conn.GetWarehouseData();
-            HashMap<String,Value> excelData = new HashMap<String, Value>();
 
-            FileInputStream file = new FileInputStream(new File("./excel/a.xlsx"));
+            ExcelParser p = new ExcelParser();
+            HashMap<String,ExcelParser.RowData> excelData = p.GetExcelData();
 
-            //Get the workbook instance for XLS file
-            XSSFWorkbook workbook = new XSSFWorkbook (file);
+            XSSFWorkbook workbook = p.GetWorkBook();
+            XSSFSheet sheet =workbook.getSheetAt(0);
 
-            //Get first sheet from the workbook
-            XSSFSheet sheet = workbook.getSheetAt(0);
-
-            //Get iterator to all the rows in current sheet
-            Iterator<Row> rowIterator = sheet.iterator();
-
-            int rCnt=0;
-            while(rowIterator.hasNext())
-            {
-                rCnt++;
-                Row row = rowIterator.next();
-
-                Cell bCell = row.getCell(3);
-                Cell qCell = row.getCell(5);
-
-                String bVal = getBarcode(bCell);
-                Double qVal = getQuantity(qCell);
-                if (bVal == null || qVal == null) continue;
-
-                Value v =  new Value();
-                v.quantity=qVal;
-                v.row=rCnt;
-                excelData.put(bVal,v);
-            }
-            int lastRow=rCnt;
+            int lastRow = p.GetLastRow();
 
             for(String bDbVal:dbData.keySet())
             {
                 Double qValDb = dbData.get(bDbVal);
-                Value exlEntry = excelData.get(bDbVal);
+                ExcelParser.RowData exlEntry = excelData.get(bDbVal);
                 boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
 
                 if (isBarcodeInExcel)
@@ -153,7 +127,7 @@ public class Main
                 }
             }
 
-            file.close();
+
             FileOutputStream output_file =new FileOutputStream(new File("./excel/b.xlsx"));
             workbook.write(output_file);
 
