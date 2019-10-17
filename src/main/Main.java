@@ -14,16 +14,6 @@ import java.util.Iterator;
 
 public class Main
 {
-    static private Row getRow(XSSFSheet sheet,int index)
-    {
-        Row r = sheet.getRow(index);
-        if (r == null)
-        {
-            r = sheet.createRow(index);
-        }
-        return r;
-    }
-
 
     static private Cell getCell(Row r,int index)
     {
@@ -35,37 +25,6 @@ public class Main
         return  c;
     }
 
-    static private String getBarcode(Cell c)
-    {
-        String btVal = null;
-
-        if(c == null)
-            return  null;
-
-        if (c.getCellType() == CellType.NUMERIC )
-        {
-            btVal = String.format ("%.0f",c.getNumericCellValue());
-        }
-        else if (c.getCellType() == CellType.STRING)
-        {
-            btVal = c.getStringCellValue();
-        }
-
-        return btVal;
-    }
-
-    static private Double getQuantity(Cell c)
-    {
-        Double qtVal =null;
-        if(c==null)
-            return null;
-
-        if (c.getCellType() == CellType.NUMERIC )
-        {
-            qtVal = c.getNumericCellValue();
-        }
-        return qtVal;
-    }
 
     static private void updateRow(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb, String bDbVal)
     {
