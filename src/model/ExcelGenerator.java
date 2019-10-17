@@ -32,7 +32,7 @@ public class ExcelGenerator {
         Init();
     }
 
-   
+
     private void Init()
     {
         try
@@ -47,10 +47,10 @@ public class ExcelGenerator {
 
             //Get iterator to all the rows in current sheet
             Iterator<Row> rowIterator = sheet.iterator();
-            int rCnt = 0;
+
             while(rowIterator.hasNext())
             {
-                rCnt++;
+                this.lastRow++;
                 Row row = rowIterator.next();
 
                 Cell bCell = row.getCell(3);
@@ -62,10 +62,10 @@ public class ExcelGenerator {
 
                 RowData v =  new RowData();
                 v.quantity=qVal;
-                v.row=rCnt;
+                v.row=lastRow;
                 excelData.put(bVal,v);
             }
-            lastRow=rCnt;
+
             file.close();
         }
         catch (Exception e)
@@ -135,7 +135,7 @@ public class ExcelGenerator {
         sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
         sheet.getRow(lastRow+1).createCell(4).setCellValue(pName);
 
-        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")");
+        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
     }
 
     public void GenerateExcel() throws  Exception
