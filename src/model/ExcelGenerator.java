@@ -140,7 +140,7 @@ public class ExcelGenerator {
 
     public void GenerateExcel() throws  Exception
     {
-        DatabaseManager conn=new DatabaseManager( "./data/credentials.txt");
+        DatabaseManager conn=new DatabaseManager( credFilePath);
         HashMap<String,Double> dbData = conn.GetWarehouseData();
 
         XSSFSheet sheet =workbook.getSheetAt(0);
