@@ -21,9 +21,14 @@ public class ExcelGenerator {
         int row;
         Double quantity;
     }
+
+    private final int bCellNum = 3;     // barcode
+    private final int qCellNum = 5;     // quantity
+    private final int stCellNum = 1;    // update status
+    private final int descCellNum= 4;   // product description
     private HashMap<String,RowData> excelData ;
     private int lastRow;
-    XSSFWorkbook workbook;
+    private XSSFWorkbook workbook;
 
     public ExcelGenerator()
     {
@@ -53,8 +58,8 @@ public class ExcelGenerator {
                 this.lastRow++;
                 Row row = rowIterator.next();
 
-                Cell bCell = row.getCell(3);
-                Cell qCell = row.getCell(5);
+                Cell bCell = row.getCell(bCellNum);
+                Cell qCell = row.getCell(qCellNum);
 
                 String bVal = GetBarcode(bCell);
                 Double qVal = GetQuantity(qCell);
@@ -120,10 +125,10 @@ public class ExcelGenerator {
 
     private void updateRow(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb, String bDbVal)
     {
-        Cell c = getCell(sheet.getRow(exlEntry.row), 5);
+        Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
         c.setCellValue(qValDb);
 
-        Cell c2 = getCell(sheet.getRow(exlEntry.row), 1);
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
         c2.setCellValue("Updated");
         System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
     }
@@ -131,9 +136,9 @@ public class ExcelGenerator {
     private void insertRowLast(XSSFSheet sheet,int lastRow,String bDbVal,Double qValDb,HashMap<String,Double>  dbData,String pName)
     {
 
-        sheet.createRow(lastRow+1).createCell(3).setCellValue(bDbVal);
-        sheet.getRow(lastRow+1).createCell(5).setCellValue(dbData.get(bDbVal));
-        sheet.getRow(lastRow+1).createCell(4).setCellValue(pName);
+        sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
+        sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal));
+        sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
 
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
     }

@@ -13,6 +13,7 @@ public class DatabaseManager
     private String hostname;
     private String databaseName;
     private String credFilePath;
+    private final String storageId = "2";
 
     public DatabaseManager(String filePath)
     {
@@ -175,7 +176,7 @@ public class DatabaseManager
                         "select sFactCode,sstRemain1 " +
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
-                        "        where spaFileIdNo=2;");
+                        "        where spaFileIdNo="+storageId);
                 while (res.next())
                 {
                     double quantity = res.getDouble(2);
