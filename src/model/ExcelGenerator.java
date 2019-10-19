@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
-
+import static  model.Constants.*;
 
 
 public class ExcelGenerator {
@@ -37,7 +37,7 @@ public class ExcelGenerator {
     {
         try
         {
-            FileInputStream file = new FileInputStream(new File("./excel/a.xlsx"));
+            FileInputStream file = new FileInputStream(new File(Constants.inputExcel));
 
             //Get the workbook instance for XLS file
             workbook = new XSSFWorkbook (file);
@@ -169,7 +169,7 @@ public class ExcelGenerator {
         }
 
 
-        FileOutputStream output_file =new FileOutputStream(new File("./excel/b.xlsx"));
+        FileOutputStream output_file =new FileOutputStream(new File(Constants.outExcel));
         workbook.write(output_file);
     }
 

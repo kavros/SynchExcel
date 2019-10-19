@@ -7,11 +7,7 @@ import java.util.Scanner;
 
 public class DatabaseManager
 {
-    enum state
-    {
-        SUCCESS,
-        FAILURE
-    };
+
     private String username;
     private String pass;
     private String hostname;
@@ -132,6 +128,7 @@ public class DatabaseManager
         }
         return productName;
     }
+
     state GetCredentialsFromFile() {
         try
         {
@@ -209,6 +206,7 @@ public class DatabaseManager
         }
         return  barcodeToQuantity;
     }
+
     state TestConnection()
     {
         String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
