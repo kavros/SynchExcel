@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -109,6 +110,11 @@ public class ExcelGenerator {
 
     private Cell getCell(Row r,int index)
     {
+        if(r == null)
+        {
+            System.err.println("Error: row cannot be null");
+            System.exit(-1);
+        }
         Cell c = r.getCell(index);
         if(c == null)
         {
