@@ -34,23 +34,16 @@ public class ExcelGenerator {
     {
         excelData = new HashMap<String, RowData>();
         lastRow = 0;
-        Init();
     }
 
 
-    private void Init()
+    private state Init()
     {
         try
         {
             FileInputStream file = new FileInputStream(new File(Constants.inputExcel));
-
-            //Get the workbook instance for XLS file
             workbook = new XSSFWorkbook (file);
-
-            //Get first sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-
-            //Get iterator to all the rows in current sheet
             Iterator<Row> rowIterator = sheet.iterator();
 
             while(rowIterator.hasNext())
@@ -76,8 +69,10 @@ public class ExcelGenerator {
         catch (Exception e)
         {
             System.out.println("Error: "+e);
+            return state.FAILURE;
         }
 
+        return  state.SUCCESS;
     }
 
     private String GetBarcode(Cell c)
@@ -143,8 +138,11 @@ public class ExcelGenerator {
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
     }
 
-    public void GenerateExcel() throws  Exception
+    public state GenerateExcel() throws  Exception
     {
+        if( Init() == state.FAILURE)
+            return state.FAILURE;
+
         DatabaseManager conn=new DatabaseManager( credFilePath);
         HashMap<String,Double> dbData = conn.GetWarehouseData();
 
@@ -176,6 +174,8 @@ public class ExcelGenerator {
 
         FileOutputStream output_file =new FileOutputStream(new File(Constants.outExcel));
         workbook.write(output_file);
+
+        return state.SUCCESS;
     }
 
 

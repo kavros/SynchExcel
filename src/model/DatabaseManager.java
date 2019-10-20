@@ -14,6 +14,7 @@ public class DatabaseManager
     private String databaseName;
     private String credFilePath;
     private final String storageId = "2";
+    private String dbURL;
 
     public DatabaseManager(String filePath)
     {
@@ -63,9 +64,10 @@ public class DatabaseManager
         hostname = scan.next();
         System.out.print("Database name:");
         databaseName = scan.next();
+        dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
     }
 
-    void SaveCredentials()
+    private void SaveCredentials()
     {
         try
         {
@@ -87,7 +89,6 @@ public class DatabaseManager
 
     public String getProductName(String barcode)
     {
-        String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
         Connection conn = null;
         String productName = null;
         try
@@ -130,7 +131,7 @@ public class DatabaseManager
         return productName;
     }
 
-    state GetCredentialsFromFile() {
+    private state GetCredentialsFromFile() {
         try
         {
             File file = new File(credFilePath);
@@ -148,6 +149,7 @@ public class DatabaseManager
             pass        = td.decrypt(details[1]);
             hostname    = details[2];
             databaseName = details[3];
+            dbURL        = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
             if(username==null || pass==null|| hostname==null)
             {
                 return state.FAILURE;
@@ -158,13 +160,14 @@ public class DatabaseManager
         {
             System.out.println(e);
         }
+
         return  state.SUCCESS;
     }
 
     public HashMap<String,Double> GetWarehouseData()
     {
         HashMap<String,Double> barcodeToQuantity = new HashMap<>();
-        String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
+
         Connection conn = null;
         try
         {
@@ -208,9 +211,8 @@ public class DatabaseManager
         return  barcodeToQuantity;
     }
 
-    state TestConnection()
+    private state TestConnection()
     {
-        String dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
         Connection conn = null;
         try
         {
