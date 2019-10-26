@@ -1,16 +1,16 @@
 package model;
 
-import main.Main;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.sound.sampled.Line;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import static  model.Constants.*;
@@ -28,15 +28,19 @@ public class ExcelGenerator {
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 4;   // product description
     private HashMap<String,RowData> excelData ;
-    private int lastRow;
+    private int totalRows;
     private XSSFWorkbook workbook;
 
     public ExcelGenerator()
     {
         excelData = new HashMap<String, RowData>();
-        lastRow = 0;
+        totalRows = -1;
     }
 
+    private boolean hasReachTheEnd(String str)
+    {
+        return ( (str != null) && (str.contains("ΣΥΝΟΛΟ TΕΛΙΚΟ")) );
+    }
 
     private state Init()
     {
@@ -46,10 +50,13 @@ public class ExcelGenerator {
             workbook = new XSSFWorkbook (file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
-
-            while(rowIterator.hasNext())
+            
+            
+            int currRow = sheet.getFirstRowNum() - 1;
+            Boolean reachedHook = false;
+            while(rowIterator.hasNext() && !reachedHook )
             {
-                this.lastRow++;
+                currRow++;
                 Row row = rowIterator.next();
 
                 Cell bCell = row.getCell(bCellNum);
@@ -57,14 +64,17 @@ public class ExcelGenerator {
 
                 String bVal = GetBarcode(bCell);
                 Double qVal = GetQuantity(qCell);
+
+                reachedHook = hasReachTheEnd(bVal);
+
                 if (bVal == null || qVal == null) continue;
 
                 RowData v =  new RowData();
                 v.quantity=qVal;
-                v.row=lastRow;
+                v.row= currRow;
                 excelData.put(bVal,v);
             }
-
+            totalRows=currRow;
             file.close();
         }
         catch (Exception e)
@@ -130,7 +140,11 @@ public class ExcelGenerator {
         c.setCellValue(qValDb);
 
         Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
-        c2.setCellValue("Updated");
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
+        LocalDate localDate = LocalDate.now();
+        c2.setCellValue("Updated on "+dtf.format(localDate));
         System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
     }
 
@@ -172,8 +186,8 @@ public class ExcelGenerator {
             {
                 if(qValDb == 0) continue;
                 String pName = conn.getProductName(bDbVal);
-                insertRowLast(sheet, lastRow, bDbVal,qValDb,dbData,pName);
-                lastRow++;
+                insertRowLast(sheet, totalRows, bDbVal,qValDb,dbData,pName);
+                totalRows++;
             }
         }
 
