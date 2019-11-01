@@ -176,7 +176,7 @@ public class ExcelGenerator {
 
             if (isBarcodeInExcel)
             {
-                boolean isQuantityChanged = (qValDb != exlEntry.quantity);
+                boolean isQuantityChanged = Double.compare(qValDb,exlEntry.quantity) != 0 ;
                 if ( isQuantityChanged )
                 {
                     updateRow(sheet,exlEntry,qValDb,bDbVal);
