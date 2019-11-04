@@ -8,6 +8,16 @@ import java.util.Scanner;
 public class DatabaseManager
 {
 
+    public class HashValue
+    {
+        double quantity;
+        double lastPrcPr;
+        HashValue(double q,double l)
+        {
+            quantity=q;
+            lastPrcPr=l;
+        }
+    }
     private String username;
     private String pass;
     private String hostname;
@@ -164,9 +174,9 @@ public class DatabaseManager
         return  state.SUCCESS;
     }
 
-    public HashMap<String,Double> GetWarehouseData()
+    public HashMap<String,HashValue> GetDataFromWarehouse()
     {
-        HashMap<String,Double> barcodeToQuantity = new HashMap<>();
+        HashMap<String,HashValue> storageHashMap = new HashMap<>();
 
         Connection conn = null;
         try
@@ -176,15 +186,25 @@ public class DatabaseManager
             {
                 Statement st = conn.createStatement();
                 ResultSet res = st.executeQuery(
-                        "select sFactCode,sstRemain1 " +
+                        "select sFactCode,sstRemain1,sLastPrcPr" +
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
                         "        where spaFileIdNo="+storageId);
+                /*SELECT SSTORE.sfileid,sname,sFactCode, sstRemain1,sLastPrcPr,stDate,stDoc,stTransKind,SpaFileIdNo
+                FROM SSTORE
+                JOIN SMAST on SSTORE.sfileId=SMAST.sfileid
+                JOIN STRN on STRN.sFileId = SSTORE.sFileId
+                where SpaFileIdNo='2' and (stTranskind=7 or stTranskind=6) and stLocation=2
+                order by stDate desc;*/
+
+
                 while (res.next())
                 {
-                    double quantity = res.getDouble(2);
-                    String barcode = res.getString(1);
-                    barcodeToQuantity.put(barcode,quantity);
+                    double lastPrcPr    = res.getDouble(3);
+                    double quantity     = res.getDouble(2);
+                    String barcode      = res.getString(1);
+                    HashValue val = new HashValue(quantity,lastPrcPr);
+                    storageHashMap.put(barcode,val);
                 }
                 conn.commit();
             }
@@ -208,7 +228,7 @@ public class DatabaseManager
 
             }
         }
-        return  barcodeToQuantity;
+        return  storageHashMap;
     }
 
     private state TestConnection()

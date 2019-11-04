@@ -23,10 +23,11 @@ public class ExcelGenerator {
         Double quantity;
     }
 
-    private final int bCellNum = 3;     // barcode
-    private final int qCellNum = 5;     // quantity
+    private final int bCellNum = 4;     // barcode
+    private final int qCellNum = 6;     // quantity
     private final int stCellNum = 1;    // update status
-    private final int descCellNum= 4;   // product description
+    private final int descCellNum= 5;   // product description
+    private final int lastPrcPrNum = 2;
     private HashMap<String,RowData> excelData ;
     private int totalRows;
     private XSSFWorkbook workbook;
@@ -134,27 +135,30 @@ public class ExcelGenerator {
     }
 
 
-    private void updateRow(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb, String bDbVal)
+    private void updateRow(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb, String bDbVal, double lastPrcVal)
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
         c.setCellValue(qValDb);
 
         Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
-
-
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
         LocalDate localDate = LocalDate.now();
         c2.setCellValue("Updated on "+dtf.format(localDate));
+
+        Cell c3 = getCell(sheet.getRow(exlEntry.row), lastPrcPrNum);
+        c3.setCellValue(lastPrcVal);
+
         System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
     }
 
-    private void insertRowLast(XSSFSheet sheet,int lastRow,String bDbVal,Double qValDb,HashMap<String,Double>  dbData,String pName)
+    private void insertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
+                               HashMap<String, DatabaseManager.HashValue>  dbData, String pName)
     {
 
         sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
-        sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal));
+        sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
         sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
-
+        sheet.getRow(lastRow+1).createCell(lastPrcPrNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
     }
 
@@ -164,14 +168,15 @@ public class ExcelGenerator {
             return state.FAILURE;
 
         DatabaseManager conn=new DatabaseManager( credFilePath);
-        HashMap<String,Double> dbData = conn.GetWarehouseData();
+        HashMap<String, DatabaseManager.HashValue> dbData = conn.GetDataFromWarehouse();
 
         XSSFSheet sheet =workbook.getSheetAt(0);
 
         for(String bDbVal:dbData.keySet())
         {
-            Double qValDb = dbData.get(bDbVal);
+            Double qValDb = dbData.get(bDbVal).quantity;
             ExcelGenerator.RowData exlEntry = excelData.get(bDbVal);
+            Double lastPrcPr = dbData.get(bDbVal).lastPrcPr;
             boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
 
             if (isBarcodeInExcel)
@@ -179,7 +184,7 @@ public class ExcelGenerator {
                 boolean isQuantityChanged = Double.compare(qValDb,exlEntry.quantity) != 0 ;
                 if ( isQuantityChanged )
                 {
-                    updateRow(sheet,exlEntry,qValDb,bDbVal);
+                    updateRow(sheet,exlEntry,qValDb,bDbVal,lastPrcPr);
                 }
             }
             else
