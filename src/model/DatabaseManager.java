@@ -3,6 +3,7 @@ package model;
 import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class DatabaseManager
@@ -12,10 +13,12 @@ public class DatabaseManager
     {
         double quantity;
         double lastPrcPr;
-        HashValue(double q,double l)
+        String productName;
+        HashValue(double q,double l,String p)
         {
-            quantity=q;
-            lastPrcPr=l;
+            quantity = q;
+            lastPrcPr = l;
+            productName = p;
         }
     }
     private String username;
@@ -97,50 +100,6 @@ public class DatabaseManager
 
     }
 
-    public String getProductName(String barcode)
-    {
-        Connection conn = null;
-        String productName = null;
-        try
-        {
-            conn = DriverManager.getConnection(dbURL, username, pass);
-            if (conn != null)
-            {
-                Statement st = conn.createStatement();
-                ResultSet res = st.executeQuery(
-                        "select sname " +
-                            "FROM SMAST " +
-                            "where sfactCode="+"'"+barcode+"';");
-                while (res.next())
-                {
-                    productName = res.getString(1);
-
-                }
-                conn.commit();
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
-        }
-        finally
-        {
-            try
-            {
-                if (conn != null && !conn.isClosed())
-                {
-                    conn.close();
-                }
-            }
-            catch (SQLException ex)
-            {
-                ex.printStackTrace();
-
-            }
-        }
-        return productName;
-    }
-
     private state GetCredentialsFromFile() {
         try
         {
@@ -186,7 +145,7 @@ public class DatabaseManager
             {
                 Statement st = conn.createStatement();
                 ResultSet res = st.executeQuery(
-                        "select sFactCode,sstRemain1,sLastPrcPr" +
+                        "select sFactCode,sstRemain1,sLastPrcPr,sname" +
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
                         "        where spaFileIdNo="+storageId);
@@ -203,7 +162,9 @@ public class DatabaseManager
                     double lastPrcPr    = res.getDouble(3);
                     double quantity     = res.getDouble(2);
                     String barcode      = res.getString(1);
-                    HashValue val = new HashValue(quantity,lastPrcPr);
+                    String productName  = res.getString(4);
+
+                    HashValue val = new HashValue(quantity,lastPrcPr,productName);
                     storageHashMap.put(barcode,val);
                 }
                 conn.commit();
@@ -215,20 +176,26 @@ public class DatabaseManager
         }
         finally
         {
-            try
-            {
-                if (conn != null && !conn.isClosed())
-                {
-                    conn.close();
-                }
-            }
-            catch (SQLException ex)
-            {
-                ex.printStackTrace();
-
-            }
+            CloseDbConnection(conn);
         }
         return  storageHashMap;
+    }
+
+
+    private void CloseDbConnection(Connection conn)
+    {
+        try
+        {
+            if (conn != null && !conn.isClosed())
+            {
+                conn.close();
+            }
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+
+        }
     }
 
     private state TestConnection()

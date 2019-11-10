@@ -21,13 +21,14 @@ public class ExcelGenerator {
     {
         int row;
         Double quantity;
+        Double lastPrcPr;
     }
 
     private final int bCellNum = 4;     // barcode
     private final int qCellNum = 6;     // quantity
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 5;   // product description
-    private final int lastPrcPrNum = 2;
+    private final int lastPrcPrCellNum = 2;
     private HashMap<String,RowData> excelData ;
     private int totalRows;
     private XSSFWorkbook workbook;
@@ -62,17 +63,23 @@ public class ExcelGenerator {
 
                 Cell bCell = row.getCell(bCellNum);
                 Cell qCell = row.getCell(qCellNum);
+                Cell lastPrcPrCell = row.getCell(lastPrcPrCellNum);
 
                 String bVal = GetBarcode(bCell);
-                Double qVal = GetQuantity(qCell);
+                Double qVal = GetNumericValue(qCell);
+                Double lastPrcPr   = GetNumericValue(lastPrcPrCell);
 
                 reachedHook = hasReachTheEnd(bVal);
 
                 if (bVal == null || qVal == null) continue;
 
+                if(lastPrcPr == null)
+                    lastPrcPr = 0.0;
+
                 RowData v =  new RowData();
-                v.quantity=qVal;
-                v.row= currRow;
+                v.quantity  = qVal;
+                v.row       = currRow;
+                v.lastPrcPr = lastPrcPr;
                 excelData.put(bVal,v);
             }
             totalRows=currRow;
@@ -106,7 +113,7 @@ public class ExcelGenerator {
         return btVal;
     }
 
-    private Double GetQuantity(Cell c)
+    private Double GetNumericValue(Cell c)
     {
         Double qtVal =null;
         if(c==null)
@@ -135,31 +142,48 @@ public class ExcelGenerator {
     }
 
 
-    private void updateRow(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb, String bDbVal, double lastPrcVal)
+    private void UpdateQuantity(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, Double qValDb)
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
         c.setCellValue(qValDb);
 
-        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
-        LocalDate localDate = LocalDate.now();
-        c2.setCellValue("Updated on "+dtf.format(localDate));
-
-        Cell c3 = getCell(sheet.getRow(exlEntry.row), lastPrcPrNum);
-        c3.setCellValue(lastPrcVal);
-
-        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at "+ bDbVal );
+        UpdatedStatusCol(sheet,exlEntry,"quantity");
+        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at line "+ (exlEntry.row+1) );
     }
 
-    private void insertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
+    private void InsertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
                                HashMap<String, DatabaseManager.HashValue>  dbData, String pName)
     {
 
         sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
         sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
         sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
-        sheet.getRow(lastRow+1).createCell(lastPrcPrNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
+        sheet.getRow(lastRow+1).createCell(lastPrcPrCellNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
+    }
+
+    private void UpdateLastPrcPr(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, double lastPrcVal)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
+        c.setCellValue(lastPrcVal);
+
+        UpdatedStatusCol(sheet,exlEntry,"purchase price");
+
+        System.out.println("Updated purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
+    }
+
+    private void UpdatedStatusCol(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, String message)
+    {
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
+        LocalDate localDate = LocalDate.now();
+        String currStatusValue =c2.getStringCellValue();
+        String out="";
+        if(currStatusValue != null)
+        {
+            out = currStatusValue+" ";
+        }
+        c2.setCellValue(out + "Updated "+ message + " on "+dtf.format(localDate));
     }
 
     public state GenerateExcel() throws  Exception
@@ -176,22 +200,31 @@ public class ExcelGenerator {
         {
             Double qValDb = dbData.get(bDbVal).quantity;
             ExcelGenerator.RowData exlEntry = excelData.get(bDbVal);
-            Double lastPrcPr = dbData.get(bDbVal).lastPrcPr;
+            Double lastPrcPrDb = dbData.get(bDbVal).lastPrcPr;
             boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
 
             if (isBarcodeInExcel)
             {
                 boolean isQuantityChanged = Double.compare(qValDb,exlEntry.quantity) != 0 ;
+
                 if ( isQuantityChanged )
                 {
-                    updateRow(sheet,exlEntry,qValDb,bDbVal,lastPrcPr);
+                    UpdateQuantity(sheet,exlEntry,qValDb);
+                }
+
+                Double lastPrcPrExl = excelData.get(bDbVal).lastPrcPr;
+                boolean isLastPrcPrChanged = Double.compare(lastPrcPrExl,lastPrcPrDb) != 0;
+
+                if(isLastPrcPrChanged)
+                {
+                    UpdateLastPrcPr(sheet,exlEntry,lastPrcPrDb);
                 }
             }
             else
             {
                 if(qValDb == 0) continue;
-                String pName = conn.getProductName(bDbVal);
-                insertRowLast(sheet, totalRows, bDbVal,qValDb,dbData,pName);
+                String pName = dbData.get(bDbVal).productName;
+                InsertRowLast(sheet, totalRows, bDbVal,qValDb,dbData,pName);
                 totalRows++;
             }
         }
