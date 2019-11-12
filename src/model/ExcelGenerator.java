@@ -191,7 +191,7 @@ public class ExcelGenerator {
         if( Init() == state.FAILURE)
             return state.FAILURE;
 
-        DatabaseManager conn=new DatabaseManager( credFilePath);
+        DatabaseManager conn = new DatabaseManager();
         HashMap<String, DatabaseManager.HashValue> dbData = conn.GetDataFromWarehouse();
 
         XSSFSheet sheet =workbook.getSheetAt(0);
