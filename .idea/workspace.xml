@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2a78322-14fa-4058-a554-71a924971f30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/SynchExcel.iml" afterPath="$PROJECT_DIR$/SynchExcel.iml" />
-      <change beforePath="$PROJECT_DIR$/src/model/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/model/DatabaseManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/ExcelGenerator.java" afterPath="$PROJECT_DIR$/src/model/ExcelGenerator.java" />
-    </list>
+    <list default="true" id="f2a78322-14fa-4058-a554-71a924971f30" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -118,7 +113,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CredentialsManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CredentialsManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/CredentialsManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-655">
@@ -140,7 +135,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExcelGenerator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ExcelGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/ExcelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="194">
@@ -857,26 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/CredentialsManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-655">
-          <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4242#4243#0" expanded="true" />
-            <element signature="e#4273#4274#0" expanded="true" />
-            <element signature="e#4308#4309#0" expanded="true" />
-            <element signature="e#4335#4336#0" expanded="true" />
-            <element signature="e#4374#4375#0" expanded="true" />
-            <element signature="e#4405#4406#0" expanded="true" />
-            <element signature="e#4441#4442#0" expanded="true" />
-            <element signature="e#4469#4470#0" expanded="true" />
-            <element signature="e#4512#4513#0" expanded="true" />
-            <element signature="e#4547#4548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -896,6 +871,26 @@
           <folding>
             <element signature="e#1170#1171#0" expanded="true" />
             <element signature="e#1245#1246#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/CredentialsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-655">
+          <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4242#4243#0" expanded="true" />
+            <element signature="e#4273#4274#0" expanded="true" />
+            <element signature="e#4308#4309#0" expanded="true" />
+            <element signature="e#4335#4336#0" expanded="true" />
+            <element signature="e#4374#4375#0" expanded="true" />
+            <element signature="e#4405#4406#0" expanded="true" />
+            <element signature="e#4441#4442#0" expanded="true" />
+            <element signature="e#4469#4470#0" expanded="true" />
+            <element signature="e#4512#4513#0" expanded="true" />
+            <element signature="e#4547#4548#0" expanded="true" />
           </folding>
         </state>
       </provider>
