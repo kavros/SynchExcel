@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import static  model.Constants.*;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 
 public class ExcelGenerator {
@@ -29,6 +30,8 @@ public class ExcelGenerator {
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 5;   // product description
     private final int lastPrcPrCellNum = 2;
+    private final int dateCellNum = 17;
+
     private HashMap<String,RowData> excelData ;
     private int totalRows;
     private XSSFWorkbook workbook;
@@ -64,6 +67,7 @@ public class ExcelGenerator {
                 Cell bCell = row.getCell(bCellNum);
                 Cell qCell = row.getCell(qCellNum);
                 Cell lastPrcPrCell = row.getCell(lastPrcPrCellNum);
+                Cell dateCell= row.getCell(dateCellNum);
 
                 String bVal = GetBarcode(bCell);
                 Double qVal = GetNumericValue(qCell);
@@ -186,6 +190,13 @@ public class ExcelGenerator {
         c2.setCellValue(out + "Updated "+ message + " on "+dtf.format(localDate));
     }
 
+    private void UpdateDate(XSSFSheet sheet, ExcelGenerator.RowData exlEntry, String date)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), dateCellNum);
+        c.setCellValue(date);
+        System.out.println("Updated purchase price " +" to " + date + " at line " + (exlEntry.row+1) );
+    }
+
     public state GenerateExcel() throws  Exception
     {
         if( Init() == state.FAILURE)
@@ -202,6 +213,7 @@ public class ExcelGenerator {
             ExcelGenerator.RowData exlEntry = excelData.get(bDbVal);
             Double lastPrcPrDb = dbData.get(bDbVal).lastPrcPr;
             boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
+            String dateValDb = dbData.get(bDbVal).lastInOrOutDate;
 
             if (isBarcodeInExcel)
             {
@@ -210,6 +222,7 @@ public class ExcelGenerator {
                 if ( isQuantityChanged )
                 {
                     UpdateQuantity(sheet,exlEntry,qValDb);
+                    UpdateDate(sheet,exlEntry,dateValDb);
                 }
 
                 Double lastPrcPrExl = excelData.get(bDbVal).lastPrcPr;
@@ -227,6 +240,7 @@ public class ExcelGenerator {
                 InsertRowLast(sheet, totalRows, bDbVal,qValDb,dbData,pName);
                 totalRows++;
             }
+            System.out.println();
         }
 
 

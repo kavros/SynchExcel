@@ -14,11 +14,13 @@ public class DatabaseManager
         double quantity;
         double lastPrcPr;
         String productName;
-        HashValue(double q,double l,String p)
+        String lastInOrOutDate;
+        HashValue(double q,double l,String p,String d)
         {
             quantity = q;
             lastPrcPr = l;
             productName = p;
+            lastInOrOutDate = d;
         }
     }
 
@@ -50,13 +52,6 @@ public class DatabaseManager
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
                         "        where spaFileIdNo="+storageId);
-                /*SELECT SSTORE.sfileid,sname,sFactCode, sstRemain1,sLastPrcPr,stDate,stDoc,stTransKind,SpaFileIdNo
-                FROM SSTORE
-                JOIN SMAST on SSTORE.sfileId=SMAST.sfileid
-                JOIN STRN on STRN.sFileId = SSTORE.sFileId
-                where SpaFileIdNo='2' and (stTranskind=7 or stTranskind=6) and stLocation=2
-                order by stDate desc;*/
-
 
                 while (res.next())
                 {
@@ -65,9 +60,26 @@ public class DatabaseManager
                     String barcode      = res.getString(1);
                     String productName  = res.getString(4);
 
-                    HashValue val = new HashValue(quantity,lastPrcPr,productName);
+                    HashValue val = new HashValue(quantity,lastPrcPr,productName," ");
                     storageHashMap.put(barcode,val);
                 }
+
+                for(String barcode : storageHashMap.keySet())
+                {
+                        ResultSet res2 = st.executeQuery(
+                        "select stdate "+
+                                "from STRN"+
+                                " JOIN SMAST on SMAST.sfileId=STRN.sfileid"+
+                                " where (stTranskind=7 or stTranskind=6) and stLocation=2 and"+
+                                " sFactCode='"+barcode+
+                                "' order by stDate desc");
+                    res2.next();
+
+                    storageHashMap.get(barcode).lastInOrOutDate = res2.getDate(1).toString();
+                    //System.out.println(barcode+" "+storageHashMap.get(barcode).lastInOrOutDate);
+
+                }
+
                 conn.commit();
             }
         }
