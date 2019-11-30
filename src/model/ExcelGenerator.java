@@ -17,7 +17,6 @@ public class ExcelGenerator {
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 5;   // product description
     private final int lastPrcPrCellNum = 2;
-    private final int dateCellNum = 17;
 
     private Cell getCell(Row r,int index)
     {
@@ -52,7 +51,6 @@ public class ExcelGenerator {
         sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
         sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
         sheet.getRow(lastRow+1).createCell(lastPrcPrCellNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
-        sheet.getRow(lastRow+1).createCell(dateCellNum).setCellValue(dbData.get(bDbVal).lastInOrOutDate);
         System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
     }
 
@@ -60,8 +58,6 @@ public class ExcelGenerator {
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
         c.setCellValue(lastPrcVal);
-
-        UpdatedStatusCol(sheet,exlEntry,"purchase price");
 
         System.out.println("Updated purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
     }
@@ -78,13 +74,6 @@ public class ExcelGenerator {
             out = currStatusValue+" ";
         }
         c2.setCellValue(out + "Updated "+ message + " on "+dtf.format(localDate));
-    }
-
-    private void UpdateDate(XSSFSheet sheet, ExcelParser.RowData exlEntry, String date)
-    {
-        Cell c = getCell(sheet.getRow(exlEntry.row), dateCellNum);
-        c.setCellValue(date);
-        System.out.println("Updated last date to " + date + " at line " + (exlEntry.row+1) );
     }
 
     public state GenerateExcel() throws  Exception
@@ -108,7 +97,6 @@ public class ExcelGenerator {
             ExcelParser.RowData exlEntry = excelData.get(bDbVal);
             Double lastPrcPrDb = dbData.get(bDbVal).lastPrcPr;
             boolean isBarcodeInExcel = (excelData.get(bDbVal) != null);
-            String dateValDb = dbData.get(bDbVal).lastInOrOutDate;
 
             if (isBarcodeInExcel)
             {
@@ -117,7 +105,6 @@ public class ExcelGenerator {
                 if ( isQuantityChanged )
                 {
                     UpdateQuantity(sheet,exlEntry,qValDb);
-                    UpdateDate(sheet,exlEntry,dateValDb);
                 }
 
                 Double lastPrcPrExl = excelData.get(bDbVal).lastPrcPr;
@@ -135,7 +122,6 @@ public class ExcelGenerator {
                 InsertRowLast(sheet, totalRows, bDbVal,qValDb,dbData,pName);
                 totalRows++;
             }
-            System.out.println();
         }
 
         FileOutputStream output_file =new FileOutputStream(new File(Constants.outExcel));

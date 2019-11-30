@@ -1,10 +1,7 @@
 package model;
 
-import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 public class DatabaseManager
 {
@@ -14,28 +11,29 @@ public class DatabaseManager
         double quantity;
         double lastPrcPr;
         String productName;
-        String lastInOrOutDate;
         HashValue(double q,double l,String p,String d)
         {
             quantity = q;
             lastPrcPr = l;
             productName = p;
-            lastInOrOutDate = d;
         }
     }
 
     private final String storageId = "2";
+    CredentialsManager credManager;
 
     public DatabaseManager()
     {
-
+        credManager = new CredentialsManager();
+        state retrieved = credManager.GetCredentialsFromFile(Constants.credFilePath);
+        if( retrieved == state.FAILURE)
+        {
+            credManager.GetUserInputs();
+        }
     }
 
-
-    public HashMap<String,HashValue> GetDataFromWarehouse()
-    {
+    public HashMap<String,HashValue> GetDataFromWarehouse() throws SQLException {
         HashMap<String,HashValue> storageHashMap = new HashMap<>();
-        CredentialsManager credManager = new CredentialsManager(Constants.credFilePath);
 
         Connection conn = null;
         try
@@ -46,6 +44,7 @@ public class DatabaseManager
                                             );
             if (conn != null)
             {
+                credManager.SaveCredentials();
                 Statement st = conn.createStatement();
                 ResultSet res = st.executeQuery(
                         "select sFactCode,sstRemain1,sLastPrcPr,sname" +
@@ -64,28 +63,12 @@ public class DatabaseManager
                     storageHashMap.put(barcode,val);
                 }
 
-                for(String barcode : storageHashMap.keySet())
-                {
-                        ResultSet res2 = st.executeQuery(
-                        "select stdate "+
-                                "from STRN"+
-                                " JOIN SMAST on SMAST.sfileId=STRN.sfileid"+
-                                " where (stTranskind=7 or stTranskind=6) and stLocation=2 and"+
-                                " sFactCode='"+barcode+
-                                "' order by stDate desc");
-                    res2.next();
-
-                    storageHashMap.get(barcode).lastInOrOutDate = res2.getDate(1).toString();
-                    //System.out.println(barcode+" "+storageHashMap.get(barcode).lastInOrOutDate);
-
-                }
-
                 conn.commit();
             }
         }
         catch (Exception e)
         {
-            System.out.println(e);
+            throw e;
         }
         finally
         {
@@ -106,9 +89,6 @@ public class DatabaseManager
         catch (SQLException ex)
         {
             ex.printStackTrace();
-
         }
     }
-
-
 }

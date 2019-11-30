@@ -22,3 +22,16 @@ This application updates the product fields inside an Excel document based on a 
     * One more column added to the original excel (as first) that indicates if the row has been updated.
     * Delete extra rows with empty content
 
+## TODO
+	- unit tests
+	- check format of excel
+	- create a json that defines columns
+	- Issues after update 
+	    - problem dutring update since there are two columns for the quantity.
+    	- investigate what happened with in the case of 2 barcodes   
+	    - dates were not updated
+	 - Requested
+        - log quantity changes to a file
+        - fix font size when adding new lines
+	    
+

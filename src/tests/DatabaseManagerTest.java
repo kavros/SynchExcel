@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 public class DatabaseManagerTest
 {
     @Test
-    public void shouldGetCredentials()
+    public void test()
     {
-        DatabaseManager dbManager = new DatabaseManager(Constants.credFilePath);
-
+        assertTrue(false);
     }
+
 }

@@ -1,9 +1,6 @@
 package model;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CredentialsManager
@@ -16,41 +13,7 @@ public class CredentialsManager
     private String credFilePath;
     private String databaseName;
 
-    CredentialsManager(String filePath)
-    {
-        credFilePath = filePath;
-        if(GetCredentialsFromFile() == state.FAILURE)
-        {
-            RetrieveAndStoreCredentials();
-        }
-        else
-        {
-            if(TestConnection() == state.SUCCESS)
-            {
-                System.out.println("Database connectivity test completed.");
-            }
-            else
-            {
-                System.out.println("Database connection failed. Please enter credentials again.");
-                RetrieveAndStoreCredentials();
-            }
-        }
-    }
-
-    private void RetrieveAndStoreCredentials()
-    {
-        AskUserForCred();
-        while (TestConnection() == state.FAILURE)
-        {
-            System.out.println("Credentials are incorrect");
-            AskUserForCred();
-        }
-        System.out.println("Database connectivity test completed.");
-        SaveCredentials();
-
-    }
-
-    private void AskUserForCred()
+    public void GetUserInputs()
     {
         Scanner scan = new Scanner(System.in);
         Console console = System.console();
@@ -67,7 +30,7 @@ public class CredentialsManager
         dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
     }
 
-    private void SaveCredentials()
+    public void SaveCredentials()
     {
         try
         {
@@ -87,8 +50,9 @@ public class CredentialsManager
 
     }
 
-    private state GetCredentialsFromFile()
+    public state GetCredentialsFromFile(String filePath)
     {
+        credFilePath = filePath;
         try
         {
             File file = new File(credFilePath);
@@ -116,49 +80,11 @@ public class CredentialsManager
         catch (Exception e)
         {
             System.out.println(e);
+            return state.FAILURE;
         }
 
         return  state.SUCCESS;
     }
-
-    private state TestConnection()
-    {
-        Connection conn = null;
-        try
-        {
-            conn = DriverManager.getConnection(dbURL, username, pass);
-
-            if(conn == null)
-            {
-                System.out.println("conn is null");
-                return state.FAILURE;
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
-            return  state.FAILURE;
-        }
-        finally
-        {
-            try
-            {
-                if (conn != null && !conn.isClosed())
-                {
-                    conn.close();
-                }
-            }
-            catch (SQLException ex)
-            {
-                ex.printStackTrace();
-                return state.FAILURE;
-            }
-        }
-        return state.SUCCESS;
-    }
-
-
-
 
     public String GetUsername()
     {
