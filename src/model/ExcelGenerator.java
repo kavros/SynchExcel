@@ -11,82 +11,33 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 
-public class ExcelGenerator {
+public class ExcelGenerator
+{
     private final int bCellNum = 4;     // barcode
     private final int qCellNum = 6;     // quantity
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 5;   // product description
     private final int lastPrcPrCellNum = 2;
 
-    private Cell getCell(Row r,int index)
+    DatabaseService databaseService;
+    ExcelParser exlParser;
+
+    public ExcelGenerator( DatabaseService _databaseService,
+                          ExcelParser _exlParser)
     {
-        if(r == null)
-        {
-            System.err.println("Error: row cannot be null");
-            System.exit(-1);
-        }
-        Cell c = r.getCell(index);
-        if(c == null)
-        {
-            c = r.createCell(index);
-        }
-        return  c;
+        databaseService = _databaseService;
+        exlParser= _exlParser;
     }
 
-
-    private void UpdateQuantity(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb)
+    public State GenerateExcel() throws  Exception
     {
-        Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
-        c.setCellValue(qValDb);
-
-        UpdatedStatusCol(sheet,exlEntry,"quantity");
-        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at line "+ (exlEntry.row+1) );
-    }
-
-    private void InsertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
-                               HashMap<String, DatabaseManager.HashValue>  dbData, String pName)
-    {
-
-        sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
-        sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
-        sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
-        sheet.getRow(lastRow+1).createCell(lastPrcPrCellNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
-        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
-    }
-
-    private void UpdateLastPrcPr(XSSFSheet sheet, ExcelParser.RowData exlEntry, double lastPrcVal)
-    {
-        Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
-        c.setCellValue(lastPrcVal);
-
-        System.out.println("Updated purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
-    }
-
-    private void UpdatedStatusCol(XSSFSheet sheet, ExcelParser.RowData exlEntry, String message)
-    {
-        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
-        LocalDate localDate = LocalDate.now();
-        String currStatusValue =c2.getStringCellValue();
-        String out="";
-        if(currStatusValue != null)
-        {
-            out = currStatusValue+" ";
-        }
-        c2.setCellValue(out + "Updated "+ message + " on "+dtf.format(localDate));
-    }
-
-    public state GenerateExcel() throws  Exception
-    {
-        ExcelParser exlParser = new ExcelParser();
         HashMap<String, ExcelParser.RowData> excelData = exlParser.GetExcelData();
         if( excelData == null)
         {
-            return state.FAILURE;
+            return State.FAILURE;
         }
 
-        DatabaseManager conn = new DatabaseManager();
-        HashMap<String, DatabaseManager.HashValue> dbData = conn.GetDataFromWarehouse();
+        HashMap<String, DatabaseService.HashValue> dbData = databaseService.GetDataFromWarehouse();
 
         XSSFSheet sheet = exlParser.GetWorkbook().getSheetAt(0);
         int totalRows = exlParser.GetTotalRows();
@@ -127,8 +78,64 @@ public class ExcelGenerator {
         FileOutputStream output_file =new FileOutputStream(new File(Constants.outExcel));
         exlParser.GetWorkbook().write(output_file);
 
-        return state.SUCCESS;
+        return State.SUCCESS;
+    }
+
+    private Cell getCell(Row r,int index)
+    {
+        if(r == null)
+        {
+            System.err.println("Error: row cannot be null");
+            System.exit(-1);
+        }
+        Cell c = r.getCell(index);
+        if(c == null)
+        {
+            c = r.createCell(index);
+        }
+        return  c;
     }
 
 
+    private void UpdateQuantity(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
+        c.setCellValue(qValDb);
+
+        UpdatedStatusCol(sheet,exlEntry,"quantity");
+        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at line "+ (exlEntry.row+1) );
+    }
+
+    private void InsertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
+                               HashMap<String, DatabaseService.HashValue>  dbData, String pName)
+    {
+
+        sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
+        sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
+        sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
+        sheet.getRow(lastRow+1).createCell(lastPrcPrCellNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
+        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
+    }
+
+    private void UpdateLastPrcPr(XSSFSheet sheet, ExcelParser.RowData exlEntry, double lastPrcVal)
+    {
+        Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
+        c.setCellValue(lastPrcVal);
+
+        System.out.println("Updated purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
+    }
+
+    private void UpdatedStatusCol(XSSFSheet sheet, ExcelParser.RowData exlEntry, String message)
+    {
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
+        LocalDate localDate = LocalDate.now();
+        String currStatusValue =c2.getStringCellValue();
+        String out="";
+        if(currStatusValue != null)
+        {
+            out = currStatusValue+" ";
+        }
+        c2.setCellValue(out + "Updated "+ message + " on "+dtf.format(localDate));
+    }
 }

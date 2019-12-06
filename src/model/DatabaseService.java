@@ -3,7 +3,7 @@ package model;
 import java.sql.*;
 import java.util.HashMap;
 
-public class DatabaseManager
+public class DatabaseService
 {
 
     public class HashValue
@@ -20,13 +20,13 @@ public class DatabaseManager
     }
 
     private final String storageId = "2";
-    CredentialsManager credManager;
+    CredentialsService credManager;
 
-    public DatabaseManager()
+    public DatabaseService(CredentialsService _credManager)
     {
-        credManager = new CredentialsManager();
-        state retrieved = credManager.GetCredentialsFromFile(Constants.credFilePath);
-        if( retrieved == state.FAILURE)
+        credManager = _credManager;
+        State retrieved = credManager.GetCredentialsFromFile(Constants.credFilePath);
+        if( retrieved == State.FAILURE)
         {
             credManager.GetUserInputs();
         }
@@ -34,7 +34,6 @@ public class DatabaseManager
 
     public HashMap<String,HashValue> GetDataFromWarehouse() throws SQLException {
         HashMap<String,HashValue> storageHashMap = new HashMap<>();
-
         Connection conn = null;
         try
         {
@@ -52,7 +51,7 @@ public class DatabaseManager
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
                         "        where spaFileIdNo="+storageId);
 
-                while (res.next())
+                while (res!= null && res.next())
                 {
                     double lastPrcPr    = res.getDouble(3);
                     double quantity     = res.getDouble(2);
@@ -66,10 +65,6 @@ public class DatabaseManager
                 conn.commit();
             }
         }
-        catch (Exception e)
-        {
-            throw e;
-        }
         finally
         {
             CloseDbConnection(conn);
@@ -77,7 +72,7 @@ public class DatabaseManager
         return  storageHashMap;
     }
 
-    private void CloseDbConnection(Connection conn)
+    public void CloseDbConnection(Connection conn)
     {
         try
         {

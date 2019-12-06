@@ -3,7 +3,7 @@ package model;
 import java.io.*;
 import java.util.Scanner;
 
-public class CredentialsManager
+public class CredentialsService
 {
 
     private String username;
@@ -12,6 +12,7 @@ public class CredentialsManager
     private String dbURL;
     private String credFilePath;
     private String databaseName;
+
 
     public void GetUserInputs()
     {
@@ -32,6 +33,9 @@ public class CredentialsManager
 
     public void SaveCredentials()
     {
+        if(credFilePath == null)
+            throw new NullPointerException("File path is not given");
+
         try
         {
             TrippleDes td = new TrippleDes();
@@ -50,7 +54,7 @@ public class CredentialsManager
 
     }
 
-    public state GetCredentialsFromFile(String filePath)
+    public State GetCredentialsFromFile(String filePath)
     {
         credFilePath = filePath;
         try
@@ -61,7 +65,7 @@ public class CredentialsManager
             String line = br.readLine();
             if(line==null || line.isEmpty())
             {
-                return state.FAILURE;
+                return State.FAILURE;
             }
 
             String[] details = line.split(",");
@@ -73,17 +77,17 @@ public class CredentialsManager
             dbURL        = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
             if(username==null || pass==null|| hostname==null)
             {
-                return state.FAILURE;
+                return State.FAILURE;
             }
 
         }
         catch (Exception e)
         {
             System.out.println(e);
-            return state.FAILURE;
+            return State.FAILURE;
         }
 
-        return  state.SUCCESS;
+        return  State.SUCCESS;
     }
 
     public String GetUsername()

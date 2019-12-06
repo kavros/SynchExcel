@@ -25,7 +25,6 @@ public class ExcelParser
     private final int bCellNum = 4;     // barcode
     private final int qCellNum = 6;     // quantity
     private final int lastPrcPrCellNum = 2;
-    private final int dateCellNum = 17;
 
     private int totalRows;
 
@@ -35,26 +34,7 @@ public class ExcelParser
         totalRows = -1;
     }
 
-    public HashMap<String, RowData> GetExcelData()
-    {
-        if(LoadDataFromExcel() == state.FAILURE)
-        {
-            return null;
-        }
-        return excelData;
-    }
-
-    public int GetTotalRows()
-    {
-        return totalRows;
-    }
-
-    public XSSFWorkbook GetWorkbook()
-    {
-        return workbook;
-    }
-
-    private state LoadDataFromExcel()
+    private State LoadDataFromExcel()
     {
         try
         {
@@ -98,10 +78,35 @@ public class ExcelParser
         catch (Exception e)
         {
             System.out.println("Error: "+e);
-            return state.FAILURE;
+            return State.FAILURE;
         }
 
-        return  state.SUCCESS;
+        return  State.SUCCESS;
+    }
+
+
+    public HashMap<String, RowData> GetExcelData()
+    {
+        if(excelData.size() != 0)
+        {
+            return excelData;
+        }
+
+        if(LoadDataFromExcel() == State.FAILURE)
+        {
+            return null;
+        }
+        return excelData;
+    }
+
+    public int GetTotalRows()
+    {
+        return totalRows;
+    }
+
+    public XSSFWorkbook GetWorkbook()
+    {
+        return workbook;
     }
 
     private boolean hasReachTheEnd(String str)
