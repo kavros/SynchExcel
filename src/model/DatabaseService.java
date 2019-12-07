@@ -8,10 +8,10 @@ public class DatabaseService
 
     public class HashValue
     {
-        double quantity;
-        double lastPrcPr;
-        String productName;
-        HashValue(double q,double l,String p,String d)
+        public double quantity;
+        public double lastPrcPr;
+        public String productName;
+        HashValue(double q,double l,String p)
         {
             quantity = q;
             lastPrcPr = l;
@@ -58,10 +58,9 @@ public class DatabaseService
                     String barcode      = res.getString(1);
                     String productName  = res.getString(4);
 
-                    HashValue val = new HashValue(quantity,lastPrcPr,productName," ");
+                    HashValue val = new HashValue(quantity,lastPrcPr,productName);
                     storageHashMap.put(barcode,val);
                 }
-
                 conn.commit();
             }
         }

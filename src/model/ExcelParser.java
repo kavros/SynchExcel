@@ -8,6 +8,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -38,11 +40,9 @@ public class ExcelParser
     {
         try
         {
-            FileInputStream file = new FileInputStream(new File(Constants.inputExcel));
-            workbook = new XSSFWorkbook (file);
+            workbook = new XSSFWorkbook (Constants.inputExcel);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
-
 
             int currRow = sheet.getFirstRowNum() - 1;
             Boolean reachedHook = false;
@@ -73,9 +73,8 @@ public class ExcelParser
                 excelData.put(bVal,v);
             }
             totalRows=currRow;
-            file.close();
         }
-        catch (Exception e)
+        catch (IOException e)
         {
             System.out.println("Error: "+e);
             return State.FAILURE;
