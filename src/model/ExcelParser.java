@@ -41,38 +41,36 @@ public class ExcelParser
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         Iterator<Row> rowIterator = sheet.iterator();
-
         int currRow = sheet.getFirstRowNum() - 1;
         Boolean reachedHook = false;
+
         while(rowIterator.hasNext() && !reachedHook )
         {
             currRow++;
             Row row = rowIterator.next();
+            String bVal = GetBarcode(row.getCell(bCellNum));
+            Double qVal = GetNumericValue(row.getCell(qCellNum));
+            Double lastPrcPr   = GetNumericValue(row.getCell(lastPrcPrCellNum));
 
-            Cell bCell = row.getCell(bCellNum);
-            Cell qCell = row.getCell(qCellNum);
-            Cell lastPrcPrCell = row.getCell(lastPrcPrCellNum);
-
-            String bVal = GetBarcode(bCell);
-            Double qVal = GetNumericValue(qCell);
-            Double lastPrcPr   = GetNumericValue(lastPrcPrCell);
+            if (bVal != null && qVal != null)
+                Insert(bVal,currRow,qVal,lastPrcPr);
 
             reachedHook = hasReachTheEnd(bVal);
-
-            if (bVal == null || qVal == null) continue;
-
-            if(lastPrcPr == null)
-                lastPrcPr = 0.0;
-
-            RowData v =  new RowData();
-            v.quantity  = qVal;
-            v.row       = currRow;
-            v.lastPrcPr = lastPrcPr;
-            excelData.put(bVal,v);
         }
         totalRows=currRow;
     }
 
+    private void Insert(String barcode, int currentRow,double quantity, Double lastPrcPr)
+    {
+        if(lastPrcPr == null)
+            lastPrcPr = 0.0;
+
+        RowData v =  new RowData();
+        v.quantity  = quantity;
+        v.row       = currentRow;
+        v.lastPrcPr = lastPrcPr;
+        excelData.put(barcode,v);
+    }
 
     public HashMap<String, RowData> GetExcelData()
     {
@@ -81,7 +79,6 @@ public class ExcelParser
 
         return excelData;
     }
-
     public int GetTotalRows()
     {
         return totalRows;

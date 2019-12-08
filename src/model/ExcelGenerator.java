@@ -57,7 +57,7 @@ public class ExcelGenerator
 
                 if ( isQuantityChanged )
                 {
-                    UpdateQuantity(sheet,exlEntry,qValDb);
+                    UpdateQuantity(sheet,exlEntry,qValDb,bDbVal);
                 }
 
                 Double lastPrcPrExl = excelData.get(bDbVal).lastPrcPr;
@@ -99,13 +99,13 @@ public class ExcelGenerator
     }
 
 
-    private void UpdateQuantity(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb)
+    private void UpdateQuantity(XSSFSheet sheet, ExcelParser.RowData exlEntry, Double qValDb,String barcode)
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(sheet,exlEntry,"quantity");
-        System.out.println("Updated quantity from " + exlEntry.quantity + " to " + qValDb+ " at line "+ (exlEntry.row+1) );
+        System.out.println("Updated entry ("+barcode+") quantity from " + exlEntry.quantity + " to " + qValDb+ " at line "+ (exlEntry.row+1) );
     }
 
     private void InsertRowLast(XSSFSheet sheet, int lastRow, String bDbVal, Double qValDb,
@@ -116,7 +116,7 @@ public class ExcelGenerator
         sheet.getRow(lastRow+1).createCell(qCellNum).setCellValue(dbData.get(bDbVal).quantity);
         sheet.getRow(lastRow+1).createCell(descCellNum).setCellValue(pName);
         sheet.getRow(lastRow+1).createCell(lastPrcPrCellNum).setCellValue(dbData.get(bDbVal).lastPrcPr);
-        System.out.println("Added entry"+"("+ bDbVal+ "," +qValDb+")"+"at row "+lastRow);
+        System.out.println("Added entry("+ bDbVal+ "," +qValDb+")at row "+(lastRow+1));
     }
 
     private void UpdateLastPrcPr(XSSFSheet sheet, ExcelParser.RowData exlEntry, double lastPrcVal)
