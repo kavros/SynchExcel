@@ -30,71 +30,55 @@ public class ExcelParser
 
     private int totalRows;
 
-    public ExcelParser()
+    public ExcelParser(XSSFWorkbook _workbook)
     {
         excelData =  new HashMap<>();
         totalRows = -1;
+        workbook = _workbook;
     }
 
-    private State LoadDataFromExcel()
+    private void LoadDataFromExcel()
     {
-        try
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.iterator();
+
+        int currRow = sheet.getFirstRowNum() - 1;
+        Boolean reachedHook = false;
+        while(rowIterator.hasNext() && !reachedHook )
         {
-            workbook = new XSSFWorkbook (Constants.inputExcel);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = sheet.iterator();
+            currRow++;
+            Row row = rowIterator.next();
 
-            int currRow = sheet.getFirstRowNum() - 1;
-            Boolean reachedHook = false;
-            while(rowIterator.hasNext() && !reachedHook )
-            {
-                currRow++;
-                Row row = rowIterator.next();
+            Cell bCell = row.getCell(bCellNum);
+            Cell qCell = row.getCell(qCellNum);
+            Cell lastPrcPrCell = row.getCell(lastPrcPrCellNum);
 
-                Cell bCell = row.getCell(bCellNum);
-                Cell qCell = row.getCell(qCellNum);
-                Cell lastPrcPrCell = row.getCell(lastPrcPrCellNum);
+            String bVal = GetBarcode(bCell);
+            Double qVal = GetNumericValue(qCell);
+            Double lastPrcPr   = GetNumericValue(lastPrcPrCell);
 
-                String bVal = GetBarcode(bCell);
-                Double qVal = GetNumericValue(qCell);
-                Double lastPrcPr   = GetNumericValue(lastPrcPrCell);
+            reachedHook = hasReachTheEnd(bVal);
 
-                reachedHook = hasReachTheEnd(bVal);
+            if (bVal == null || qVal == null) continue;
 
-                if (bVal == null || qVal == null) continue;
+            if(lastPrcPr == null)
+                lastPrcPr = 0.0;
 
-                if(lastPrcPr == null)
-                    lastPrcPr = 0.0;
-
-                RowData v =  new RowData();
-                v.quantity  = qVal;
-                v.row       = currRow;
-                v.lastPrcPr = lastPrcPr;
-                excelData.put(bVal,v);
-            }
-            totalRows=currRow;
+            RowData v =  new RowData();
+            v.quantity  = qVal;
+            v.row       = currRow;
+            v.lastPrcPr = lastPrcPr;
+            excelData.put(bVal,v);
         }
-        catch (IOException e)
-        {
-            System.out.println("Error: "+e);
-            return State.FAILURE;
-        }
-
-        return  State.SUCCESS;
+        totalRows=currRow;
     }
 
 
     public HashMap<String, RowData> GetExcelData()
     {
-        if(excelData.size() != 0)
-        {
-            return excelData;
-        }
+        if(excelData.size() == 0)
+            LoadDataFromExcel();
 
-        if(LoadDataFromExcel() == State.FAILURE)
-        {
-            return null;
-        }
         return excelData;
     }
 

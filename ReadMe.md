@@ -33,5 +33,6 @@ This application updates the product fields inside an Excel document based on a 
 	 - Requested
         - log quantity changes to a file
         - fix font size when adding new lines
+        - !! add kwdiko when adding new product to excel
 	    
 
