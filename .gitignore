@@ -3,3 +3,4 @@ data/credentials.txt
 *.jar
 credentials.txt
 b.xlsx
+log.txt
