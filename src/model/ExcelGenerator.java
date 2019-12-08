@@ -65,7 +65,7 @@ public class ExcelGenerator
 
                 if(isLastPrcPrChanged)
                 {
-                    UpdateLastPrcPr(sheet,exlEntry,lastPrcPrDb);
+                    UpdateLastPrcPr(sheet,exlEntry,lastPrcPrDb,bDbVal);
                 }
             }
             else
@@ -119,12 +119,12 @@ public class ExcelGenerator
         System.out.println("Added entry("+ bDbVal+ "," +qValDb+")at row "+(lastRow+1));
     }
 
-    private void UpdateLastPrcPr(XSSFSheet sheet, ExcelParser.RowData exlEntry, double lastPrcVal)
+    private void UpdateLastPrcPr(XSSFSheet sheet, ExcelParser.RowData exlEntry, double lastPrcVal,String barcode)
     {
         Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
         c.setCellValue(lastPrcVal);
 
-        System.out.println("Updated purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
+        System.out.println("Updated entry("+barcode+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcVal + " at line " + (exlEntry.row+1) );
     }
 
     private void UpdatedStatusCol(XSSFSheet sheet, ExcelParser.RowData exlEntry, String message)

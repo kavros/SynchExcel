@@ -20,6 +20,13 @@ public class ExcelParser
         int row;
         Double quantity;
         Double lastPrcPr;
+
+        public RowData(Double _quantity, Double _lastPrcPr,int _row)
+        {
+            row=_row;
+            quantity=_quantity;
+            lastPrcPr=_lastPrcPr;
+        }
     }
 
     private XSSFWorkbook workbook;
@@ -65,10 +72,7 @@ public class ExcelParser
         if(lastPrcPr == null)
             lastPrcPr = 0.0;
 
-        RowData v =  new RowData();
-        v.quantity  = quantity;
-        v.row       = currentRow;
-        v.lastPrcPr = lastPrcPr;
+        RowData v =  new RowData(quantity,lastPrcPr,currentRow);
         excelData.put(barcode,v);
     }
 
