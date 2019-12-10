@@ -27,7 +27,8 @@ This application updates the product fields inside an Excel document based on a 
         - run a validation algorithm after the update completed.
         - create a json that defines columns
         - check format of excel
-        - add unit tests        		    
+        - add unit tests     
+        - SPIKE: is it a good aproach to make all libraries external dependency   		    
 	 - Requested
         - log changes to a file
         - fix font size when adding new lines
