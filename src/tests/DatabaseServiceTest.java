@@ -77,4 +77,24 @@ public class DatabaseServiceTest
         assertTrue (result.get("4313").productName.equals("Bread"));
         assertTrue (result.get("4313").quantity == 2.0 );
     }
+
+    @Test
+    public void GetDataFromWarehouse_WhenCalledTwice_ReturnsCallDatabaseOnce() throws SQLException
+    {
+        DatabaseService dbServer =  new DatabaseService(credServ);
+        ResultSet resultSet = mock(ResultSet.class);
+        Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
+        when(resultSet.getString(1)).thenReturn("4313");
+        when(resultSet.getString(4)).thenReturn("Bread");
+        when(resultSet.getDouble(2)).thenReturn(2.0);
+        when(resultSet.getDouble(3)).thenReturn(1.0);
+        when(statement
+                .executeQuery(Mockito.anyString())).thenReturn(resultSet);
+        replay(DriverManager.class);
+
+        HashMap<String, DatabaseService.HashValue> result = dbServer.GetDataFromWarehouse();
+        dbServer.GetDataFromWarehouse();
+
+        verify(statement, times(1)).executeQuery(anyString());
+    }
 }

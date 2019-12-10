@@ -21,6 +21,7 @@ public class DatabaseService
 
     private final String storageId = "2";
     CredentialsService credManager;
+    HashMap<String,HashValue> storageHashMap;
 
     public DatabaseService(CredentialsService _credManager)
     {
@@ -30,10 +31,14 @@ public class DatabaseService
         {
             credManager.GetUserInputs();
         }
+        storageHashMap = new HashMap<>();
     }
 
     public HashMap<String,HashValue> GetDataFromWarehouse() throws SQLException {
-        HashMap<String,HashValue> storageHashMap = new HashMap<>();
+
+        if(!storageHashMap.isEmpty())
+            return storageHashMap;
+
         Connection conn = null;
         try
         {

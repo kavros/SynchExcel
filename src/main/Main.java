@@ -16,7 +16,10 @@ public class Main
             DatabaseService conn =  new DatabaseService(new CredentialsService());
             ExcelGenerator gen = new ExcelGenerator(conn,exlParser);
 
-            gen.GenerateExcel();
+            if ( gen.GenerateExcel() == State.SUCCESS)
+                gen.SaveExcel();
+            else
+                System.err.println("Failed to generate the excel file");
 
             //workbook.close();
         }catch (Exception e)
