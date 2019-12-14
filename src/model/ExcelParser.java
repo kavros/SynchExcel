@@ -15,22 +15,9 @@ import java.util.Iterator;
 
 public class ExcelParser
 {
-    public class RowData
-    {
-        int row;
-        Double quantity;
-        Double lastPrcPr;
-
-        public RowData(Double _quantity, Double _lastPrcPr,int _row)
-        {
-            row=_row;
-            quantity=_quantity;
-            lastPrcPr=_lastPrcPr;
-        }
-    }
 
     private XSSFWorkbook workbook;
-    private HashMap<String, RowData> excelData;
+    private HashMap<String, ExcelProductDetails> excelData;
     private final int bCellNum = 4;     // barcode
     private final int qCellNum = 6;     // quantity
     private final int lastPrcPrCellNum = 2;
@@ -72,11 +59,11 @@ public class ExcelParser
         if(lastPrcPr == null)
             lastPrcPr = 0.0;
 
-        RowData v =  new RowData(quantity,lastPrcPr,currentRow);
+        ExcelProductDetails v =  new ExcelProductDetails(quantity,lastPrcPr,currentRow);
         excelData.put(barcode,v);
     }
 
-    public HashMap<String, RowData> GetExcelData()
+    public HashMap<String, ExcelProductDetails> GetExcelData()
     {
         if(excelData.size() == 0)
             LoadDataFromExcel();

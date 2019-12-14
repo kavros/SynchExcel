@@ -2,7 +2,6 @@ package model;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -37,12 +36,14 @@ public class ExcelGenerator
 
     public State GenerateExcel() throws SQLException
     {
-        HashMap<String, ExcelParser.RowData> excelData = exlParser.GetExcelData();
-        if( excelData == null)
+        HashMap<String, ExcelProductDetails> excelData = exlParser.GetExcelData();
+        HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
+
+        if( excelData == null || dbData.size() == 0)
+        {
+            System.out.println("Database service or parser failed to provide data to generator.");
             return State.FAILURE;
-
-        HashMap<String, DatabaseService.HashValue> dbData = databaseService.GetDataFromWarehouse();
-
+        }
         int totalRows = exlParser.GetTotalRows();
 
         for(String bDbVal:dbData.keySet())
@@ -76,7 +77,7 @@ public class ExcelGenerator
     private void UpdateRow(String bDbVal ) throws SQLException
     {
 
-        ExcelParser.RowData exlEntry = exlParser.GetExcelData().get(bDbVal);
+        ExcelProductDetails exlEntry = exlParser.GetExcelData().get(bDbVal);
         Double qValDb = databaseService.GetDataFromWarehouse().get(bDbVal).quantity;
         boolean isQuantityChanged = ( Double.compare(qValDb,exlEntry.quantity) != 0 );
         if ( isQuantityChanged )
@@ -113,7 +114,7 @@ public class ExcelGenerator
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         Double qValDb = databaseService.GetDataFromWarehouse().get(barcode).quantity;
-        ExcelParser.RowData exlEntry = exlParser.GetExcelData().get(barcode);
+        ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
 
         Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
         c.setCellValue(qValDb);
@@ -129,9 +130,13 @@ public class ExcelGenerator
 
     private void InsertRowLast(int lastRow, String bDbVal) throws SQLException
     {
-        HashMap<String, DatabaseService.HashValue> dbData = databaseService.GetDataFromWarehouse();
+        HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
         Double qValDb = dbData.get(bDbVal).quantity;
-        String productName = databaseService.GetDataFromWarehouse().get(bDbVal).productName;
+        String productName = databaseService
+                .GetDataFromWarehouse()
+                .get(bDbVal)
+                .productName;
+
         XSSFSheet sheet = workbook.getSheetAt(0);
 
         sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
@@ -153,7 +158,7 @@ public class ExcelGenerator
     private void UpdateLastPrcPr(String barcode) throws SQLException
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        ExcelParser.RowData exlEntry = exlParser.GetExcelData().get(barcode);
+        ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
 
         Double lastPrcPrDb = databaseService
                 .GetDataFromWarehouse()
@@ -169,7 +174,7 @@ public class ExcelGenerator
     private void UpdatedStatusCol( String barcode)
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        ExcelParser.RowData exlEntry = exlParser.GetExcelData().get(barcode);
+        ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
         Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
         LocalDate localDate = LocalDate.now();

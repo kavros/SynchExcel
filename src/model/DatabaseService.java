@@ -5,23 +5,9 @@ import java.util.HashMap;
 
 public class DatabaseService
 {
-
-    public class HashValue
-    {
-        public double quantity;
-        public double lastPrcPr;
-        public String productName;
-        HashValue(double q,double l,String p)
-        {
-            quantity = q;
-            lastPrcPr = l;
-            productName = p;
-        }
-    }
-
     private final String storageId = "2";
     CredentialsService credManager;
-    HashMap<String,HashValue> storageHashMap;
+    HashMap<String, DatabaseProductDetails> storageHashMap;
 
     public DatabaseService(CredentialsService _credManager)
     {
@@ -34,7 +20,7 @@ public class DatabaseService
         storageHashMap = new HashMap<>();
     }
 
-    public HashMap<String,HashValue> GetDataFromWarehouse() throws SQLException {
+    public HashMap<String, DatabaseProductDetails> GetDataFromWarehouse() throws SQLException {
 
         if(!storageHashMap.isEmpty())
             return storageHashMap;
@@ -63,7 +49,7 @@ public class DatabaseService
                     String barcode      = res.getString(1);
                     String productName  = res.getString(4);
 
-                    HashValue val = new HashValue(quantity,lastPrcPr,productName);
+                    DatabaseProductDetails val = new DatabaseProductDetails(quantity,lastPrcPr,productName);
                     storageHashMap.put(barcode,val);
                 }
                 conn.commit();

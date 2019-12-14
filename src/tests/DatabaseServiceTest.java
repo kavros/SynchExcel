@@ -2,18 +2,14 @@ package tests;
 
 import model.CredentialsService;
 import model.DatabaseService;
+import model.DatabaseProductDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-
 import java.sql.*;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import javax.sql.RowSet;
-
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.easymock.EasyMock.expect;
@@ -71,7 +67,7 @@ public class DatabaseServiceTest
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
 
-        HashMap<String, DatabaseService.HashValue> result = dbServer.GetDataFromWarehouse();
+        HashMap<String, DatabaseProductDetails> result = dbServer.GetDataFromWarehouse();
 
         assertTrue (result.get("4313").lastPrcPr == 1.0);
         assertTrue (result.get("4313").productName.equals("Bread"));
@@ -92,7 +88,7 @@ public class DatabaseServiceTest
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
 
-        HashMap<String, DatabaseService.HashValue> result = dbServer.GetDataFromWarehouse();
+        HashMap<String, DatabaseProductDetails> result = dbServer.GetDataFromWarehouse();
         dbServer.GetDataFromWarehouse();
 
         verify(statement, times(1)).executeQuery(anyString());
