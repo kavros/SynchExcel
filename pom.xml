@@ -1,0 +1,23 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany.app</groupId>
+    <artifactId>SynchExcel</artifactId>
+    <version>1</version>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>nl.bstoi.poiparser</groupId>
+            <artifactId>PoiParser</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.13</version>
+        </dependency>
+        
+    </dependencies>
+
+</project>
