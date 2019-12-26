@@ -56,7 +56,7 @@ public class ExcelGeneratorTest
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
-        when(dbService.GetDataFromWarehouse()).thenReturn(new HashMap<>());
+        when(dbService.GetDataFromWarehouse()).thenReturn(new HashMap());
 
         State result = generator.GenerateExcel();
 
