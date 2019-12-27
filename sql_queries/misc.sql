@@ -31,9 +31,15 @@ where sstore.sfileid='17764'; */
 
 
 
-/*insert into sstore
+/*
+insert into sstore
 (sFileId,SpaFileIdNo,sstRemain1,sstRemain2,sstApogr1,sstApogr2,sstWaiting1,sstWaiting2,sstOrdered1,sstOrdered2) 
-values (54,2,2,0,0,0,0,0,0,0);*/
+values (54,2,2,0,0,0,0,0,0,0);
+
+insert into sstore
+(sFileId,SpaFileIdNo,sstRemain1,sstRemain2,sstApogr1,sstApogr2,sstWaiting1,sstWaiting2,sstOrdered1,sstOrdered2)
+values (9310,2,2,0,0,0,0,0,0,0);
+*/
 
 
 

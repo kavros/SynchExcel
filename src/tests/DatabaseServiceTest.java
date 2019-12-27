@@ -42,7 +42,7 @@ public class DatabaseServiceTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ReturnsEmptyHashMap()  throws SQLException {
+    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap()  throws SQLException {
 
 
         DatabaseService dbServer =  new DatabaseService(credServ);
@@ -54,7 +54,7 @@ public class DatabaseServiceTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ReturnsResults() throws SQLException
+    public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws SQLException
     {
         DatabaseService dbServer =  new DatabaseService(credServ);
         ResultSet resultSet = mock(ResultSet.class);
@@ -63,6 +63,7 @@ public class DatabaseServiceTest
         when(resultSet.getString(4)).thenReturn("Bread");
         when(resultSet.getDouble(2)).thenReturn(2.0);
         when(resultSet.getDouble(3)).thenReturn(1.0);
+        when(resultSet.getString(5)).thenReturn("43.13");
         when(statement
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
@@ -72,10 +73,11 @@ public class DatabaseServiceTest
         assertTrue (result.get("4313").lastPrcPr == 1.0);
         assertTrue (result.get("4313").productName.equals("Bread"));
         assertTrue (result.get("4313").quantity == 2.0 );
+        assertTrue (result.get("4313").productCode == "43.13" );
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenCalledTwice_ReturnsCallDatabaseOnce() throws SQLException
+    public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws SQLException
     {
         DatabaseService dbServer =  new DatabaseService(credServ);
         ResultSet resultSet = mock(ResultSet.class);

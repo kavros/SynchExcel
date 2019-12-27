@@ -70,7 +70,7 @@ public class ExcelGeneratorTest
         dbData = new HashMap<>();
         excelData = new  HashMap<>();
         workbook = new XSSFWorkbook();
-        DatabaseProductDetails dbDetails = new DatabaseProductDetails(1.0,1.0,"bread");
+        DatabaseProductDetails dbDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
         ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
         dbData.put("43.13",dbDetails);
         excelData.put("43.13",excelDetails);
@@ -88,7 +88,7 @@ public class ExcelGeneratorTest
         String barcode = "43.13";
         double price = 1.0;
         Row row = workbook.getSheetAt(0).getRow(0);
-        assertTrue(row.getCell(4).getStringCellValue() == barcode );
+        assertTrue(row.getCell(4).getStringCellValue().equals(barcode) );
         assertTrue(row.getCell(6).getNumericCellValue() == quantity );
         assertTrue(row.getCell(5).getStringCellValue() == productName );
         assertTrue(row.getCell(2).getNumericCellValue() == price);
@@ -101,7 +101,7 @@ public class ExcelGeneratorTest
         dbData = new HashMap<>();
         excelData = new  HashMap<>();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails dbDetails = new DatabaseProductDetails(10,1.1,"bread");
+        DatabaseProductDetails dbDetails = new DatabaseProductDetails(10,1.1,"bread","43.13");
         ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
         dbData.put("43.13",dbDetails);
         excelData.put("43.13",excelDetails);
@@ -130,8 +130,8 @@ public class ExcelGeneratorTest
         dbData    = new HashMap<>();
         excelData = new  HashMap<>();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread");
-        DatabaseProductDetails product2Details = new DatabaseProductDetails(1.0,1.0,"paper");
+        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
+        DatabaseProductDetails product2Details = new DatabaseProductDetails(1.0,1.0,"paper","43.13");
         ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
         dbData.put("43.13",productDetails);
         dbData.put("43.14",product2Details);
@@ -155,8 +155,8 @@ public class ExcelGeneratorTest
         dbData    = new HashMap<>();
         excelData = new  HashMap<>();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread");
-        DatabaseProductDetails product2Details = new DatabaseProductDetails(0.0,1.0,"paper");
+        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
+        DatabaseProductDetails product2Details = new DatabaseProductDetails(0.0,1.0,"paper","43.13");
         ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
         dbData.put("43.13",productDetails);
         dbData.put("43.14",product2Details);

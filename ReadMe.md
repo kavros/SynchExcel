@@ -31,8 +31,7 @@ This application updates the product fields inside an Excel document based on a 
         - SPIKE: is it a good aproach to make all libraries external dependency   		    
 	 - Requested
         - log changes to a file
-        - fix font size when adding new lines
-        - add kwdiko when adding new product to excel
+        - fix font size when adding new lines     
         
 	    
 

@@ -37,7 +37,7 @@ public class DatabaseService
                 credManager.SaveCredentials();
                 Statement st = conn.createStatement();
                 ResultSet res = st.executeQuery(
-                        "select sFactCode,sstRemain1,sLastPrcPr,sname" +
+                        "select sFactCode,sstRemain1,sLastPrcPr,sname,sCode " +
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
                         "        where spaFileIdNo="+storageId);
@@ -48,8 +48,9 @@ public class DatabaseService
                     double quantity     = res.getDouble(2);
                     String barcode      = res.getString(1);
                     String productName  = res.getString(4);
+                    String productCode  = res.getString(5);
 
-                    DatabaseProductDetails val = new DatabaseProductDetails(quantity,lastPrcPr,productName);
+                    DatabaseProductDetails val = new DatabaseProductDetails(quantity,lastPrcPr,productName,productCode);
                     storageHashMap.put(barcode,val);
                 }
                 conn.commit();

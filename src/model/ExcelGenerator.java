@@ -21,7 +21,7 @@ public class ExcelGenerator
     private final int stCellNum = 1;    // update status
     private final int descCellNum= 5;   // product description
     private final int lastPrcPrCellNum = 2;
-
+    private final int productCodeCellNum = 3;
     private DatabaseService databaseService;
     private ExcelParser exlParser;
     XSSFWorkbook workbook;
@@ -132,10 +132,7 @@ public class ExcelGenerator
     {
         HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
         Double qValDb = dbData.get(bDbVal).quantity;
-        String productName = databaseService
-                .GetDataFromWarehouse()
-                .get(bDbVal)
-                .productName;
+        String productName =  dbData.get(bDbVal).productName;
 
         XSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -152,7 +149,11 @@ public class ExcelGenerator
                 .createCell(lastPrcPrCellNum)
                 .setCellValue(dbData.get(bDbVal).lastPrcPr);
 
-        System.out.println("Added entry("+ bDbVal+ "," +qValDb+")at row "+(lastRow+1));
+        sheet.getRow(lastRow+1)
+                .createCell(productCodeCellNum)
+                .setCellValue(dbData.get(bDbVal).productCode);
+
+        System.out.println("Added entry("+ bDbVal+ ","+productName+","+qValDb+")at row "+(lastRow+1));
     }
 
     private void UpdateLastPrcPr(String barcode) throws SQLException
