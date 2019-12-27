@@ -114,6 +114,7 @@ public class ExcelGenerator
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         Double qValDb = databaseService.GetDataFromWarehouse().get(barcode).quantity;
+        String productName = databaseService.GetDataFromWarehouse().get(barcode).productName;
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
 
         Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
@@ -122,7 +123,7 @@ public class ExcelGenerator
         UpdatedStatusCol(barcode);
         System.out.println
                 (
-                        "Updated entry ("+barcode+") quantity from "
+                        "Updated entry ("+barcode+","+productName+") quantity from "
                         + exlEntry.quantity + " to " + qValDb+ " at line "
                         + (exlEntry.row+1)
                 );
@@ -153,14 +154,16 @@ public class ExcelGenerator
                 .createCell(productCodeCellNum)
                 .setCellValue(dbData.get(bDbVal).productCode);
 
-        System.out.println("Added entry("+ bDbVal+ ","+productName+","+qValDb+")at row "+(lastRow+1));
+        System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
     }
 
     private void UpdateLastPrcPr(String barcode) throws SQLException
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
-
+        String productName =  databaseService
+                .GetDataFromWarehouse()
+                .get(barcode).productName;
         Double lastPrcPrDb = databaseService
                 .GetDataFromWarehouse()
                 .get(barcode)
@@ -169,7 +172,7 @@ public class ExcelGenerator
         Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
         c.setCellValue(lastPrcPrDb);
 
-        System.out.println("Updated entry("+barcode+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
+        System.out.println("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
     }
 
     private void UpdatedStatusCol( String barcode)
