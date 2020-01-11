@@ -14,11 +14,6 @@ This application updates an Excel document fields based on the SQL table. The ap
 ## Useful Links
 * [Fix for "invalid signature file digest.."](https://stackoverflow.com/questions/34855649/invalid-signature-file-digest-for-manifest-main-attributes-exception-while-tryin/34856095#34856095)
 
-## Excel structure
-* These are the necessary changes that need to be done:
-    * One more column added to the original excel (as first) that indicates if the row has been updated.
-    * Delete extra rows with empty content
-
 ## TODO   
     - Good to do
         - run a validation algorithm after the update completed.
