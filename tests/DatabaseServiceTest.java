@@ -1,4 +1,3 @@
-package tests;
 
 import model.CredentialsService;
 import model.DatabaseService;

@@ -1,4 +1,3 @@
-package tests;
 
 import model.Constants;
 import model.CredentialsService;
