@@ -13,14 +13,3 @@ This tool developed to automate a weekly data entry process in a supermarket whi
 ## Useful Links
 * [Fix for "invalid signature file digest.."](https://stackoverflow.com/questions/34855649/invalid-signature-file-digest-for-manifest-main-attributes-exception-while-tryin/34856095#34856095)
 
-## TODO   
-    - Good to do
-        - run a validation algorithm after the update completed.
-        - create a json that defines columns
-        - check format of excel                		    
-	 - Requested
-        - log changes to a file
-        - fix font size when adding new lines     
-        
-	    
-
