@@ -18,9 +18,6 @@ public class ExcelParser
 
     private XSSFWorkbook workbook;
     private HashMap<String, ExcelProductDetails> excelData;
-    private final int bCellNum = 4;     // barcode
-    private final int qCellNum = 6;     // quantity
-    private final int lastPrcPrCellNum = 2;
 
     private int totalRows;
 
@@ -42,9 +39,9 @@ public class ExcelParser
         {
             currRow++;
             Row row = rowIterator.next();
-            String bVal = GetBarcode(row.getCell(bCellNum));
-            Double qVal = GetNumericValue(row.getCell(qCellNum));
-            Double lastPrcPr   = GetNumericValue(row.getCell(lastPrcPrCellNum));
+            String bVal = GetBarcode(row.getCell(Constants.bCellNum));
+            Double qVal = GetNumericValue(row.getCell(Constants.qCellNum));
+            Double lastPrcPr = GetNumericValue(row.getCell(Constants.lastPrcPrCellNum));
 
             if (bVal != null && qVal != null)
                 Insert(bVal,currRow,qVal,lastPrcPr);
@@ -84,6 +81,7 @@ public class ExcelParser
     {
         return ( (str != null) && (str.contains("ΣΥΝΟΛΟ TΕΛΙΚΟ")) );
     }
+
     private String GetBarcode(Cell c)
     {
         String btVal = null;
@@ -113,7 +111,7 @@ public class ExcelParser
         {
             qtVal = c.getNumericCellValue();
         }
+
         return qtVal;
     }
-
 }
