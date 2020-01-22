@@ -1,4 +1,5 @@
 language: java
 jdk:
-  - oraclejdk8
-
+  - oraclejdk13
+install: true
+script: mvn clean package -DskipTests=true
