@@ -1,3 +1,4 @@
+ [![Build Status](https://travis-ci.com/kavros/SynchExcel.svg?branch=master)](https://travis-ci.com/kavros/SynchExcel)
 # Overview
 This tool developed to automate a weekly data entry process in a supermarket which used to happen manually. The tool uses the data coming from the warehouse database in order to update a custom Excel document.
  
