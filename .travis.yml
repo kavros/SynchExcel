@@ -3,5 +3,5 @@ jdk:
   - oraclejdk13
 services:
   - mysql
-script: mvn clean compile test -B
+script: mvn clean compile package
 
