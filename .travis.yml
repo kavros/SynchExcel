@@ -1,4 +1,6 @@
 language: java
 jdk:
   - oraclejdk13
-install: true
+script: mvn clean compile test
+
+
