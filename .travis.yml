@@ -3,4 +3,5 @@ jdk:
   - oraclejdk13
 script: mvn clean compile
 
-
+after_success:
+  - coveralls
