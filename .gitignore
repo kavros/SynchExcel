@@ -1,6 +1,5 @@
 data/credentials.txt
 *.class
 *.jar
-credentials.txt
 b.xlsx
 log.txt
