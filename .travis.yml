@@ -1,6 +1,6 @@
 language: java
 jdk:
   - oraclejdk13
-script: mvn clean compile test
+script: mvn clean package -DskipTests=yes
 
 
