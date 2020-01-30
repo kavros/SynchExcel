@@ -3,5 +3,5 @@ jdk:
   - openjdk8
 script: mvn clean compile
 
-script: mvn clean compile test #jacoco:report coveralls:report
+script: mvn clean compile test jacoco:report coveralls:report
 
