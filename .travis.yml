@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk13
+  - openjdk8
 script: mvn clean compile
 
 script: mvn clean compile test #jacoco:report coveralls:report
