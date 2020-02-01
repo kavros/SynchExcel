@@ -58,4 +58,26 @@ public class CredentialsServiceTest
         assertTrue(srv.GetDatabaseName().equals("Cmp005"));
         assertTrue(res == State.SUCCESS);
     }
+
+    @Test
+    public void SaveCredentials_WhenValidSaveCredentials_ThenRetrieveThemCorrectly()
+    {
+        String simulatedUserInput = "kef" + System.getProperty("line.separator") +
+                "pass" + System.getProperty("line.separator") +
+                "localhost" + System.getProperty("line.separator") +
+                "Cmp005" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+        CredentialsService srv = new CredentialsService();
+        srv.GetCredentialsFromFile("testCredentials.text");
+        srv.GetUserInputs();
+
+        srv.SaveCredentials();
+        State res = srv.GetCredentialsFromFile("testCredentials.text");
+
+        assertTrue(res == State.SUCCESS);
+        assertTrue(srv.GetDatabaseName().equals( "Cmp005"));
+        assertTrue(srv.GetPass().equals( "pass"));
+        assertTrue(srv.GetUsername().equals( "kef"));
+        assertTrue(srv.GetHostname().equals( "localhost"));
+    }
 }

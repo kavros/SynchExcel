@@ -75,7 +75,7 @@ public class CredentialsService
             hostname    = details[2];
             databaseName = details[3];
             dbURL        = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
-            if(username==null || pass==null|| hostname==null)
+            if(username==null || pass==null|| hostname==null || databaseName == null)
             {
                 return State.FAILURE;
             }
