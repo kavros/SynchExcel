@@ -12,21 +12,17 @@ public class TrippleDes
 {
     private static final String UNICODE_FORMAT = "UTF8";
     public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
-    private KeySpec ks;
-    private SecretKeyFactory skf;
     private Cipher cipher;
     byte[] arrayBytes;
-    private String myEncryptionKey;
-    private String myEncryptionScheme;
     SecretKey key;
 
     public TrippleDes() throws Exception
     {
-        myEncryptionKey = "KavrosKavrosKavrosKavros";
-        myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
+        String myEncryptionKey = "KavrosKavrosKavrosKavros";
+        String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
         arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
-        ks = new DESedeKeySpec(arrayBytes);
-        skf = SecretKeyFactory.getInstance(myEncryptionScheme);
+        KeySpec ks = new DESedeKeySpec(arrayBytes);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance(myEncryptionScheme);
         cipher = Cipher.getInstance(myEncryptionScheme);
         key = skf.generateSecret(ks);
     }
