@@ -19,7 +19,7 @@ public class DatabaseService
         storageHashMap = new HashMap<>();
     }
 
-    public HashMap<String, DatabaseProductDetails> GetDataFromWarehouse() throws SQLException {
+    public HashMap<String, DatabaseProductDetails> GetDataFromWarehouse() throws Exception {
 
         if(!storageHashMap.isEmpty())
             return storageHashMap;

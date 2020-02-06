@@ -36,7 +36,7 @@ public class ExcelGeneratorTest
     }
 
     @Test
-    public void GenerateExcel_WhenExcelDataIsNull_ReturnsFail() throws SQLException
+    public void GenerateExcel_WhenExcelDataIsNull_ReturnsFail() throws Exception
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
@@ -49,7 +49,7 @@ public class ExcelGeneratorTest
     }
 
     @Test
-    public void GenerateExcel_WhenDatabaseMapIsEmpty_ReturnsFail() throws SQLException
+    public void GenerateExcel_WhenDatabaseMapIsEmpty_ReturnsFail() throws Exception
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
@@ -62,7 +62,7 @@ public class ExcelGeneratorTest
     }
 
     @Test
-    public void GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame() throws SQLException
+    public void GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame() throws Exception
     {
 
         dbData = new HashMap<>();
@@ -88,12 +88,12 @@ public class ExcelGeneratorTest
         Row row = workbook.getSheetAt(0).getRow(0);
         assertTrue(row.getCell(4).getStringCellValue().equals(barcode) );
         assertTrue(row.getCell(6).getNumericCellValue() == quantity );
-        assertTrue(row.getCell(5).getStringCellValue() == productName );
+        assertTrue(row.getCell(5).getStringCellValue().equals(productName));
         assertTrue(row.getCell(2).getNumericCellValue() == price);
     }
 
     @Test
-    public void GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow() throws SQLException
+    public void GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow() throws Exception
     {
 
         dbData = new HashMap<>();
@@ -115,14 +115,14 @@ public class ExcelGeneratorTest
 
         generator.GenerateExcel();
 
-        assertTrue(row.getCell(4).getStringCellValue() == barcode );
+        assertTrue(row.getCell(4).getStringCellValue().equals(barcode));
         assertTrue(row.getCell(6).getNumericCellValue() == 10.0 );
-        assertTrue(row.getCell(5).getStringCellValue() == productName );
+        assertTrue(row.getCell(5).getStringCellValue().equals(productName));
         assertTrue(row.getCell(2).getNumericCellValue() == 1.1);
     }
 
     @Test
-    public void GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook() throws SQLException
+    public void GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook() throws Exception
     {
 
         dbData    = new HashMap<>();
@@ -147,7 +147,7 @@ public class ExcelGeneratorTest
     }
 
     @Test
-    public void GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored() throws SQLException
+    public void GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored() throws Exception
     {
 
         dbData    = new HashMap<>();

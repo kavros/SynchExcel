@@ -29,8 +29,7 @@ public class CredentialsServiceTest
     }
 
     @Test(expected = NullPointerException.class)
-    public void SaveCredentials_WhenFilePathNotGiven_ShouldTrowException()
-    {
+    public void SaveCredentials_WhenFilePathNotGiven_ShouldTrowException() throws Exception {
         CredentialsService srv = new CredentialsService();
 
         srv.SaveCredentials();
@@ -59,8 +58,7 @@ public class CredentialsServiceTest
     }
 
     @Test
-    public void SaveCredentials_WhenValidSaveCredentials_ThenRetrieveThemCorrectly()
-    {
+    public void SaveCredentials_WhenValidSaveCredentials_ThenRetrieveThemCorrectly() throws Exception {
         String simulatedUserInput = "kef" + System.getProperty("line.separator") +
                 "pass" + System.getProperty("line.separator") +
                 "localhost" + System.getProperty("line.separator") +

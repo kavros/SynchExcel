@@ -34,7 +34,7 @@ public class ExcelGenerator
         workbook = _exlParser.GetWorkbook();
     }
 
-    public State GenerateExcel() throws SQLException
+    public State GenerateExcel() throws Exception
     {
         HashMap<String, ExcelProductDetails> excelData = exlParser.GetExcelData();
         HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
@@ -74,7 +74,7 @@ public class ExcelGenerator
         workbook.write(output_file);
     }
 
-    private void UpdateRow(String bDbVal ) throws SQLException
+    private void UpdateRow(String bDbVal ) throws Exception
     {
 
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(bDbVal);
@@ -110,7 +110,7 @@ public class ExcelGenerator
     }
 
 
-    private void UpdateQuantity(String barcode)  throws SQLException
+    private void UpdateQuantity(String barcode) throws Exception
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         Double qValDb = databaseService.GetDataFromWarehouse().get(barcode).quantity;
@@ -129,7 +129,7 @@ public class ExcelGenerator
                 );
     }
 
-    private void InsertRowLast(int lastRow, String bDbVal) throws SQLException
+    private void InsertRowLast(int lastRow, String bDbVal) throws Exception
     {
         HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
         Double qValDb = dbData.get(bDbVal).quantity;
@@ -157,7 +157,7 @@ public class ExcelGenerator
         System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
     }
 
-    private void UpdateLastPrcPr(String barcode) throws SQLException
+    private void UpdateLastPrcPr(String barcode) throws Exception
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);

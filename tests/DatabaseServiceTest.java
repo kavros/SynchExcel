@@ -41,7 +41,7 @@ public class DatabaseServiceTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap()  throws SQLException {
+    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap()  throws Exception {
 
 
         DatabaseService dbServer =  new DatabaseService(credServ);
@@ -53,7 +53,7 @@ public class DatabaseServiceTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws SQLException
+    public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws Exception
     {
         DatabaseService dbServer =  new DatabaseService(credServ);
         ResultSet resultSet = mock(ResultSet.class);
@@ -76,7 +76,7 @@ public class DatabaseServiceTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws SQLException
+    public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws Exception
     {
         DatabaseService dbServer =  new DatabaseService(credServ);
         ResultSet resultSet = mock(ResultSet.class);

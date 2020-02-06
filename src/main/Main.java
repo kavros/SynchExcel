@@ -10,8 +10,7 @@ public class Main
 {
 
 
-    public static void main(String[] args) throws IOException, SQLException
-    {
+    public static void main(String[] args) throws Exception {
 
         XSSFWorkbook workbook = new  XSSFWorkbook(Constants.inputExcel);
         ExcelParser exlParser = new ExcelParser(workbook);
