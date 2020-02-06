@@ -2,7 +2,6 @@
 import model.Constants;
 import model.CredentialsService;
 import model.State;
-import org.apache.commons.math3.analysis.function.Constant;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;

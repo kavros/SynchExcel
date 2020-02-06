@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
-import java.util.HashMap;
 
 public class ExcelParserTest
 {

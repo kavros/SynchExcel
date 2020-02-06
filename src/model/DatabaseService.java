@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public class DatabaseService
 {
-    private final String storageId = "2";
     CredentialsService credManager;
     HashMap<String, DatabaseProductDetails> storageHashMap;
 
@@ -36,11 +35,12 @@ public class DatabaseService
             {
                 credManager.SaveCredentials();
                 Statement st = conn.createStatement();
+                String storageId = "2";
                 ResultSet res = st.executeQuery(
                         "select sFactCode,sstRemain1,sLastPrcPr,sname,sCode " +
                         "        FROM SSTORE " +
                         "        JOIN smast on sstore.sfileId=smast.sfileid " +
-                        "        where spaFileIdNo="+storageId);
+                        "        where spaFileIdNo="+ storageId);
 
                 while (res!= null && res.next())
                 {

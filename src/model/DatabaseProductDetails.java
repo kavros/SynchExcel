@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Struct;
-
 public class DatabaseProductDetails
 {
     public double quantity;

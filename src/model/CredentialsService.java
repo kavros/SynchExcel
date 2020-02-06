@@ -31,27 +31,18 @@ public class CredentialsService
         dbURL = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
     }
 
-    public void SaveCredentials()
-    {
+    public void SaveCredentials() throws Exception {
         if(credFilePath == null)
             throw new NullPointerException("File path is not given");
 
-        try
-        {
-            TrippleDes td = new TrippleDes();
-            String encrypted = td.encrypt(pass);
-            String decrypted = td.decrypt(encrypted);
+        TrippleDes td = new TrippleDes();
+        String encrypted = td.encrypt(pass);
+        String decrypted = td.decrypt(encrypted);
 
-            String credentials=username+","+encrypted+","+hostname+","+databaseName;
-            BufferedWriter writer = new BufferedWriter(new FileWriter(credFilePath));
-            writer.write(credentials);
-            writer.close();
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
-        }
-
+        String credentials=username+","+encrypted+","+hostname+","+databaseName;
+        BufferedWriter writer = new BufferedWriter(new FileWriter(credFilePath));
+        writer.write(credentials);
+        writer.close();
     }
 
     public State GetCredentialsFromFile(String filePath)
@@ -83,7 +74,7 @@ public class CredentialsService
         }
         catch (Exception e)
         {
-            System.out.println(e);
+            System.out.println("Failed to get credentials from file "+e);
             return State.FAILURE;
         }
 
