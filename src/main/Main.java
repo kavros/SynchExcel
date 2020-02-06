@@ -2,9 +2,6 @@ package main;
 import model.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 
 public class Main
 {
