@@ -1,5 +1,6 @@
  [![Build Status](https://travis-ci.com/kavros/SynchExcel.svg?branch=master)](https://travis-ci.com/kavros/SynchExcel)
  [![Coverage Status](https://coveralls.io/repos/github/kavros/SynchExcel/badge.svg?branch=master)](https://coveralls.io/github/kavros/SynchExcel?branch=master)
+ [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kavros_SynchExcel&metric=alert_status)](https://sonarcloud.io/dashboard?id=kavros_SynchExcel)
 # Overview
 This tool developed to automate a weekly data entry process in a supermarket which used to happen manually. The tool uses the data coming from the warehouse database in order to update a custom Excel document.
  
