@@ -12,8 +12,8 @@ import java.util.Iterator;
 public class ExcelParser
 {
 
-    private XSSFWorkbook workbook;
-    private HashMap<String, ExcelProductDetails> excelData;
+    private final XSSFWorkbook workbook;
+    private final HashMap<String, ExcelProductDetails> excelData;
 
     private int totalRows;
 

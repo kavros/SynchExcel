@@ -2,10 +2,10 @@ package model;
 
 public class DatabaseProductDetails
 {
-    public double quantity;
-    public double lastPrcPr;
-    public String productName;
-    public String productCode;
+    public final double quantity;
+    public final double lastPrcPr;
+    public final String productName;
+    public final String productCode;
 
     public DatabaseProductDetails(double q, double l, String p, String c)
     {

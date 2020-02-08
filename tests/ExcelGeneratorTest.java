@@ -22,14 +22,14 @@ import static org.mockito.Mockito.when;
 public class ExcelGeneratorTest
 {
 
-    ExcelParser parser;
-    DatabaseService dbService;
-    HashMap<String, DatabaseProductDetails> dbData;
-    HashMap<String, ExcelProductDetails> excelData;
-        XSSFWorkbook workbook ;
+    private ExcelParser parser;
+    private DatabaseService dbService;
+    private HashMap<String, DatabaseProductDetails> dbData;
+    private HashMap<String, ExcelProductDetails> excelData;
+        private XSSFWorkbook workbook ;
 
     @Before
-    public void Setup() throws SQLException
+    public void Setup()
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
@@ -54,7 +54,7 @@ public class ExcelGeneratorTest
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
-        when(dbService.GetDataFromWarehouse()).thenReturn(new HashMap());
+        when(dbService.GetDataFromWarehouse()).thenReturn(new HashMap<>());
 
         State result = generator.GenerateExcel();
 

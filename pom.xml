@@ -109,6 +109,7 @@
             </configuration>
         </plugin>
 
+        <!-- Plugin for running unit tests on Travis CI -->
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>cobertura-maven-plugin</artifactId>
@@ -116,8 +117,8 @@
             <configuration>
                 <format>xml</format>
                 <maxmem>256m</maxmem>
-                <!-- aggregated reports for multi-module projects -->
                 <aggregate>true</aggregate>
+                <check/>
             </configuration>
         </plugin>
 

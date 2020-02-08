@@ -21,9 +21,9 @@ import java.util.HashMap;
 @PrepareForTest({DriverManager.class,DatabaseService.class})
 public class DatabaseServiceTest
 {
-    Connection connection;
-    CredentialsService credServ ;
-    Statement statement;
+    private Connection connection;
+    private CredentialsService credServ ;
+    private Statement statement;
 
     @Before
     public void Setup()throws SQLException
@@ -72,7 +72,7 @@ public class DatabaseServiceTest
         assertTrue (result.get("4313").lastPrcPr == 1.0);
         assertTrue (result.get("4313").productName.equals("Bread"));
         assertTrue (result.get("4313").quantity == 2.0 );
-        assertTrue (result.get("4313").productCode == "43.13" );
+        assertTrue (result.get("4313").productCode.equals("43.13"));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class DatabaseServiceTest
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
 
-        HashMap<String, DatabaseProductDetails> result = dbServer.GetDataFromWarehouse();
+        dbServer.GetDataFromWarehouse();
         dbServer.GetDataFromWarehouse();
 
         verify(statement, times(1)).executeQuery(anyString());

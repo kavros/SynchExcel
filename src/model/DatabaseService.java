@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class DatabaseService
 {
-    CredentialsService credManager;
-    HashMap<String, DatabaseProductDetails> storageHashMap;
+    private final CredentialsService credManager;
+    private final HashMap<String, DatabaseProductDetails> productsInWarehouse = new HashMap<>();
 
     public DatabaseService(CredentialsService _credManager)
     {
@@ -16,13 +16,12 @@ public class DatabaseService
         {
             credManager.GetUserInputs();
         }
-        storageHashMap = new HashMap<>();
     }
 
     public HashMap<String, DatabaseProductDetails> GetDataFromWarehouse() throws Exception {
 
-        if(!storageHashMap.isEmpty())
-            return storageHashMap;
+        if(!productsInWarehouse.isEmpty())
+            return productsInWarehouse;
 
         Connection conn = null;
         try
@@ -51,7 +50,7 @@ public class DatabaseService
                     String productCode  = res.getString(5);
 
                     DatabaseProductDetails val = new DatabaseProductDetails(quantity,lastPrcPr,productName,productCode);
-                    storageHashMap.put(barcode,val);
+                    productsInWarehouse.put(barcode,val);
                 }
                 conn.commit();
             }
@@ -60,10 +59,10 @@ public class DatabaseService
         {
             CloseDbConnection(conn);
         }
-        return  storageHashMap;
+        return productsInWarehouse;
     }
 
-    public void CloseDbConnection(Connection conn)
+    private void CloseDbConnection(Connection conn)
     {
         try
         {

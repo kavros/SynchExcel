@@ -11,10 +11,10 @@ import org.apache.commons.codec.binary.Base64;
 public class TrippleDes
 {
     private static final String UNICODE_FORMAT = "UTF8";
-    public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
+    private static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
     private Cipher cipher;
-    byte[] arrayBytes;
-    SecretKey key;
+    private byte[] arrayBytes;
+    private SecretKey key;
 
     public TrippleDes() throws Exception
     {

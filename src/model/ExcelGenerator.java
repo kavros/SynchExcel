@@ -21,9 +21,9 @@ public class ExcelGenerator
     private final int descCellNum= 5;   // product description
     private final int lastPrcPrCellNum = 2;
     private final int productCodeCellNum = 3;
-    private DatabaseService databaseService;
-    private ExcelParser exlParser;
-    XSSFWorkbook workbook;
+    private final DatabaseService databaseService;
+    private final ExcelParser exlParser;
+    private final XSSFWorkbook workbook;
 
     public ExcelGenerator( DatabaseService _databaseService,
                           ExcelParser _exlParser)

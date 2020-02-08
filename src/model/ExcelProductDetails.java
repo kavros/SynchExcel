@@ -2,9 +2,9 @@ package model;
 
 public class ExcelProductDetails
 {
-    int row;
-    Double quantity;
-    Double lastPrcPr;
+    final int row;
+    final Double quantity;
+    final Double lastPrcPr;
 
 
     public int GetRow() {
