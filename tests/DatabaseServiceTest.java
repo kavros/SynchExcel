@@ -21,14 +21,13 @@ import java.util.HashMap;
 @PrepareForTest({DriverManager.class,DatabaseService.class})
 public class DatabaseServiceTest
 {
-    private Connection connection;
     private CredentialsService credServ ;
     private Statement statement;
 
     @Before
     public void Setup()throws SQLException
     {
-        connection = mock(Connection.class);
+        Connection connection = mock(Connection.class);
         credServ = mock(CredentialsService.class);
         when(credServ.GetDbURL()).thenReturn("url");
         when(credServ.GetUsername()).thenReturn("kef");

@@ -13,14 +13,13 @@ public class TrippleDes
     private static final String UNICODE_FORMAT = "UTF8";
     private static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
     private Cipher cipher;
-    private byte[] arrayBytes;
     private SecretKey key;
 
     public TrippleDes() throws Exception
     {
         String myEncryptionKey = "KavrosKavrosKavrosKavros";
         String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
-        arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
+        byte[] arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
         KeySpec ks = new DESedeKeySpec(arrayBytes);
         SecretKeyFactory skf = SecretKeyFactory.getInstance(myEncryptionScheme);
         cipher = Cipher.getInstance(myEncryptionScheme);
