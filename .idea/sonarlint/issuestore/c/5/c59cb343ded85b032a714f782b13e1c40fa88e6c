@@ -1,0 +1,27 @@
+
+\squid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(˜¸õâ
+fsquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(¹®Ùœÿÿÿÿÿ
+Wsquid:S1854"=Remove this useless assignment to local variable "decrypted".(é€‘øÿÿÿÿ
+csquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØÃ¦Q
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ë·«Üúÿÿÿÿ
+_squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(·™œ:
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ü¬øÿÿÿÿ
+csquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«»ãC
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”³éïüÿÿÿÿ
+Hsquid:S1481".Remove this unused "decrypted" local variable.(é€‘øÿÿÿÿ
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¸õâ
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•±ÎÈ
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÓÎÚ°
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(˜ã–É
+Osquid:S1854";Remove this useless assignment to local variable "console".(èƒ÷#
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ĞÿÌÊıÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(öıš«
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß–ïÜıÿÿÿÿ
+@squid:S1481",Remove this unused "console" local variable.(èƒ÷#
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(”ğˆŸùÿÿÿÿ
+fsquid:S2095"LUse try-with-resources or close this "BufferedWriter" in a "finally" clause.(Å—Çºıÿÿÿÿ

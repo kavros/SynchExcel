@@ -1,6 +1,6 @@
 
-import model.Constants;
 import model.CredentialsService;
+import model.DatabaseService;
 import model.State;
 import org.junit.Test;
 
@@ -50,7 +50,7 @@ public class CredentialsServiceTest
     {
         CredentialsService srv = new CredentialsService();
 
-        State res = srv.GetCredentialsFromFile(Constants.credFilePath);
+        State res = srv.GetCredentialsFromFile(DatabaseService.credFilePath);
 
         assertTrue(srv.GetUsername().equals("kef"));
         assertTrue(srv.GetDatabaseName().equals("Cmp005"));

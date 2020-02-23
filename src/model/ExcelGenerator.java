@@ -1,5 +1,6 @@
 package model;
 
+import model.parser.ExcelParser;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -15,12 +16,7 @@ import java.util.HashMap;
 
 public class ExcelGenerator
 {
-    private final int bCellNum = 4;     // barcode
-    private final int qCellNum = 6;     // quantity
-    private final int stCellNum = 1;    // update status
-    private final int descCellNum= 5;   // product description
-    private final int lastPrcPrCellNum = 2;
-    private final int productCodeCellNum = 3;
+    public static final String outExcel     = "./excel/b.xlsx";
     private final DatabaseService databaseService;
     private final ExcelParser exlParser;
     private final XSSFWorkbook workbook;
@@ -69,7 +65,7 @@ public class ExcelGenerator
         if(exlParser.GetExcelData() == null)
             System.err.println("SaveExcel failed because parser returns null");
 
-        FileOutputStream output_file = new FileOutputStream(new File(Constants.outExcel));
+        FileOutputStream output_file = new FileOutputStream(new File(outExcel));
         workbook.write(output_file);
     }
 
@@ -116,7 +112,7 @@ public class ExcelGenerator
         String productName = databaseService.GetDataFromWarehouse().get(barcode).productName;
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
 
-        Cell c = getCell(sheet.getRow(exlEntry.row), qCellNum);
+        Cell c = getCell(sheet.getRow(exlEntry.row), Columns.QUANTITY);
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(barcode);
@@ -136,21 +132,21 @@ public class ExcelGenerator
 
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        sheet.createRow(lastRow+1).createCell(bCellNum).setCellValue(bDbVal);
+        sheet.createRow(lastRow+1).createCell(Columns.BARCODE).setCellValue(bDbVal);
         sheet.getRow(lastRow+1)
-                .createCell(qCellNum)
+                .createCell(Columns.QUANTITY)
                 .setCellValue(dbData.get(bDbVal).quantity);
 
         sheet.getRow(lastRow+1)
-                .createCell(descCellNum)
+                .createCell(Columns.PRODUCT_DESCRIPTION)
                 .setCellValue(productName);
 
         sheet.getRow(lastRow+1)
-                .createCell(lastPrcPrCellNum)
+                .createCell(Columns.LAST_PRICE)
                 .setCellValue(dbData.get(bDbVal).lastPrcPr);
 
         sheet.getRow(lastRow+1)
-                .createCell(productCodeCellNum)
+                .createCell(Columns.PRODUCT_CODE)
                 .setCellValue(dbData.get(bDbVal).productCode);
 
         System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
@@ -168,7 +164,7 @@ public class ExcelGenerator
                 .get(barcode)
                 .lastPrcPr;
 
-        Cell c = getCell(sheet.getRow(exlEntry.row), lastPrcPrCellNum);
+        Cell c = getCell(sheet.getRow(exlEntry.row), Columns.LAST_PRICE);
         c.setCellValue(lastPrcPrDb);
 
         System.out.println("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
@@ -178,10 +174,12 @@ public class ExcelGenerator
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelProductDetails exlEntry = exlParser.GetExcelData().get(barcode);
-        Cell c2 = getCell(sheet.getRow(exlEntry.row), stCellNum);
+        Cell c2 = getCell(sheet.getRow(exlEntry.row), Columns.UPDATE_STATUS);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
         LocalDate localDate = LocalDate.now();
 
         c2.setCellValue("Updated quantity on "+dtf.format(localDate));
     }
+
+
 }

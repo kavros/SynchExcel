@@ -7,11 +7,12 @@ public class DatabaseService
 {
     private final CredentialsService credManager;
     private final HashMap<String, DatabaseProductDetails> productsInWarehouse = new HashMap<>();
+    public static final String credFilePath = "./credentials.txt";
 
     public DatabaseService(CredentialsService _credManager)
     {
         credManager = _credManager;
-        State retrieved = credManager.GetCredentialsFromFile(Constants.credFilePath);
+        State retrieved = credManager.GetCredentialsFromFile(credFilePath);
         if( retrieved == State.FAILURE)
         {
             credManager.GetUserInputs();

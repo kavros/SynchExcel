@@ -1,15 +1,16 @@
 package main;
 import model.*;
+import model.parser.ExcelParser;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class Main
 {
-
+    public static final String inputExcel   = "./excel/a.xlsx";
 
     public static void main(String[] args) throws Exception {
 
-        XSSFWorkbook workbook = new  XSSFWorkbook(Constants.inputExcel);
+        XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);
         ExcelParser exlParser = new ExcelParser(workbook);
         DatabaseService conn =  new DatabaseService(new CredentialsService());
         ExcelGenerator gen = new ExcelGenerator(conn,exlParser);

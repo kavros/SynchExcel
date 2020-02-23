@@ -1,0 +1,30 @@
+
+T
+squid:S106|"9Replace this use of System.out or System.err by a logger.(’Ø¸¡üÿÿÿÿ
+8squid:S1170"!Make this final field static too.(Şå
+gsquid:S00100 "NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€Ë›
+ksquid:S00100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûú¹ëûÿÿÿÿ
+T
+squid:S106G"9Replace this use of System.out or System.err by a logger.(ªçş úÿÿÿÿ
+U
+squid:S106¯"9Replace this use of System.out or System.err by a logger.(Íñçƒÿÿÿÿÿ
+=squid:S1170"!Make this final field static too.(ÌÛî¿øÿÿÿÿ
+fsquid:S00100%"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä´§’
+P
+squid:S106"9Replace this use of System.out or System.err by a logger.(½ùí
+isquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô‚¶æ
+T
+squid:S106e"9Replace this use of System.out or System.err by a logger.(¸š‚Çûÿÿÿÿ
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü«Ùìşÿÿÿÿ
+T
+squid:S106,"9Replace this use of System.out or System.err by a logger.(»ªöÿÿÿÿÿ
+Psquid:S28641"4Iterate over the "entrySet" instead of the "keySet".(Ë¨äœıÿÿÿÿ
+fsquid:S00100M"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß™‡¤
+8squid:S1170"!Make this final field static too.(Ğ¥Ö÷
+8squid:S1170"!Make this final field static too.(Âç¹
+isquid:S00117I"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁŞ§‘
+8squid:S1170"!Make this final field static too.(è¸Œ¸
+=squid:S1170"!Make this final field static too.(Ê†ÂÜüÿÿÿÿ
+lsquid:S00100²"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È¶¶èúÿÿÿÿ
+lsquid:S00100„"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÇìÌıÿÿÿÿ
+ksquid:S00100q"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ØÊøÿÿÿÿ

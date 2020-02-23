@@ -1,5 +1,5 @@
-import model.Constants;
-import model.ExcelParser;
+import model.Columns;
+import model.parser.ExcelParser;
 import model.ExcelProductDetails;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -16,9 +16,9 @@ public class ExcelParserTest
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet();
         Row row = sheet.createRow(0);
-        row.createCell(Constants.bCellNum).setCellValue("43.13");
-        row.createCell(Constants.lastPrcPrCellNum).setCellValue(1.00f);
-        row.createCell(Constants.qCellNum).setCellValue(6);
+        row.createCell(Columns.BARCODE).setCellValue("43.13");
+        row.createCell(Columns.LAST_PRICE).setCellValue(1.00f);
+        row.createCell(Columns.QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelProductDetails result =  parser.GetExcelData().get("43.13");
@@ -35,9 +35,9 @@ public class ExcelParserTest
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet();
         Row row = sheet.createRow(0);
-        row.createCell(Constants.bCellNum).setCellValue(new Double("9999000869"));
-        row.createCell(Constants.lastPrcPrCellNum).setCellValue(1.0);
-        row.createCell(Constants.qCellNum).setCellValue(6);
+        row.createCell(Columns.BARCODE).setCellValue(new Double("9999000869"));
+        row.createCell(Columns.LAST_PRICE).setCellValue(1.0);
+        row.createCell(Columns.QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelProductDetails result =  parser.GetExcelData().get("9999000869");
