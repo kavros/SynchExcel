@@ -1,4 +1,6 @@
-package model;
+package model.dbReader;
+
+import model.State;
 
 import java.io.*;
 import java.util.Scanner;

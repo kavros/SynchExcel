@@ -1,6 +1,6 @@
-import model.Columns;
+import model.ExcelCell;
 import model.parser.ExcelParser;
-import model.ExcelProductDetails;
+import model.parser.ExcelProductDetails;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,17 +16,17 @@ public class ExcelParserTest
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet();
         Row row = sheet.createRow(0);
-        row.createCell(Columns.BARCODE).setCellValue("43.13");
-        row.createCell(Columns.LAST_PRICE).setCellValue(1.00f);
-        row.createCell(Columns.QUANTITY).setCellValue(6);
+        row.createCell(ExcelCell.BARCODE).setCellValue("43.13");
+        row.createCell(ExcelCell.LAST_PRICE).setCellValue(1.00f);
+        row.createCell(ExcelCell.QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelProductDetails result =  parser.GetExcelData().get("43.13");
 
         ExcelProductDetails expectedResult = new  ExcelProductDetails(6.0, 1.0, 0);
-        assertTrue(result.GetLastPrcPr().equals( expectedResult.GetLastPrcPr() ));
-        assertTrue(result.GetQuantity().equals( expectedResult.GetQuantity() ));
-        assertTrue(result.GetRow() ==  expectedResult.GetRow() );
+        assertTrue(result.lastPrcPr.equals( expectedResult.lastPrcPr ));
+        assertTrue(result.quantity.equals( expectedResult.quantity ));
+        assertTrue(result.row ==  expectedResult.row );
     }
 
     @Test
@@ -35,16 +35,16 @@ public class ExcelParserTest
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet();
         Row row = sheet.createRow(0);
-        row.createCell(Columns.BARCODE).setCellValue(new Double("9999000869"));
-        row.createCell(Columns.LAST_PRICE).setCellValue(1.0);
-        row.createCell(Columns.QUANTITY).setCellValue(6);
+        row.createCell(ExcelCell.BARCODE).setCellValue(new Double("9999000869"));
+        row.createCell(ExcelCell.LAST_PRICE).setCellValue(1.0);
+        row.createCell(ExcelCell.QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelProductDetails result =  parser.GetExcelData().get("9999000869");
 
         ExcelProductDetails expectedResult = new  ExcelProductDetails(6.0, 1.0, 0);
-        assertTrue(result.GetLastPrcPr().equals( expectedResult.GetLastPrcPr() ));
-        assertTrue(result.GetQuantity().equals( expectedResult.GetQuantity() ));
-        assertTrue(result.GetRow() ==  expectedResult.GetRow() );
+        assertTrue(result.lastPrcPr.equals( expectedResult.lastPrcPr ));
+        assertTrue(result.quantity.equals( expectedResult.quantity ));
+        assertTrue(result.row ==  expectedResult.row );
     }
 }

@@ -1,7 +1,7 @@
 
-import model.CredentialsService;
-import model.DatabaseService;
-import model.DatabaseProductDetails;
+import model.dbReader.CredentialsService;
+import model.dbReader.DatabaseService;
+import model.dbReader.DatabaseProductDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
 
-import model.CredentialsService;
-import model.DatabaseService;
+import model.dbReader.CredentialsService;
+import model.dbReader.DatabaseService;
 import model.State;
 import org.junit.Test;
 

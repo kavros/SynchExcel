@@ -1,10 +1,12 @@
 
-asquid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ıÄùçıÿÿÿÿ
-‡squid:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(íó£ıÿÿÿÿ
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì”î½şÿÿÿÿ
-\squid:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(˜ğ×
-fsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úÉ³y
-Qsquid:S2589"7Remove this expression which always evaluates to "true"(¬ÆÊ¾øÿÿÿÿ
-Lsquid:S2589"7Remove this expression which always evaluates to "true"(¢ëîÁ
-8squid:S1148"#Use a logger to log this exception.(Ç’Çê
-isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íó£ıÿÿÿÿ
+hsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úÉ³y
+ysquid:S00115
+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(İ¯ğ€8¼æî›‡.
+^squid:S2095%"GUse try-with-resources or close this "Statement" in a "finally" clause.(˜ğ×
+Ssquid:S2589""7Remove this expression which always evaluates to "true"(¬ÆÊ¾øÿÿÿÿ
+Nsquid:S2589-"7Remove this expression which always evaluates to "true"(¢ëîÁ
+:squid:S1148M"#Use a logger to log this exception.(Ç’Çê
+csquid:S2095'"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ıÄùçıÿÿÿÿ
+‰squid:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(íó£ıÿÿÿÿ
+ksquid:S00100B"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì”î½şÿÿÿÿ
+ksquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íó£ıÿÿÿÿ

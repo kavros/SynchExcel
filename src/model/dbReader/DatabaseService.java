@@ -1,4 +1,6 @@
-package model;
+package model.dbReader;
+
+import model.State;
 
 import java.sql.*;
 import java.util.HashMap;

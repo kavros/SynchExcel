@@ -1,7 +1,6 @@
 package model.parser;
 
-import model.Columns;
-import model.ExcelProductDetails;
+import model.ExcelCell;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -37,9 +36,9 @@ public class ExcelParser
         {
             currRow++;
             Row row = rowIterator.next();
-            String bVal = GetBarcode(row.getCell(Columns.BARCODE));
-            Double qVal = GetNumericValue(row.getCell(Columns.QUANTITY));
-            Double lastPrcPr = GetNumericValue(row.getCell(Columns.LAST_PRICE));
+            String bVal = GetBarcode(row.getCell(ExcelCell.BARCODE));
+            Double qVal = GetNumericValue(row.getCell(ExcelCell.QUANTITY));
+            Double lastPrcPr = GetNumericValue(row.getCell(ExcelCell.LAST_PRICE));
 
             if (bVal != null && qVal != null)
                 Insert(bVal,currRow,qVal,lastPrcPr);

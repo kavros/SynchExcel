@@ -1,4 +1,4 @@
-package model;
+package model.dbReader;
 
 public class DatabaseProductDetails
 {

@@ -1,30 +1,25 @@
 
+Psquid:S2864,"4Iterate over the "entrySet" instead of the "keySet".(Ë¨äœıÿÿÿÿ
 T
-squid:S106|"9Replace this use of System.out or System.err by a logger.(’Ø¸¡üÿÿÿÿ
-8squid:S1170"!Make this final field static too.(Şå
-gsquid:S00100 "NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€Ë›
-ksquid:S00100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûú¹ëûÿÿÿÿ
-T
-squid:S106G"9Replace this use of System.out or System.err by a logger.(ªçş úÿÿÿÿ
-U
-squid:S106¯"9Replace this use of System.out or System.err by a logger.(Íñçƒÿÿÿÿÿ
-=squid:S1170"!Make this final field static too.(ÌÛî¿øÿÿÿÿ
-fsquid:S00100%"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä´§’
+squid:S106B"9Replace this use of System.out or System.err by a logger.(ªçş úÿÿÿÿ
 P
-squid:S106"9Replace this use of System.out or System.err by a logger.(½ùí
-isquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô‚¶æ
+squid:S106˜"9Replace this use of System.out or System.err by a logger.(½ùí
+fsquid:S00100 "NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä´§’
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü«Ùìşÿÿÿÿ
 T
-squid:S106e"9Replace this use of System.out or System.err by a logger.(¸š‚Çûÿÿÿÿ
-nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü«Ùìşÿÿÿÿ
+squid:S106`"9Replace this use of System.out or System.err by a logger.(¸š‚Çûÿÿÿÿ
+hsquid:S00117D"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô ¦6
+isquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô‚¶æ
 T
-squid:S106,"9Replace this use of System.out or System.err by a logger.(»ªöÿÿÿÿÿ
-Psquid:S28641"4Iterate over the "entrySet" instead of the "keySet".(Ë¨äœıÿÿÿÿ
-fsquid:S00100M"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß™‡¤
-8squid:S1170"!Make this final field static too.(Ğ¥Ö÷
-8squid:S1170"!Make this final field static too.(Âç¹
-isquid:S00117I"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁŞ§‘
-8squid:S1170"!Make this final field static too.(è¸Œ¸
-=squid:S1170"!Make this final field static too.(Ê†ÂÜüÿÿÿÿ
-lsquid:S00100²"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È¶¶èúÿÿÿÿ
-lsquid:S00100„"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÇìÌıÿÿÿÿ
-ksquid:S00100q"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ØÊøÿÿÿÿ
+squid:S106'"9Replace this use of System.out or System.err by a logger.(»ªöÿÿÿÿÿ
+fsquid:S00100H"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß™‡¤
+ksquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÇìÌıÿÿÿÿ
+U
+squid:S106ª"9Replace this use of System.out or System.err by a logger.(Íñçƒÿÿÿÿÿ
+ksquid:S00100l"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ØÊøÿÿÿÿ
+T
+squid:S106w"9Replace this use of System.out or System.err by a logger.(’Ø¸¡üÿÿÿÿ
+gsquid:S00100›"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€Ë›
+ksquid:S00100?"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûú¹ëûÿÿÿÿ
+ysquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(›Ô¸Â8µó›‡.
+lsquid:S00100­"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È¶¶èúÿÿÿÿ

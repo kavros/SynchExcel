@@ -23,3 +23,7 @@ N
 tests/DatabaseServiceTest.java,c\9\c98c6e44757eeaacbc2087c0aaeca4f15fd5aec9
 Q
 !src/model/parser/ExcelParser.java,8\c\8c8aafc1678250b151e61e08389e8d3f31582958
+J
+tests/ExcelParserTest.java,3\1\31e747a8bc38a1b33e852109208f930e33158f22
+H
+src/model/ExcelCell.java,2\8\2824a22e8439d44cd66da8b2941058788d7cc35a
