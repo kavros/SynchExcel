@@ -1,28 +1,33 @@
 package model.parser;
 
-import model.ExcelCell;
+import model.ExcelCellNumber;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.util.HashMap;
 import java.util.Iterator;
 
 public class ExcelParser
 {
 
     private final XSSFWorkbook workbook;
-    private final HashMap<String, ExcelProductDetails> excelData;
-
+    private ExcelData data;
     private int totalRows;
 
     public ExcelParser(XSSFWorkbook _workbook)
     {
-        excelData =  new HashMap<>();
+        data = new ExcelData();
         totalRows = -1;
         workbook = _workbook;
+    }
+
+    public ExcelData GetExcelData()
+    {
+        if(data.Size() == 0)
+            LoadDataFromExcel();
+
+        return data;
     }
 
     private void LoadDataFromExcel()
@@ -36,9 +41,9 @@ public class ExcelParser
         {
             currRow++;
             Row row = rowIterator.next();
-            String bVal = GetBarcode(row.getCell(ExcelCell.BARCODE));
-            Double qVal = GetNumericValue(row.getCell(ExcelCell.QUANTITY));
-            Double lastPrcPr = GetNumericValue(row.getCell(ExcelCell.LAST_PRICE));
+            String bVal = GetBarcode(row.getCell(ExcelCellNumber.BARCODE));
+            Double qVal = GetNumericValue(row.getCell(ExcelCellNumber.QUANTITY));
+            Double lastPrcPr = GetNumericValue(row.getCell(ExcelCellNumber.LAST_PRICE));
 
             if (bVal != null && qVal != null)
                 Insert(bVal,currRow,qVal,lastPrcPr);
@@ -53,17 +58,10 @@ public class ExcelParser
         if(lastPrcPr == null)
             lastPrcPr = 0.0;
 
-        ExcelProductDetails v =  new ExcelProductDetails(quantity,lastPrcPr,currentRow);
-        excelData.put(barcode,v);
+        ExcelRow row = new ExcelRow(currentRow,quantity,lastPrcPr);
+        data.Add(row,barcode);
     }
 
-    public HashMap<String, ExcelProductDetails> GetExcelData()
-    {
-        if(excelData.size() == 0)
-            LoadDataFromExcel();
-
-        return excelData;
-    }
     public int GetTotalRows()
     {
         return totalRows;

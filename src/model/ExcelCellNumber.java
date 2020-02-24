@@ -1,6 +1,6 @@
 package model;
 
-public final class ExcelCell
+public final class ExcelCellNumber
 {
     public static final int BARCODE = 4;
     public static final int QUANTITY = 6;

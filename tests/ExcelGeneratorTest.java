@@ -2,8 +2,9 @@ import model.*;
 import model.dbReader.DatabaseProductDetails;
 import model.dbReader.DatabaseService;
 import model.generator.ExcelGenerator;
+import model.parser.ExcelData;
 import model.parser.ExcelParser;
-import model.parser.ExcelProductDetails;
+import model.parser.ExcelRow;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -26,7 +27,7 @@ public class ExcelGeneratorTest
     private ExcelParser parser;
     private DatabaseService dbService;
     private HashMap<String, DatabaseProductDetails> dbData;
-    private HashMap<String, ExcelProductDetails> excelData;
+    private ExcelData excelData;
         private XSSFWorkbook workbook ;
 
     @Before
@@ -67,12 +68,12 @@ public class ExcelGeneratorTest
     {
 
         dbData = new HashMap<>();
-        excelData = new  HashMap<>();
+        excelData = new  ExcelData();
         workbook = new XSSFWorkbook();
         DatabaseProductDetails dbDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
-        ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
+        ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.put("43.13",dbDetails);
-        excelData.put("43.13",excelDetails);
+        excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
@@ -98,12 +99,12 @@ public class ExcelGeneratorTest
     {
 
         dbData = new HashMap<>();
-        excelData = new  HashMap<>();
+        excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
         DatabaseProductDetails dbDetails = new DatabaseProductDetails(10,1.1,"bread","43.13");
-        ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
+        ExcelRow excelDetails = new ExcelRow(0,1.0,0.0);
         dbData.put("43.13",dbDetails);
-        excelData.put("43.13",excelDetails);
+        excelData.Add(excelDetails,"43.13");
         String productName = "bread";
         String barcode = "43.13";
         CreateExcelSheet();
@@ -127,14 +128,14 @@ public class ExcelGeneratorTest
     {
 
         dbData    = new HashMap<>();
-        excelData = new  HashMap<>();
+        excelData = new ExcelData();
         workbook  = new XSSFWorkbook();
         DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
         DatabaseProductDetails product2Details = new DatabaseProductDetails(1.0,1.0,"paper","43.13");
-        ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
+        ExcelRow excelDetails = new ExcelRow(0, 1.0, 1.0);
         dbData.put("43.13",productDetails);
         dbData.put("43.14",product2Details);
-        excelData.put("43.13",excelDetails);
+        excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
@@ -152,14 +153,14 @@ public class ExcelGeneratorTest
     {
 
         dbData    = new HashMap<>();
-        excelData = new  HashMap<>();
+        excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
         DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
         DatabaseProductDetails product2Details = new DatabaseProductDetails(0.0,1.0,"paper","43.13");
-        ExcelProductDetails excelDetails = new ExcelProductDetails(1.0,1.0,0);
+        ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.put("43.13",productDetails);
         dbData.put("43.14",product2Details);
-        excelData.put("43.13",excelDetails);
+        excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
