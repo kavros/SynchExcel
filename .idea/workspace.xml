@@ -2,27 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6741d7f1-8fe2-478a-9803-e4c53d95e1fb" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/model/parser/ExcelProductDetails.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/43ed079bd481ff72d09bdb215380b6f37e5e3a15" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/43ed079bd481ff72d09bdb215380b6f37e5e3a15" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/5/050468f559987d887e312b82195529d4b4a78138" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/8/2824a22e8439d44cd66da8b2941058788d7cc35a" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/43ed079bd481ff72d09bdb215380b6f37e5e3a15" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/c/8c8aafc1678250b151e61e08389e8d3f31582958" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/c/8c8aafc1678250b151e61e08389e8d3f31582958" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/ba236a5bb9c9dfa81983520e34b1063a1dad6d9a" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/ba236a5bb9c9dfa81983520e34b1063a1dad6d9a" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/e/ee8561c849d57af5b8ea50f215808ffa31436ebb" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/e/ee8561c849d57af5b8ea50f215808ffa31436ebb" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/fe03b4fd3afe162c6e01309b98a22588e093d274" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/fe03b4fd3afe162c6e01309b98a22588e093d274" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/ba236a5bb9c9dfa81983520e34b1063a1dad6d9a" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/5/c59cb343ded85b032a714f782b13e1c40fa88e6c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/9/d96829fdc844b2603166f35c85eea176256474f7" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/e/ee8561c849d57af5b8ea50f215808ffa31436ebb" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/Columns.java" afterPath="$PROJECT_DIR$/src/model/ExcelCell.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/CredentialsService.java" afterPath="$PROJECT_DIR$/src/model/dbReader/CredentialsService.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/DatabaseProductDetails.java" afterPath="$PROJECT_DIR$/src/model/dbReader/DatabaseProductDetails.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/DatabaseService.java" afterPath="$PROJECT_DIR$/src/model/dbReader/DatabaseService.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/ExcelGenerator.java" afterPath="$PROJECT_DIR$/src/model/generator/ExcelGenerator.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/ExcelProductDetails.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/model/TrippleDes.java" afterPath="$PROJECT_DIR$/src/model/dbReader/TrippleDes.java" />
-      <change beforePath="$PROJECT_DIR$/src/model/parser/ExcelParser.java" afterPath="$PROJECT_DIR$/src/model/parser/ExcelParser.java" />
-      <change beforePath="$PROJECT_DIR$/tests/CredentialsServiceTest.java" afterPath="$PROJECT_DIR$/tests/CredentialsServiceTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/model/dbReader/DatabaseProductDetails.java" afterPath="$PROJECT_DIR$/src/model/dbReader/DatabaseData.java" />
+      <change beforePath="$PROJECT_DIR$/src/model/dbReader/DatabaseService.java" afterPath="$PROJECT_DIR$/src/model/dbReader/DatabaseService.java" />
+      <change beforePath="$PROJECT_DIR$/src/model/generator/ExcelGenerator.java" afterPath="$PROJECT_DIR$/src/model/generator/ExcelGenerator.java" />
       <change beforePath="$PROJECT_DIR$/tests/DatabaseServiceTest.java" afterPath="$PROJECT_DIR$/tests/DatabaseServiceTest.java" />
       <change beforePath="$PROJECT_DIR$/tests/ExcelGeneratorTest.java" afterPath="$PROJECT_DIR$/tests/ExcelGeneratorTest.java" />
-      <change beforePath="$PROJECT_DIR$/tests/ExcelParserTest.java" afterPath="$PROJECT_DIR$/tests/ExcelParserTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -39,26 +33,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ExcelParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelParser.java">
+      <file leaf-file-name="DatabaseData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="16" />
+            <state relative-caret-position="408">
+              <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2080#2081#0" expanded="true" />
-                <element signature="e#2155#2156#0" expanded="true" />
+                <element signature="e#234#235#0" expanded="true" />
+                <element signature="e#275#276#0" expanded="true" />
+                <element signature="e#325#326#0" expanded="true" />
+                <element signature="e#369#370#0" expanded="true" />
+                <element signature="e#398#399#0" expanded="true" />
+                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#480#481#0" expanded="true" />
+                <element signature="e#520#521#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExcelProductDetails.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelProductDetails.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -66,30 +56,20 @@
       <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="18" />
+            <state relative-caret-position="323">
+              <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
               <folding>
-                <marker date="1582578480097" expanded="true" signature="1379:1614" ph=" SELECT statement (SSTORE, SMAST)" />
+                <marker date="1582663576649" expanded="true" signature="1389:1624" ph=" SELECT statement (SSTORE, SMAST)" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseProductDetails.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseProductDetails.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExcelGenerator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ExcelGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/generator/ExcelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="133" column="46" lean-forward="false" selection-start-line="133" selection-start-column="24" selection-end-line="133" selection-end-column="46" />
+            <state relative-caret-position="333">
+              <caret line="137" column="49" lean-forward="true" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,6 +78,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -119,6 +106,8 @@
       <find>ExcelProductDetails</find>
       <find>Column</find>
       <find>ExcelPro</find>
+      <find>ExcelData</find>
+      <find>Error: row cannot be null</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,21 +129,32 @@
         <option value="$PROJECT_DIR$/src/model/CredentialsService.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/model/DatabaseProductDetails.java" />
-        <option value="$PROJECT_DIR$/tests/ExcelGeneratorTest.java" />
         <option value="$PROJECT_DIR$/src/model/TrippleDes.java" />
-        <option value="$PROJECT_DIR$/tests/DatabaseServiceTest.java" />
         <option value="$PROJECT_DIR$/src/model/ExcelParser.java" />
-        <option value="$PROJECT_DIR$/src/model/parser/ExcelParser.java" />
         <option value="$PROJECT_DIR$/src/model/DatabaseService.java" />
         <option value="$PROJECT_DIR$/tests/CredentialsServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/model/Constants.java" />
         <option value="$PROJECT_DIR$/src/model/ExcelGenerator.java" />
         <option value="$PROJECT_DIR$/src/model/Columns.java" />
-        <option value="$PROJECT_DIR$/src/model/ExcelCell.java" />
         <option value="$PROJECT_DIR$/src/model/ExcelProductDetails.java" />
-        <option value="$PROJECT_DIR$/tests/ExcelParserTest.java" />
         <option value="$PROJECT_DIR$/src/model/parser/ExcelProductDetails.java" />
+        <option value="$PROJECT_DIR$/src/model/parser/ExcelProducts.java" />
+        <option value="$PROJECT_DIR$/src/model/ExcelCell.java" />
+        <option value="$PROJECT_DIR$/src/model/ExcelCellNumber.java" />
+        <option value="$PROJECT_DIR$/src/model/parser/ExcelRow.java" />
+        <option value="$PROJECT_DIR$/src/model/parser/ExcelData.java" />
+        <option value="$PROJECT_DIR$/tests/ExcelParserTest.java" />
+        <option value="$PROJECT_DIR$/src/model/parser/ExcelParser.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseProductDetails.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseColumns.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseColumn.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseRow.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseService.java" />
+        <option value="$PROJECT_DIR$/tests/DatabaseServiceTest.java" />
+        <option value="$PROJECT_DIR$/tests/ExcelGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/model/dbReader/DatabaseData.java" />
+        <option value="$PROJECT_DIR$/src/model/generator/ExcelGenerator.java" />
       </list>
     </option>
   </component>
@@ -200,8 +200,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -262,7 +263,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,32 +284,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.ExcelGeneratorTest.GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="main.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SynchExcel" />
-      <envs />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -325,34 +306,14 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration name="All in SynchExcel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="SynchExcel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="SynchExcel" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CredentialsServiceTest" />
-      <option name="METHOD_NAME" value="SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" />
+      <option name="MAIN_CLASS_NAME" value="ExcelGeneratorTest" />
+      <option name="METHOD_NAME" value="GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -365,14 +326,14 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="SynchExcel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CredentialsServiceTest" />
-      <option name="METHOD_NAME" value="SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" />
+      <option name="MAIN_CLASS_NAME" value="ExcelGeneratorTest" />
+      <option name="METHOD_NAME" value="GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -385,14 +346,54 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="DatabaseServiceTest.GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ExcelGeneratorTest.GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="SynchExcel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DatabaseServiceTest" />
-      <option name="METHOD_NAME" value="GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults" />
+      <option name="MAIN_CLASS_NAME" value="ExcelGeneratorTest" />
+      <option name="METHOD_NAME" value="GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="ExcelGeneratorTest.GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="SynchExcel" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ExcelGeneratorTest" />
+      <option name="METHOD_NAME" value="GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="ExcelParserTest.GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="SynchExcel" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ExcelParserTest" />
+      <option name="METHOD_NAME" value="GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -466,19 +467,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.All in SynchExcel" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.DatabaseServiceTest.GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ExcelParserTest.GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.DatabaseServiceTest.GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.All in SynchExcel" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ExcelGeneratorTest.GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ExcelParserTest.GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" />
       </list>
     </recent_temporary>
   </component>
@@ -499,40 +500,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail - 2020.02.01 at 15h 14m 37s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored - 2020.02.25 at 20h 56m 45s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail - 2020.02.01 at 15h 15m 53s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook - 2020.02.24 at 22h 07m 46s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail - 2020.02.01 at 15h 17m 41s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook - 2020.02.24 at 22h 08m 50s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail - 2020.02.01 at 15h 18m 53s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook - 2020.02.24 at 22h 09m 21s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail - 2020.02.06 at 20h 38m 48s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenInValidSaveCredentials_ThenRetrieveFail" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame - 2020.02.24 at 22h 07m 21s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly - 2020.02.01 at 15h 02m 57s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" configurationId="JUnit" />
+    <history-entry file="ExcelGeneratorTest_GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow - 2020.02.24 at 22h 07m 34s.xml">
+      <configuration name="ExcelGeneratorTest.GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly - 2020.02.01 at 15h 04m 02s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" configurationId="JUnit" />
+    <history-entry file="ExcelParserTest_GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData - 2020.02.24 at 22h 04m 07s.xml">
+      <configuration name="ExcelParserTest.GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly - 2020.02.01 at 15h 09m 45s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" configurationId="JUnit" />
+    <history-entry file="ExcelParserTest_GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData - 2020.02.24 at 22h 07m 05s.xml">
+      <configuration name="ExcelParserTest.GetExcelData_WhenBarcodeIsDouble_ReturnsTheCorrectData" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CredentialsServiceTest_SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly - 2020.02.01 at 15h 10m 43s.xml">
-      <configuration name="CredentialsServiceTest.SaveCredentials_WhenSaveCredentials_ThenRetrieveThemCorrectly" configurationId="JUnit" />
+    <history-entry file="ExcelParserTest_GetExcelData_WhenBarcodeIsString_ReturnsTheCorrectData - 2020.02.24 at 22h 06m 18s.xml">
+      <configuration name="ExcelParserTest.GetExcelData_WhenBarcodeIsString_ReturnsTheCorrectData" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DatabaseServiceTest_GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults - 2020.02.08 at 19h 02m 11s.xml">
-      <configuration name="DatabaseServiceTest.GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults" configurationId="JUnit" />
+    <history-entry file="ExcelParserTest_GetExcelData_WhenBarcodeIsString_ReturnsTheCorrectData - 2020.02.24 at 22h 06m 59s.xml">
+      <configuration name="ExcelParserTest.GetExcelData_WhenBarcodeIsString_ReturnsTheCorrectData" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -553,12 +553,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.4978678" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -568,6 +567,7 @@
       <window_info id="Inspection Results" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48540542" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175" sideWeight="0.55807745" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -580,29 +580,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CredentialsServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/DatabaseServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -631,7 +608,7 @@
         <state relative-caret-position="34">
           <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="3" selection-end-column="25" />
           <folding>
-            <marker date="1582578480097" expanded="true" signature="1379:1614" ph=" SELECT statement (SSTORE, SMAST)" />
+            <marker date="1582663576649" expanded="true" signature="1389:1624" ph=" SELECT statement (SSTORE, SMAST)" />
           </folding>
         </state>
       </provider>
@@ -672,7 +649,7 @@
         <state relative-caret-position="34">
           <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="3" selection-end-column="25" />
           <folding>
-            <marker date="1582578480097" expanded="true" signature="1379:1614" ph=" SELECT statement (SSTORE, SMAST)" />
+            <marker date="1582663576649" expanded="true" signature="1389:1624" ph=" SELECT statement (SSTORE, SMAST)" />
           </folding>
         </state>
       </provider>
@@ -721,7 +698,7 @@
         <state relative-caret-position="34">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="3" selection-end-column="25" />
           <folding>
-            <marker date="1582578480097" expanded="true" signature="1379:1614" ph=" SELECT statement (SSTORE, SMAST)" />
+            <marker date="1582663576649" expanded="true" signature="1389:1624" ph=" SELECT statement (SSTORE, SMAST)" />
           </folding>
         </state>
       </provider>
@@ -756,17 +733,26 @@
           <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2080#2081#0" expanded="true" />
-            <element signature="e#2155#2156#0" expanded="true" />
+            <element signature="e#1972#1973#0" expanded="true" />
+            <element signature="e#2047#2048#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelProductDetails.java">
+    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="19" column="5" lean-forward="false" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#159#160#0" expanded="true" />
+            <element signature="e#202#203#0" expanded="true" />
+            <element signature="e#259#260#0" expanded="true" />
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#393#394#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -881,24 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/ExcelGeneratorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/DatabaseServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="4" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/dbReader/TrippleDes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -923,67 +891,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelParser.java">
+    <entry file="file://$PROJECT_DIR$/src/model/ExcelCellNumber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2080#2081#0" expanded="true" />
-            <element signature="e#2155#2156#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="34">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelRow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/ExcelParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        <state relative-caret-position="561">
+          <caret line="41" column="28" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1972#1973#0" expanded="true" />
+            <element signature="e#2047#2048#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseRow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="24" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="14" selection-start-column="2" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="e#159#160#0" expanded="true" />
+            <element signature="e#202#203#0" expanded="true" />
+            <element signature="e#259#260#0" expanded="true" />
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#393#394#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="18" />
+        <state relative-caret-position="323">
+          <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
           <folding>
-            <marker date="1582578480097" expanded="true" signature="1379:1614" ph=" SELECT statement (SSTORE, SMAST)" />
+            <marker date="1582663576649" expanded="true" signature="1389:1624" ph=" SELECT statement (SSTORE, SMAST)" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/DatabaseServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1163">
+          <caret line="85" column="33" lean-forward="false" selection-start-line="85" selection-start-column="33" selection-end-line="85" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/ExcelGeneratorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="59" column="76" lean-forward="false" selection-start-line="59" selection-start-column="76" selection-end-line="59" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="903" column="17" lean-forward="false" selection-start-line="903" selection-start-column="11" selection-end-line="903" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#234#235#0" expanded="true" />
+            <element signature="e#275#276#0" expanded="true" />
+            <element signature="e#325#326#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#520#521#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/generator/ExcelGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="133" column="46" lean-forward="false" selection-start-line="133" selection-start-column="24" selection-end-line="133" selection-end-column="46" />
+        <state relative-caret-position="333">
+          <caret line="137" column="49" lean-forward="true" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/dbReader/DatabaseProductDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ExcelCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/parser/ExcelProductDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>

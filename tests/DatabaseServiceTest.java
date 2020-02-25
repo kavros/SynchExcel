@@ -1,7 +1,7 @@
 
 import model.dbReader.CredentialsService;
 import model.dbReader.DatabaseService;
-import model.dbReader.DatabaseProductDetails;
+import model.dbReader.DatabaseData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,9 +46,9 @@ public class DatabaseServiceTest
         DatabaseService dbServer =  new DatabaseService(credServ);
         replay(DriverManager.class);
 
-        HashMap result = dbServer.GetDataFromWarehouse();
+        DatabaseData result = dbServer.GetDataFromWarehouse();
 
-        assertTrue (result.size() == 0);
+        assertTrue (result.Size() == 0);
     }
 
     @Test
@@ -66,12 +66,12 @@ public class DatabaseServiceTest
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
 
-        HashMap<String, DatabaseProductDetails> result = dbServer.GetDataFromWarehouse();
+        DatabaseData result = dbServer.GetDataFromWarehouse();
 
-        assertTrue (result.get("4313").lastPrcPr == 1.0);
-        assertTrue (result.get("4313").productName.equals("Bread"));
-        assertTrue (result.get("4313").quantity == 2.0 );
-        assertTrue (result.get("4313").productCode.equals("43.13"));
+        assertTrue (result.Get("4313").lastPrcPr == 1.0);
+        assertTrue (result.Get("4313").productName.equals("Bread"));
+        assertTrue (result.Get("4313").quantity == 2.0 );
+        assertTrue (result.Get("4313").productCode.equals("43.13"));
     }
 
     @Test

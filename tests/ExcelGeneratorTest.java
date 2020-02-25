@@ -1,5 +1,6 @@
 import model.*;
-import model.dbReader.DatabaseProductDetails;
+import model.dbReader.DatabaseData;
+import model.dbReader.DatabaseRow;
 import model.dbReader.DatabaseService;
 import model.generator.ExcelGenerator;
 import model.parser.ExcelData;
@@ -26,7 +27,7 @@ public class ExcelGeneratorTest
 
     private ExcelParser parser;
     private DatabaseService dbService;
-    private HashMap<String, DatabaseProductDetails> dbData;
+    private DatabaseData dbData;
     private ExcelData excelData;
         private XSSFWorkbook workbook ;
 
@@ -56,7 +57,7 @@ public class ExcelGeneratorTest
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseService.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
-        when(dbService.GetDataFromWarehouse()).thenReturn(new HashMap<>());
+        when(dbService.GetDataFromWarehouse()).thenReturn(new DatabaseData());
 
         State result = generator.GenerateExcel();
 
@@ -67,12 +68,12 @@ public class ExcelGeneratorTest
     public void GenerateExcel_WhenExcelIsUpToDate_WorkbookRemainsSame() throws Exception
     {
 
-        dbData = new HashMap<>();
+        dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook = new XSSFWorkbook();
-        DatabaseProductDetails dbDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
+        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
-        dbData.put("43.13",dbDetails);
+        dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
@@ -98,12 +99,12 @@ public class ExcelGeneratorTest
     public void GenerateExcel_WhenProductsQuantityChange_UpdateWorkbookRow() throws Exception
     {
 
-        dbData = new HashMap<>();
+        dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails dbDetails = new DatabaseProductDetails(10,1.1,"bread","43.13");
+        DatabaseRow dbDetails = new DatabaseRow(10,1.1,"bread","43.13");
         ExcelRow excelDetails = new ExcelRow(0,1.0,0.0);
-        dbData.put("43.13",dbDetails);
+        dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
         String productName = "bread";
         String barcode = "43.13";
@@ -127,14 +128,14 @@ public class ExcelGeneratorTest
     public void GenerateExcel_WhenAddedNewProduct_InsertRowInToWorkbook() throws Exception
     {
 
-        dbData    = new HashMap<>();
+        dbData    = new DatabaseData();
         excelData = new ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
-        DatabaseProductDetails product2Details = new DatabaseProductDetails(1.0,1.0,"paper","43.13");
+        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
+        DatabaseRow product2Details = new DatabaseRow(1.0,1.0,"paper","43.13");
         ExcelRow excelDetails = new ExcelRow(0, 1.0, 1.0);
-        dbData.put("43.13",productDetails);
-        dbData.put("43.14",product2Details);
+        dbData.Add("43.13",productDetails);
+        dbData.Add("43.14",product2Details);
         excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
@@ -152,14 +153,14 @@ public class ExcelGeneratorTest
     public void GenerateExcel_WhenAddedNewProductWithZeroQuantity_InsertIgnored() throws Exception
     {
 
-        dbData    = new HashMap<>();
+        dbData    = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseProductDetails productDetails = new DatabaseProductDetails(1.0,1.0,"bread","43.13");
-        DatabaseProductDetails product2Details = new DatabaseProductDetails(0.0,1.0,"paper","43.13");
+        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
+        DatabaseRow product2Details = new DatabaseRow(0.0,1.0,"paper","43.13");
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
-        dbData.put("43.13",productDetails);
-        dbData.put("43.14",product2Details);
+        dbData.Add("43.13",productDetails);
+        dbData.Add("43.14",product2Details);
         excelData.Add(excelDetails,"43.13");
         CreateExcelSheet();
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);

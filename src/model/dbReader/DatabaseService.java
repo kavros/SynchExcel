@@ -8,11 +8,13 @@ import java.util.HashMap;
 public class DatabaseService
 {
     private final CredentialsService credManager;
-    private final HashMap<String, DatabaseProductDetails> productsInWarehouse = new HashMap<>();
+    //private final HashMap<String, DatabaseData> productsInWarehouse = new HashMap<>();
+    private DatabaseData dbData;
     public static final String credFilePath = "./credentials.txt";
 
     public DatabaseService(CredentialsService _credManager)
     {
+        dbData = new DatabaseData();
         credManager = _credManager;
         State retrieved = credManager.GetCredentialsFromFile(credFilePath);
         if( retrieved == State.FAILURE)
@@ -21,10 +23,10 @@ public class DatabaseService
         }
     }
 
-    public HashMap<String, DatabaseProductDetails> GetDataFromWarehouse() throws Exception {
+    public DatabaseData GetDataFromWarehouse() throws Exception {
 
-        if(!productsInWarehouse.isEmpty())
-            return productsInWarehouse;
+        if(dbData.Size() != 0)
+            return dbData;
 
         Connection conn = null;
         try
@@ -52,8 +54,8 @@ public class DatabaseService
                     String productName  = res.getString(4);
                     String productCode  = res.getString(5);
 
-                    DatabaseProductDetails val = new DatabaseProductDetails(quantity,lastPrcPr,productName,productCode);
-                    productsInWarehouse.put(barcode,val);
+                    DatabaseRow val = new DatabaseRow(quantity,lastPrcPr,productName,productCode);
+                    dbData.Add(barcode,val);
                 }
                 conn.commit();
             }
@@ -62,7 +64,7 @@ public class DatabaseService
         {
             CloseDbConnection(conn);
         }
-        return productsInWarehouse;
+        return dbData;
     }
 
     private void CloseDbConnection(Connection conn)

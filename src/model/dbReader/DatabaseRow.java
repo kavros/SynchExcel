@@ -1,13 +1,13 @@
 package model.dbReader;
 
-public class DatabaseProductDetails
+public class DatabaseRow
 {
     public final double quantity;
     public final double lastPrcPr;
     public final String productName;
     public final String productCode;
 
-    public DatabaseProductDetails(double q, double l, String p, String c)
+    public DatabaseRow(double q, double l, String p, String c)
     {
         quantity = q;
         lastPrcPr = l;

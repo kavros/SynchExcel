@@ -1,6 +1,6 @@
 package model.generator;
 
-import model.dbReader.DatabaseProductDetails;
+import model.dbReader.DatabaseData;
 import model.dbReader.DatabaseService;
 import model.ExcelCellNumber;
 import model.State;
@@ -17,7 +17,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 
 
 public class ExcelGenerator
@@ -38,18 +37,18 @@ public class ExcelGenerator
     public State GenerateExcel() throws Exception
     {
         ExcelData excelData = exlParser.GetExcelData();
-        HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
+        DatabaseData dbData = databaseService.GetDataFromWarehouse();
 
-        if( excelData == null || dbData.size() == 0)
+        if( excelData == null || dbData.Size() == 0)
         {
             System.out.println("Database service or parser failed to provide data to generator.");
             return State.FAILURE;
         }
         int totalRows = exlParser.GetTotalRows();
 
-        for(String bDbVal:dbData.keySet())
+        for(String bDbVal:dbData.GetBarcodes())
         {
-            Double qValDb = dbData.get(bDbVal).quantity;
+            Double qValDb = dbData.Get(bDbVal).quantity;
             boolean isBarcodeInExcel = (excelData.Get(bDbVal) != null);
 
             if (isBarcodeInExcel)
@@ -79,14 +78,14 @@ public class ExcelGenerator
     {
 
         ExcelRow exlEntry = exlParser.GetExcelData().Get(bDbVal);
-        Double qValDb = databaseService.GetDataFromWarehouse().get(bDbVal).quantity;
+        Double qValDb = databaseService.GetDataFromWarehouse().Get(bDbVal).quantity;
         boolean isQuantityChanged = ( Double.compare(qValDb,exlEntry.quantity) != 0 );
         if ( isQuantityChanged )
         {
             UpdateQuantity(bDbVal);
         }
 
-        Double lastPrcPrDb  = databaseService.GetDataFromWarehouse().get(bDbVal).lastPrcPr;
+        Double lastPrcPrDb  = databaseService.GetDataFromWarehouse().Get(bDbVal).lastPrcPr;
         Double lastPrcPrExl = exlParser.GetExcelData().Get(bDbVal).lastPrcPr;
         boolean isLastPrcPrChanged = (Double.compare(lastPrcPrExl,lastPrcPrDb) != 0);
         if( isLastPrcPrChanged )
@@ -95,7 +94,7 @@ public class ExcelGenerator
         }
     }
 
-    private Cell getCell(Row r,int index)
+    private Cell GetCell(Row r, int index)
     {
         if(r == null)
         {
@@ -114,11 +113,11 @@ public class ExcelGenerator
     private void UpdateQuantity(String barcode) throws Exception
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        Double qValDb = databaseService.GetDataFromWarehouse().get(barcode).quantity;
-        String productName = databaseService.GetDataFromWarehouse().get(barcode).productName;
+        Double qValDb = databaseService.GetDataFromWarehouse().Get(barcode).quantity;
+        String productName = databaseService.GetDataFromWarehouse().Get(barcode).productName;
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
 
-        Cell c = getCell(sheet.getRow(exlEntry.row), ExcelCellNumber.QUANTITY);
+        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelCellNumber.QUANTITY);
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(barcode);
@@ -132,16 +131,16 @@ public class ExcelGenerator
 
     private void InsertRowLast(int lastRow, String bDbVal) throws Exception
     {
-        HashMap<String, DatabaseProductDetails> dbData = databaseService.GetDataFromWarehouse();
-        Double qValDb = dbData.get(bDbVal).quantity;
-        String productName =  dbData.get(bDbVal).productName;
+        DatabaseData dbData = databaseService.GetDataFromWarehouse();
+        Double qValDb = dbData.Get(bDbVal).quantity;
+        String productName =  dbData.Get(bDbVal).productName;
 
         XSSFSheet sheet = workbook.getSheetAt(0);
 
         sheet.createRow(lastRow+1).createCell(ExcelCellNumber.BARCODE).setCellValue(bDbVal);
         sheet.getRow(lastRow+1)
                 .createCell(ExcelCellNumber.QUANTITY)
-                .setCellValue(dbData.get(bDbVal).quantity);
+                .setCellValue(dbData.Get(bDbVal).quantity);
 
         sheet.getRow(lastRow+1)
                 .createCell(ExcelCellNumber.PRODUCT_DESCRIPTION)
@@ -149,11 +148,11 @@ public class ExcelGenerator
 
         sheet.getRow(lastRow+1)
                 .createCell(ExcelCellNumber.LAST_PRICE)
-                .setCellValue(dbData.get(bDbVal).lastPrcPr);
+                .setCellValue(dbData.Get(bDbVal).lastPrcPr);
 
         sheet.getRow(lastRow+1)
                 .createCell(ExcelCellNumber.PRODUCT_CODE)
-                .setCellValue(dbData.get(bDbVal).productCode);
+                .setCellValue(dbData.Get(bDbVal).productCode);
 
         System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
     }
@@ -164,13 +163,13 @@ public class ExcelGenerator
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
         String productName =  databaseService
                 .GetDataFromWarehouse()
-                .get(barcode).productName;
+                .Get(barcode).productName;
         Double lastPrcPrDb = databaseService
                 .GetDataFromWarehouse()
-                .get(barcode)
+                .Get(barcode)
                 .lastPrcPr;
 
-        Cell c = getCell(sheet.getRow(exlEntry.row), ExcelCellNumber.LAST_PRICE);
+        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelCellNumber.LAST_PRICE);
         c.setCellValue(lastPrcPrDb);
 
         System.out.println("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
@@ -180,7 +179,7 @@ public class ExcelGenerator
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
-        Cell c2 = getCell(sheet.getRow(exlEntry.row), ExcelCellNumber.UPDATE_STATUS);
+        Cell c2 = GetCell(sheet.getRow(exlEntry.row), ExcelCellNumber.UPDATE_STATUS);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
         LocalDate localDate = LocalDate.now();
 
