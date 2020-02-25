@@ -1,6 +1,6 @@
 
-import model.dbReader.CredentialsService;
-import model.dbReader.DatabaseService;
+import model.credentialsReaderWriter.CredentialsIO;
+import model.dbReader.DatabaseReader;
 import model.State;
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 import static org.junit.Assert.assertTrue;
 
 
-public class CredentialsServiceTest
+public class CredentialsIOTest
 {
     @Test
     public void GetUserInputs_WhenInputsProvided_ShouldSetDbUrl()
@@ -19,7 +19,7 @@ public class CredentialsServiceTest
             "Alexis-PC" + System.getProperty("line.separator") +
             "Cmp005" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-        CredentialsService srv = new CredentialsService();
+        CredentialsIO srv = new CredentialsIO();
 
         srv.GetUserInputs();
 
@@ -30,7 +30,7 @@ public class CredentialsServiceTest
 
     @Test(expected = NullPointerException.class)
     public void SaveCredentials_WhenFilePathNotGiven_ShouldTrowException() throws Exception {
-        CredentialsService srv = new CredentialsService();
+        CredentialsIO srv = new CredentialsIO();
 
         srv.SaveCredentials();
     }
@@ -38,7 +38,7 @@ public class CredentialsServiceTest
     @Test
     public void GetCredentialsFromFile_WhenFileNotExist_ReturnFail()
     {
-        CredentialsService srv = new CredentialsService();
+        CredentialsIO srv = new CredentialsIO();
 
         State res = srv.GetCredentialsFromFile("fileNotFound");
 
@@ -48,9 +48,9 @@ public class CredentialsServiceTest
     @Test
     public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()
     {
-        CredentialsService srv = new CredentialsService();
+        CredentialsIO srv = new CredentialsIO();
 
-        State res = srv.GetCredentialsFromFile(DatabaseService.credFilePath);
+        State res = srv.GetCredentialsFromFile(DatabaseReader.credFilePath);
 
         assertTrue(srv.GetUsername().equals("kef"));
         assertTrue(srv.GetDatabaseName().equals("Cmp005"));
@@ -64,7 +64,7 @@ public class CredentialsServiceTest
                 "localhost" + System.getProperty("line.separator") +
                 "Cmp005" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-        CredentialsService srv = new CredentialsService();
+        CredentialsIO srv = new CredentialsIO();
         srv.GetCredentialsFromFile("testCredentials.text");
         srv.GetUserInputs();
 

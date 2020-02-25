@@ -1,18 +1,17 @@
 package model.dbReader;
 
 import model.State;
+import model.credentialsReaderWriter.CredentialsIO;
 
 import java.sql.*;
-import java.util.HashMap;
 
-public class DatabaseService
+public class DatabaseReader
 {
-    private final CredentialsService credManager;
-    //private final HashMap<String, DatabaseData> productsInWarehouse = new HashMap<>();
+    private final CredentialsIO credManager;
     private DatabaseData dbData;
     public static final String credFilePath = "./credentials.txt";
 
-    public DatabaseService(CredentialsService _credManager)
+    public DatabaseReader(CredentialsIO _credManager)
     {
         dbData = new DatabaseData();
         credManager = _credManager;

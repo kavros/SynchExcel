@@ -1,6 +1,5 @@
 
-import model.dbReader.CredentialsService;
-import model.dbReader.DatabaseService;
+import model.credentialsReaderWriter.CredentialsIO;
 import model.dbReader.DatabaseData;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,21 +13,20 @@ import static org.mockito.Mockito.*;
 import static org.easymock.EasyMock.expect;
 import static org.powermock.api.easymock.PowerMock.mockStatic;
 import static org.powermock.api.easymock.PowerMock.replay;
-import java.util.HashMap;
 
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DriverManager.class,DatabaseService.class})
-public class DatabaseServiceTest
+@PrepareForTest({DriverManager.class, model.dbReader.DatabaseReader.class})
+public class DatabaseReaderTest
 {
-    private CredentialsService credServ ;
+    private CredentialsIO credServ ;
     private Statement statement;
 
     @Before
     public void Setup()throws SQLException
     {
         Connection connection = mock(Connection.class);
-        credServ = mock(CredentialsService.class);
+        credServ = mock(CredentialsIO.class);
         when(credServ.GetDbURL()).thenReturn("url");
         when(credServ.GetUsername()).thenReturn("kef");
         when(credServ.GetPass()).thenReturn("pass");
@@ -43,7 +41,7 @@ public class DatabaseServiceTest
     public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap()  throws Exception {
 
 
-        DatabaseService dbServer =  new DatabaseService(credServ);
+        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
         replay(DriverManager.class);
 
         DatabaseData result = dbServer.GetDataFromWarehouse();
@@ -54,7 +52,7 @@ public class DatabaseServiceTest
     @Test
     public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws Exception
     {
-        DatabaseService dbServer =  new DatabaseService(credServ);
+        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");
@@ -77,7 +75,7 @@ public class DatabaseServiceTest
     @Test
     public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws Exception
     {
-        DatabaseService dbServer =  new DatabaseService(credServ);
+        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");

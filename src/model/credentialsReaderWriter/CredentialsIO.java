@@ -1,11 +1,11 @@
-package model.dbReader;
+package model.credentialsReaderWriter;
 
 import model.State;
 
 import java.io.*;
 import java.util.Scanner;
 
-public class CredentialsService
+public class CredentialsIO
 {
 
     private String username;

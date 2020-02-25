@@ -1,7 +1,7 @@
 import model.*;
 import model.dbReader.DatabaseData;
 import model.dbReader.DatabaseRow;
-import model.dbReader.DatabaseService;
+import model.dbReader.DatabaseReader;
 import model.generator.ExcelGenerator;
 import model.parser.ExcelData;
 import model.parser.ExcelParser;
@@ -14,19 +14,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import java.util.HashMap;
+
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ExcelParser.class, DatabaseService.class})
+@PrepareForTest({ExcelParser.class, DatabaseReader.class})
 public class ExcelGeneratorTest
 {
 
     private ExcelParser parser;
-    private DatabaseService dbService;
+    private DatabaseReader dbService;
     private DatabaseData dbData;
     private ExcelData excelData;
         private XSSFWorkbook workbook ;
@@ -35,14 +35,14 @@ public class ExcelGeneratorTest
     public void Setup()
     {
         parser = mock(ExcelParser.class);
-        dbService = mock(DatabaseService.class);
+        dbService = mock(DatabaseReader.class);
     }
 
     @Test
     public void GenerateExcel_WhenExcelDataIsNull_ReturnsFail() throws Exception
     {
         parser = mock(ExcelParser.class);
-        dbService = mock(DatabaseService.class);
+        dbService = mock(DatabaseReader.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
         when(parser.GetExcelData()).thenReturn(null);
 
@@ -55,7 +55,7 @@ public class ExcelGeneratorTest
     public void GenerateExcel_WhenDatabaseMapIsEmpty_ReturnsFail() throws Exception
     {
         parser = mock(ExcelParser.class);
-        dbService = mock(DatabaseService.class);
+        dbService = mock(DatabaseReader.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
         when(dbService.GetDataFromWarehouse()).thenReturn(new DatabaseData());
 

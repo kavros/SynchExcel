@@ -1,4 +1,4 @@
-package model.dbReader;
+package model.credentialsReaderWriter;
 
 import java.security.spec.KeySpec;
 import javax.crypto.Cipher;

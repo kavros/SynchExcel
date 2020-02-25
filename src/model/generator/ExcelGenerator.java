@@ -1,7 +1,7 @@
 package model.generator;
 
 import model.dbReader.DatabaseData;
-import model.dbReader.DatabaseService;
+import model.dbReader.DatabaseReader;
 import model.ExcelCellNumber;
 import model.State;
 import model.parser.ExcelData;
@@ -22,14 +22,14 @@ import java.time.format.DateTimeFormatter;
 public class ExcelGenerator
 {
     public static final String outExcel     = "./excel/b.xlsx";
-    private final DatabaseService databaseService;
+    private final DatabaseReader databaseReader;
     private final ExcelParser exlParser;
     private final XSSFWorkbook workbook;
 
-    public ExcelGenerator( DatabaseService _databaseService,
+    public ExcelGenerator( DatabaseReader _databaseReader,
                           ExcelParser _exlParser)
     {
-        databaseService = _databaseService;
+        databaseReader = _databaseReader;
         exlParser= _exlParser;
         workbook = _exlParser.GetWorkbook();
     }
@@ -37,7 +37,7 @@ public class ExcelGenerator
     public State GenerateExcel() throws Exception
     {
         ExcelData excelData = exlParser.GetExcelData();
-        DatabaseData dbData = databaseService.GetDataFromWarehouse();
+        DatabaseData dbData = databaseReader.GetDataFromWarehouse();
 
         if( excelData == null || dbData.Size() == 0)
         {
@@ -78,14 +78,14 @@ public class ExcelGenerator
     {
 
         ExcelRow exlEntry = exlParser.GetExcelData().Get(bDbVal);
-        Double qValDb = databaseService.GetDataFromWarehouse().Get(bDbVal).quantity;
+        Double qValDb = databaseReader.GetDataFromWarehouse().Get(bDbVal).quantity;
         boolean isQuantityChanged = ( Double.compare(qValDb,exlEntry.quantity) != 0 );
         if ( isQuantityChanged )
         {
             UpdateQuantity(bDbVal);
         }
 
-        Double lastPrcPrDb  = databaseService.GetDataFromWarehouse().Get(bDbVal).lastPrcPr;
+        Double lastPrcPrDb  = databaseReader.GetDataFromWarehouse().Get(bDbVal).lastPrcPr;
         Double lastPrcPrExl = exlParser.GetExcelData().Get(bDbVal).lastPrcPr;
         boolean isLastPrcPrChanged = (Double.compare(lastPrcPrExl,lastPrcPrDb) != 0);
         if( isLastPrcPrChanged )
@@ -113,8 +113,8 @@ public class ExcelGenerator
     private void UpdateQuantity(String barcode) throws Exception
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        Double qValDb = databaseService.GetDataFromWarehouse().Get(barcode).quantity;
-        String productName = databaseService.GetDataFromWarehouse().Get(barcode).productName;
+        Double qValDb = databaseReader.GetDataFromWarehouse().Get(barcode).quantity;
+        String productName = databaseReader.GetDataFromWarehouse().Get(barcode).productName;
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
 
         Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelCellNumber.QUANTITY);
@@ -131,7 +131,7 @@ public class ExcelGenerator
 
     private void InsertRowLast(int lastRow, String bDbVal) throws Exception
     {
-        DatabaseData dbData = databaseService.GetDataFromWarehouse();
+        DatabaseData dbData = databaseReader.GetDataFromWarehouse();
         Double qValDb = dbData.Get(bDbVal).quantity;
         String productName =  dbData.Get(bDbVal).productName;
 
@@ -161,10 +161,10 @@ public class ExcelGenerator
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
-        String productName =  databaseService
+        String productName =  databaseReader
                 .GetDataFromWarehouse()
                 .Get(barcode).productName;
-        Double lastPrcPrDb = databaseService
+        Double lastPrcPrDb = databaseReader
                 .GetDataFromWarehouse()
                 .Get(barcode)
                 .lastPrcPr;
