@@ -1,7 +1,5 @@
 package model.credentialsReaderWriter;
 
-import model.State;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -47,8 +45,7 @@ public class CredentialsIO
         writer.close();
     }
 
-    public State GetCredentialsFromFile(String filePath)
-    {
+    public void GetCredentialsFromFile(String filePath) throws Exception {
         credFilePath = filePath;
         try
         {
@@ -58,7 +55,7 @@ public class CredentialsIO
             String line = br.readLine();
             if(line==null || line.isEmpty())
             {
-                return State.FAILURE;
+                throw new IllegalArgumentException("Credentials are empty");
             }
 
             String[] details = line.split(",");
@@ -70,17 +67,20 @@ public class CredentialsIO
             dbURL        = "jdbc:sqlserver://" + hostname + ";" + "databaseName="+databaseName;
             if(username==null || pass==null|| hostname==null || databaseName == null)
             {
-                return State.FAILURE;
+                throw new IllegalArgumentException("Some of the file credentials are missing");
             }
-
+        }
+        catch (IOException e)
+        {
+            System.out.println("Failed to open file "+e);
+            throw e;
         }
         catch (Exception e)
         {
-            System.out.println("Failed to get credentials from file "+e);
-            return State.FAILURE;
+            System.out.println("Failed at decryption");
+            e.printStackTrace();
+            throw e;
         }
-
-        return  State.SUCCESS;
     }
 
     public String GetUsername()

@@ -1,10 +1,10 @@
 
 import model.credentialsReaderWriter.CredentialsIO;
 import model.dbReader.DatabaseReader;
-import model.State;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
@@ -29,36 +29,35 @@ public class CredentialsIOTest
     }
 
     @Test(expected = NullPointerException.class)
-    public void SaveCredentials_WhenFilePathNotGiven_ShouldTrowException() throws Exception {
+    public void SaveCredentials_WhenFilePathNotGiven_ShouldThrowNullPointerException() throws Exception
+    {
         CredentialsIO srv = new CredentialsIO();
 
         srv.SaveCredentials();
     }
 
-    @Test
-    public void GetCredentialsFromFile_WhenFileNotExist_ReturnFail()
+    @Test(expected = IOException.class)
+    public void GetCredentialsFromFile_WhenFileNotExist_ShouldThrowIOException() throws Exception
     {
         CredentialsIO srv = new CredentialsIO();
 
-        State res = srv.GetCredentialsFromFile("fileNotFound");
-
-        assertTrue(res == State.FAILURE);
+        srv.GetCredentialsFromFile("fileNotFound");
     }
 
     @Test
-    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()
+    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent() throws Exception
     {
         CredentialsIO srv = new CredentialsIO();
 
-        State res = srv.GetCredentialsFromFile(DatabaseReader.credFilePath);
+        srv.GetCredentialsFromFile(DatabaseReader.credFilePath);
 
         assertTrue(srv.GetUsername().equals("kef"));
         assertTrue(srv.GetDatabaseName().equals("Cmp005"));
-        assertTrue(res == State.SUCCESS);
     }
 
     @Test
-    public void SaveCredentials_WhenValidSaveCredentials_ThenRetrieveThemCorrectly() throws Exception {
+    public void SaveCredentials_WhenValidSaveCredentials_ThenRetrieveThemCorrectly() throws Exception
+    {
         String simulatedUserInput = "kef" + System.getProperty("line.separator") +
                 "pass" + System.getProperty("line.separator") +
                 "localhost" + System.getProperty("line.separator") +
@@ -69,9 +68,8 @@ public class CredentialsIOTest
         srv.GetUserInputs();
 
         srv.SaveCredentials();
-        State res = srv.GetCredentialsFromFile("testCredentials.text");
+        srv.GetCredentialsFromFile("testCredentials.text");
 
-        assertTrue(res == State.SUCCESS);
         assertTrue(srv.GetDatabaseName().equals( "Cmp005"));
         assertTrue(srv.GetPass().equals( "pass"));
         assertTrue(srv.GetUsername().equals( "kef"));

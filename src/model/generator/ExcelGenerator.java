@@ -3,7 +3,6 @@ package model.generator;
 import model.dbReader.DatabaseData;
 import model.dbReader.DatabaseReader;
 import model.ExcelCellNumber;
-import model.State;
 import model.parser.ExcelData;
 import model.parser.ExcelParser;
 import model.parser.ExcelRow;
@@ -34,17 +33,14 @@ public class ExcelGenerator
         workbook = _exlParser.GetWorkbook();
     }
 
-    public State GenerateExcel() throws Exception
+    public void GenerateExcel() throws Exception
     {
         ExcelData excelData = exlParser.GetExcelData();
         DatabaseData dbData = databaseReader.GetDataFromWarehouse();
-
-        if( excelData == null || dbData.Size() == 0)
-        {
-            System.out.println("Database service or parser failed to provide data to generator.");
-            return State.FAILURE;
-        }
         int totalRows = exlParser.GetTotalRows();
+
+        if( dbData == null ||dbData.Size() == 0 )
+            throw new IllegalArgumentException("Data retrieved from database equals to 0");
 
         for(String bDbVal:dbData.GetBarcodes())
         {
@@ -61,8 +57,6 @@ public class ExcelGenerator
                 totalRows++;
             }
         }
-
-        return State.SUCCESS;
     }
 
     public void SaveExcel() throws IOException

@@ -38,30 +38,26 @@ public class ExcelGeneratorTest
         dbService = mock(DatabaseReader.class);
     }
 
-    @Test
-    public void GenerateExcel_WhenExcelDataIsNull_ReturnsFail() throws Exception
+    @Test(expected = IllegalArgumentException.class)
+    public void GenerateExcel_WhenExcelDataIsNull_ThrowsNullPointerException() throws Exception
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseReader.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
         when(parser.GetExcelData()).thenReturn(null);
 
-        State result = generator.GenerateExcel();
-
-        assertTrue(result == State.FAILURE);
+        generator.GenerateExcel();
     }
 
-    @Test
-    public void GenerateExcel_WhenDatabaseMapIsEmpty_ReturnsFail() throws Exception
+    @Test(expected = IllegalArgumentException.class)
+    public void GenerateExcel_WhenDatabaseMapIsEmpty_ThrowsNullPointerException() throws Exception
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseReader.class);
         ExcelGenerator generator = new ExcelGenerator(dbService,parser);
         when(dbService.GetDataFromWarehouse()).thenReturn(new DatabaseData());
 
-        State result = generator.GenerateExcel();
-
-        assertTrue(result == State.FAILURE);
+        generator.GenerateExcel();
     }
 
     @Test

@@ -1,6 +1,5 @@
 package model.dbReader;
 
-import model.State;
 import model.credentialsReaderWriter.CredentialsIO;
 
 import java.sql.*;
@@ -11,15 +10,11 @@ public class DatabaseReader
     private DatabaseData dbData;
     public static final String credFilePath = "./credentials.txt";
 
-    public DatabaseReader(CredentialsIO _credManager)
+    public DatabaseReader(CredentialsIO _credManager) throws Exception
     {
         dbData = new DatabaseData();
         credManager = _credManager;
-        State retrieved = credManager.GetCredentialsFromFile(credFilePath);
-        if( retrieved == State.FAILURE)
-        {
-            credManager.GetUserInputs();
-        }
+        credManager.GetCredentialsFromFile(credFilePath);
     }
 
     public DatabaseData GetDataFromWarehouse() throws Exception {
