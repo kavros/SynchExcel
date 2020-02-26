@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static org.junit.Assert.assertTrue;
 
@@ -42,6 +43,17 @@ public class CredentialsIOTest
         CredentialsIO srv = new CredentialsIO();
 
         srv.GetCredentialsFromFile("fileNotFound");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void GetCredentialsFromFile_WhenFileIsEmpty_ShouldThrowIOException() throws Exception
+    {
+        CredentialsIO srv = new CredentialsIO();
+        PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+        writer.close();
+
+        srv.GetCredentialsFromFile("the-file-name.txt");
+
     }
 
     @Test

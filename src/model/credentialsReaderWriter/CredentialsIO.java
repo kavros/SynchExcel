@@ -75,12 +75,6 @@ public class CredentialsIO
             System.out.println("Failed to open file "+e);
             throw e;
         }
-        catch (Exception e)
-        {
-            System.out.println("Failed at decryption");
-            e.printStackTrace();
-            throw e;
-        }
     }
 
     public String GetUsername()
