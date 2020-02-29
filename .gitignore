@@ -4,3 +4,6 @@ data/credentials.txt
 b.xlsx
 log.txt
 .idea/sonarlint/*
+testFiles/fileNotFound
+testFiles/testCredentials.text
+testFiles/the-file-name.txt
