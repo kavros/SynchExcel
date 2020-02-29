@@ -1,28 +1,0 @@
-
-ksquid:S00112…"FDefine and throw a dedicated exception instead of using a generic one.(»ÇìÌıÿÿÿÿ8Ôº¼É‡.
-ysquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(›Ô¸Â8Ôº¼É‡.
-[
-squid:S106H"9Replace this use of System.out or System.err by a logger.(ªçş úÿÿÿÿ8Ôº¼É‡.
-nsquid:S00100¡"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€Ë›8Ôº¼É‡.
-fsquid:S00112¡"FDefine and throw a dedicated exception instead of using a generic one.(Ä€Ë›8Ôº¼É‡.
-osquid:S00117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô ¦68Ôº¼É‡.
-Wsquid:S28642"4Iterate over the "entrySet" instead of the "keySet".(Ë¨äœıÿÿÿÿ8Ôº¼É‡.
-[
-squid:S106f"9Replace this use of System.out or System.err by a logger.(¸š‚Çûÿÿÿÿ8Ôº¼É‡.
-psquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô‚¶æ8Ôº¼É‡.
-rsquid:S00100E"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûú¹ëûÿÿÿÿ8Ôº¼É‡.
-msquid:S00100N"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß™‡¤8Ôº¼É‡.
-usquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü«Ùìşÿÿÿÿ8Ôº¼É‡.
-[
-squid:S106}"9Replace this use of System.out or System.err by a logger.(’Ø¸¡üÿÿÿÿ8Ôº¼É‡.
-\
-squid:S106°"9Replace this use of System.out or System.err by a logger.(Íñçƒÿÿÿÿÿ8Ôº¼É‡.
-ssquid:S00100³"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È¶¶èúÿÿÿÿ8Ôº¼É‡.
-ssquid:S00100…"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÇìÌıÿÿÿÿ8Ôº¼É‡.
-[
-squid:S106-"9Replace this use of System.out or System.err by a logger.(»ªöÿÿÿÿÿ8Ôº¼É‡.
-msquid:S00100&"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä´§’8Ôº¼É‡.
-jsquid:S00112r"FDefine and throw a dedicated exception instead of using a generic one.(–ØÊøÿÿÿÿ8Ôº¼É‡.
-rsquid:S00100r"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ØÊøÿÿÿÿ8Ôº¼É‡.
-W
-squid:S106"9Replace this use of System.out or System.err by a logger.(½ùí8Ôº¼É‡.

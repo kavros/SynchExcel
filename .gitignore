@@ -3,3 +3,4 @@ data/credentials.txt
 *.jar
 b.xlsx
 log.txt
+.idea/sonarlint/*
