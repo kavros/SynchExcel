@@ -1,6 +1,5 @@
 package main;
-import model.*;
-import model.credentialsReaderWriter.CredentialsIO;
+import model.credentialsReaderWriter.CredentialsReader;
 import model.dbReader.DatabaseReader;
 import model.generator.ExcelGenerator;
 import model.parser.ExcelParser;
@@ -16,9 +15,9 @@ public class Main
 
         XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);
         ExcelParser exlParser = new ExcelParser(workbook);
-        DatabaseReader dbReader =  new DatabaseReader(new CredentialsIO());
+        DatabaseReader dbReader =  new DatabaseReader(new CredentialsReader());
         ExcelGenerator gen = new ExcelGenerator(dbReader,exlParser);
-
+        gen.GenerateExcel();
         gen.SaveExcel();
 
         //workbook.close();

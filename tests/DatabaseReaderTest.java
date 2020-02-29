@@ -1,6 +1,8 @@
 
-import model.credentialsReaderWriter.CredentialsIO;
+import model.credentialsReaderWriter.Credentials;
+import model.credentialsReaderWriter.CredentialsReader;
 import model.dbReader.DatabaseData;
+import model.dbReader.DatabaseReader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,17 +21,19 @@ import static org.powermock.api.easymock.PowerMock.replay;
 @PrepareForTest({DriverManager.class, model.dbReader.DatabaseReader.class})
 public class DatabaseReaderTest
 {
-    private CredentialsIO credServ ;
+    private CredentialsReader credReader;
     private Statement statement;
 
     @Before
     public void Setup()throws SQLException
     {
         Connection connection = mock(Connection.class);
-        credServ = mock(CredentialsIO.class);
-        when(credServ.GetDbURL()).thenReturn("url");
-        when(credServ.GetUsername()).thenReturn("kef");
-        when(credServ.GetPass()).thenReturn("pass");
+        credReader = mock(CredentialsReader.class);
+        Credentials credentials = new Credentials();
+        credentials.SetDbUrl("url");
+        credentials.SetPassword("pass");
+        credentials.SetUsername("kef");
+        when(credReader.GetCredentials(DatabaseReader.credFilePath)).thenReturn(credentials);
         statement = mock(Statement.class);
         when(connection.createStatement()).thenReturn(statement);
         mockStatic(DriverManager.class);
@@ -38,21 +42,19 @@ public class DatabaseReaderTest
     }
 
     @Test
-    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap()  throws Exception {
-
-
-        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
+    public void GetDataFromWarehouse_WhenDbResultSetIsNull_ThenReturnsEmptyHashMap() throws Exception
+    {
+        DatabaseReader dbServer =  new DatabaseReader(credReader);
         replay(DriverManager.class);
 
         DatabaseData result = dbServer.GetDataFromWarehouse();
-
         assertTrue (result.Size() == 0);
     }
 
     @Test
     public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws Exception
     {
-        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
+        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credReader);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");
@@ -75,7 +77,7 @@ public class DatabaseReaderTest
     @Test
     public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws Exception
     {
-        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credServ);
+        model.dbReader.DatabaseReader dbServer =  new model.dbReader.DatabaseReader(credReader);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");

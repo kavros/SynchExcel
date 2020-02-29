@@ -1,7 +1,11 @@
 package model.credentialsReaderWriter;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.spec.KeySpec;
 import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
@@ -15,15 +19,22 @@ public class TrippleDes
     private Cipher cipher;
     private SecretKey key;
 
-    public TrippleDes() throws Exception
+    public TrippleDes()
     {
-        String myEncryptionKey = "KavrosKavrosKavrosKavros";
-        String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
-        byte[] arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
-        KeySpec ks = new DESedeKeySpec(arrayBytes);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance(myEncryptionScheme);
-        cipher = Cipher.getInstance(myEncryptionScheme);
-        key = skf.generateSecret(ks);
+        try
+        {
+            String myEncryptionKey = "KavrosKavrosKavrosKavros";
+            String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
+            byte[] arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
+            KeySpec ks = new DESedeKeySpec(arrayBytes);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(myEncryptionScheme);
+            cipher = Cipher.getInstance(myEncryptionScheme);
+            key = skf.generateSecret(ks);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
     public String encrypt(String unencryptedString) {
         String encryptedString = null;
