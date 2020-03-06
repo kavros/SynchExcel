@@ -1,12 +1,17 @@
 package model.credentialsReaderWriter;
 
+import javassist.bytecode.stackmap.TypeData;
+
 import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CredentialsReader
 {
     Credentials credentials = new Credentials();
     private String credFilePath;
+    private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
 
     public Credentials GetCredentials(String filePath)
     {
@@ -16,7 +21,7 @@ public class CredentialsReader
             String line = reader.readLine();
             if( !IsLineInInValidFormat(line) )
             {
-                System.err.println("Credentials file format is invalid.");
+                logger.log(Level.WARNING,"Credentials file format is invalid.");
                 ReadCredentialsFromStdinAndSave();
             }
             else
@@ -25,7 +30,7 @@ public class CredentialsReader
             }
         }
         catch (IOException e) {
-            System.err.println("Failed to open file with credentials");
+            logger.log(Level.WARNING,"Failed to open file with credentials");
             ReadCredentialsFromStdinAndSave();
         }
         return credentials;

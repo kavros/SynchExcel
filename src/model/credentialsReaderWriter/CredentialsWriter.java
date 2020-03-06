@@ -1,11 +1,18 @@
 package model.credentialsReaderWriter;
 
+import javassist.bytecode.stackmap.TypeData;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CredentialsWriter
 {
+
+    private CredentialsWriter(){}
+    private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
 
     public static void SaveCredentials(Credentials credentials, String credFilePath)
     {
@@ -21,7 +28,7 @@ public class CredentialsWriter
             writer.close();
         }catch(IOException e)
         {
-            System.err.println("Error: Failed to save file");
+            logger.log(Level.SEVERE,"Error: Failed to save file");
         }
     }
 }
