@@ -1,7 +1,6 @@
 package model.credentialsReaderWriter;
 
 import javassist.bytecode.stackmap.TypeData;
-
 import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -33,6 +32,12 @@ public class CredentialsReader
             logger.log(Level.WARNING,"Failed to open file with credentials");
             ReadCredentialsFromStdinAndSave();
         }
+        catch (EncrypterDecrypterException e)
+        {
+            logger.log(Level.WARNING,"Decryption failed.");
+            ReadCredentialsFromStdinAndSave();
+        }
+
         return credentials;
     }
 
@@ -73,13 +78,13 @@ public class CredentialsReader
         credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName="+credentials.databaseName;
     }
 
-    private void LoadCredentials(String[] credentialsArray)
+    private void LoadCredentials(String[] credentialsArray) throws EncrypterDecrypterException
     {
-        TrippleDes td = new TrippleDes();
-        credentials.username    = credentialsArray[0];
-        credentials.password    = td.decrypt(credentialsArray[1]);
-        credentials.hostname    = credentialsArray[2];
+        EncrypterDecrypter td = new EncrypterDecrypter();
+        credentials.username = credentialsArray[0];
+        credentials.password = td.decrypt(credentialsArray[1]);
+        credentials.hostname = credentialsArray[2];
         credentials.databaseName = credentialsArray[3];
-        credentials.dbURL        = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName="+credentials.databaseName;
+        credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName=" + credentials.databaseName;
     }
 }

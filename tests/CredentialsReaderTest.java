@@ -45,7 +45,8 @@ public class CredentialsReaderTest
     }
 
     @Test
-    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent() throws IOException {
+    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()
+    {
         CredentialsReader srv = new CredentialsReader();
 
         Credentials res = srv.GetCredentials("testFiles/credentials.txt");

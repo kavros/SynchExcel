@@ -19,16 +19,17 @@ public class CredentialsWriter
         if(credFilePath == null || credentials == null)
             throw new IllegalArgumentException("File path is not given");
 
-        TrippleDes td = new TrippleDes();
-        String encrypted = td.encrypt(credentials.password);
-        String credentialsSaveFormat = credentials.username+","+encrypted+","+credentials.hostname+","+credentials.databaseName;
         try( BufferedWriter writer = new BufferedWriter(new FileWriter(credFilePath)) )
         {
+            EncrypterDecrypter td = new EncrypterDecrypter();
+            String encrypted = td.encrypt(credentials.password);
+            String credentialsSaveFormat = credentials.username+","+encrypted+","+credentials.hostname+","+credentials.databaseName;
             writer.write(credentialsSaveFormat);
             writer.close();
-        }catch(IOException e)
+        }
+        catch(IOException | EncrypterDecrypterException e)
         {
-            logger.log(Level.SEVERE,"Error: Failed to save file");
+            logger.log(Level.SEVERE,"Error: Failed to save file \n"+e);
         }
     }
 }
