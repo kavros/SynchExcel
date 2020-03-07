@@ -1,6 +1,5 @@
 
-import model.credentialsReaderWriter.Credentials;
-import model.credentialsReaderWriter.CredentialsReader;
+import model.credentialsReaderWriter.*;
 import model.dbReader.DatabaseReader;
 import org.junit.Test;
 
@@ -24,9 +23,11 @@ public class CredentialsReaderTest
     }
 
     @Test
-    public void GetCredentials_WhenFileNotExist_ShouldGetCredentialsFromStdin()
+    public void GetCredentials_WhenFileNotExist_ShouldGetCredentialsFromStdin() throws EncrypterDecrypterException
     {
-        CredentialsReader srv = new CredentialsReader();
+        EncrypterDecrypter en = new EncrypterDecrypter();
+        CredentialsWriter cw = new CredentialsWriter(en);
+        CredentialsReader srv = new CredentialsReader(cw,en);
         SimulateStdinInputs();
 
         srv.GetCredentials("testFiles/fileNotFound");
@@ -35,7 +36,9 @@ public class CredentialsReaderTest
     @Test
     public void GetCredentialsFromFile_WhenFileIsEmpty_ShouldGetCredentialsFromStdin() throws Exception
     {
-        CredentialsReader srv = new CredentialsReader();
+        EncrypterDecrypter en = new EncrypterDecrypter();
+        CredentialsWriter cw = new CredentialsWriter(en);
+        CredentialsReader srv = new CredentialsReader(cw,en);
         String fileName = "testFiles/the-file-name.txt";
         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
         writer.close();
@@ -45,9 +48,11 @@ public class CredentialsReaderTest
     }
 
     @Test
-    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()
+    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()throws EncrypterDecrypterException
     {
-        CredentialsReader srv = new CredentialsReader();
+        EncrypterDecrypter en = new EncrypterDecrypter();
+        CredentialsWriter cw = new CredentialsWriter(en);
+        CredentialsReader srv = new CredentialsReader(cw,en);
 
         Credentials res = srv.GetCredentials("testFiles/credentials.txt");
 

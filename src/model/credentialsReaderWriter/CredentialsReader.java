@@ -11,6 +11,14 @@ public class CredentialsReader
     Credentials credentials = new Credentials();
     private String credFilePath;
     private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
+    private CredentialsWriter credentialsWriter;
+    private  EncrypterDecrypter encrypterDecrypter;
+
+    public CredentialsReader(CredentialsWriter cWriter,EncrypterDecrypter ed)
+    {
+        credentialsWriter=cWriter;
+        encrypterDecrypter = ed;
+    }
 
     public Credentials GetCredentials(String filePath)
     {
@@ -60,7 +68,7 @@ public class CredentialsReader
     private void ReadCredentialsFromStdinAndSave()
     {
         GetCredentialsFromUser();
-        CredentialsWriter.SaveCredentials(credentials,credFilePath);
+        credentialsWriter.SaveCredentials(credentials,credFilePath);
     }
 
     private void GetCredentialsFromUser()
@@ -80,9 +88,8 @@ public class CredentialsReader
 
     private void LoadCredentials(String[] credentialsArray) throws EncrypterDecrypterException
     {
-        EncrypterDecrypter td = new EncrypterDecrypter();
         credentials.username = credentialsArray[0];
-        credentials.password = td.decrypt(credentialsArray[1]);
+        credentials.password = encrypterDecrypter.decrypt(credentialsArray[1]);
         credentials.hostname = credentialsArray[2];
         credentials.databaseName = credentialsArray[3];
         credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName=" + credentials.databaseName;
