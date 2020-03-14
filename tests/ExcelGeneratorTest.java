@@ -42,7 +42,7 @@ public class ExcelGeneratorTest
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseReader.class);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,null);
         when(parser.GetExcelData()).thenReturn(null);
 
         generator.GenerateExcel();
@@ -53,7 +53,7 @@ public class ExcelGeneratorTest
     {
         parser = mock(ExcelParser.class);
         dbService = mock(DatabaseReader.class);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,null);
         when(dbService.GetDataFromWarehouse()).thenReturn(new DatabaseData());
 
         generator.GenerateExcel();
@@ -74,8 +74,7 @@ public class ExcelGeneratorTest
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
         when(parser.GetTotalRows()).thenReturn(1);
-        when(parser.GetWorkbook()).thenReturn(workbook);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,workbook);
 
         generator.GenerateExcel();
 
@@ -108,8 +107,7 @@ public class ExcelGeneratorTest
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
         when(parser.GetTotalRows()).thenReturn(1);
-        when(parser.GetWorkbook()).thenReturn(workbook);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,workbook);
 
         generator.GenerateExcel();
 
@@ -136,8 +134,7 @@ public class ExcelGeneratorTest
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
         when(parser.GetTotalRows()).thenReturn(1);
-        when(parser.GetWorkbook()).thenReturn(workbook);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,workbook);
 
         generator.GenerateExcel();
 
@@ -161,8 +158,7 @@ public class ExcelGeneratorTest
         when(dbService.GetDataFromWarehouse()).thenReturn(dbData);
         when(parser.GetExcelData()).thenReturn(excelData);
         when(parser.GetTotalRows()).thenReturn(1);
-        when(parser.GetWorkbook()).thenReturn(workbook);
-        ExcelGenerator generator = new ExcelGenerator(dbService,parser);
+        ExcelGenerator generator = new ExcelGenerator(dbService,parser,workbook);
 
         generator.GenerateExcel();
 

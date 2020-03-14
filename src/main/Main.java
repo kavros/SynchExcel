@@ -19,7 +19,7 @@ public class Main
         XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);
         ExcelParser exlParser = new ExcelParser(workbook);
         DatabaseReader dbReader =  new DatabaseReader(new CredentialsReader(cw,ed));
-        ExcelGenerator gen = new ExcelGenerator(dbReader,exlParser);
+        ExcelGenerator gen = new ExcelGenerator(dbReader,exlParser,workbook);
         gen.GenerateExcel();
         gen.SaveExcel();
 

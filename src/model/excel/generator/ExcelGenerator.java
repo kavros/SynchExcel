@@ -25,12 +25,12 @@ public class ExcelGenerator
     private final ExcelParser exlParser;
     private final XSSFWorkbook workbook;
 
-    public ExcelGenerator( DatabaseReader _databaseReader,
-                          ExcelParser _exlParser)
+    public ExcelGenerator( DatabaseReader databaseReader,
+                          ExcelParser exlParser, XSSFWorkbook workbook)
     {
-        databaseReader = _databaseReader;
-        exlParser= _exlParser;
-        workbook = _exlParser.GetWorkbook();
+        this.databaseReader = databaseReader;
+        this.exlParser= exlParser;
+        this.workbook = workbook;
     }
 
     public void GenerateExcel() throws Exception

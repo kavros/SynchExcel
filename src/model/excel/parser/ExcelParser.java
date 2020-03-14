@@ -67,11 +67,6 @@ public class ExcelParser
         return totalRows;
     }
 
-    public XSSFWorkbook GetWorkbook()
-    {
-        return workbook;
-    }
-
     private boolean hasReachTheEnd(String str)
     {
         return ( (str != null) && (str.contains("ΣΥΝΟΛΟ TΕΛΙΚΟ")) );
