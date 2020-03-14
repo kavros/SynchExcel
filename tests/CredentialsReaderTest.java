@@ -1,10 +1,10 @@
 
+import model.cipher.EncrypterDecrypter;
+import model.cipher.EncrypterDecrypterException;
 import model.credentialsReaderWriter.*;
-import model.dbReader.DatabaseReader;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package model.credentialsReaderWriter;
+package model.cipher;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -7,6 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import javax.crypto.*;
 import javax.crypto.spec.DESedeKeySpec;
+
 import org.apache.commons.codec.binary.Base64;
 
 

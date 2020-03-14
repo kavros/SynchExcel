@@ -1,7 +1,7 @@
 import model.credentialsReaderWriter.Credentials;
 import model.credentialsReaderWriter.CredentialsWriter;
-import model.credentialsReaderWriter.EncrypterDecrypter;
-import model.credentialsReaderWriter.EncrypterDecrypterException;
+import model.cipher.EncrypterDecrypter;
+import model.cipher.EncrypterDecrypterException;
 import model.dbReader.DatabaseReader;
 import model.parser.ExcelParser;
 import org.junit.Test;

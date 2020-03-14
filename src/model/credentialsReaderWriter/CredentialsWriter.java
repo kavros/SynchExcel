@@ -1,6 +1,8 @@
 package model.credentialsReaderWriter;
 
 import javassist.bytecode.stackmap.TypeData;
+import model.cipher.EncrypterDecrypter;
+import model.cipher.EncrypterDecrypterException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

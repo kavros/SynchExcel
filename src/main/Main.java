@@ -1,7 +1,7 @@
 package main;
 import model.credentialsReaderWriter.CredentialsReader;
 import model.credentialsReaderWriter.CredentialsWriter;
-import model.credentialsReaderWriter.EncrypterDecrypter;
+import model.cipher.EncrypterDecrypter;
 import model.dbReader.DatabaseReader;
 import model.generator.ExcelGenerator;
 import model.parser.ExcelParser;

@@ -1,6 +1,9 @@
 package model.credentialsReaderWriter;
 
 import javassist.bytecode.stackmap.TypeData;
+import model.cipher.EncrypterDecrypter;
+import model.cipher.EncrypterDecrypterException;
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -12,7 +15,7 @@ public class CredentialsReader
     private String credFilePath;
     private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
     private CredentialsWriter credentialsWriter;
-    private  EncrypterDecrypter encrypterDecrypter;
+    private EncrypterDecrypter encrypterDecrypter;
 
     public CredentialsReader(CredentialsWriter cWriter,EncrypterDecrypter ed)
     {

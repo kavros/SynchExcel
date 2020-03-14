@@ -1,4 +1,4 @@
-package model.credentialsReaderWriter;
+package model.cipher;
 
 public class EncrypterDecrypterException extends Exception
 {
