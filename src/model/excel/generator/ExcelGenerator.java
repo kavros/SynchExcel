@@ -8,6 +8,7 @@ import model.excel.parser.ExcelParser;
 import model.excel.parser.ExcelRow;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -49,11 +50,11 @@ public class ExcelGenerator
 
             if (isBarcodeInExcel)
             {
-                UpdateRow(bDbVal);
+                UpdateCells(bDbVal);
             }
             else if(qValDb !=0) // if barcode is not inside excel and quantity is not 0 then add new excel entry
             {
-                InsertRowLast(totalRows, bDbVal);
+                InsertCells(totalRows, bDbVal);
                 totalRows++;
             }
         }
@@ -68,7 +69,7 @@ public class ExcelGenerator
         workbook.write(output_file);
     }
 
-    private void UpdateRow(String bDbVal ) throws Exception
+    private void UpdateCells(String bDbVal )
     {
 
         ExcelRow exlEntry = exlParser.GetExcelData().Get(bDbVal);
@@ -123,28 +124,31 @@ public class ExcelGenerator
                 );
     }
 
-    private void InsertRowLast(int lastRow, String bDbVal)
+    private void InsertCells(int lastRow, String bDbVal)
     {
         DatabaseData dbData = databaseReader.GetDataFromWarehouse();
         Double qValDb = dbData.Get(bDbVal).quantity;
         String productName =  dbData.Get(bDbVal).productName;
-
         XSSFSheet sheet = workbook.getSheetAt(0);
+        XSSFRow endOfSheet = sheet.createRow(lastRow+1);
 
-        sheet.createRow(lastRow+1).createCell(ExcelColumns.BARCODE).setCellValue(bDbVal);
-        sheet.getRow(lastRow+1)
+        endOfSheet
+            .createCell(ExcelColumns.BARCODE)
+            .setCellValue(bDbVal);
+
+        endOfSheet
                 .createCell(ExcelColumns.QUANTITY)
                 .setCellValue(dbData.Get(bDbVal).quantity);
 
-        sheet.getRow(lastRow+1)
+        endOfSheet
                 .createCell(ExcelColumns.PRODUCT_DESCRIPTION)
                 .setCellValue(productName);
 
-        sheet.getRow(lastRow+1)
+        endOfSheet
                 .createCell(ExcelColumns.LAST_PRICE)
                 .setCellValue(dbData.Get(bDbVal).lastPrcPr);
 
-        sheet.getRow(lastRow+1)
+        endOfSheet
                 .createCell(ExcelColumns.PRODUCT_CODE)
                 .setCellValue(dbData.Get(bDbVal).productCode);
 
