@@ -1,7 +1,7 @@
 package main;
 import model.credentialsReaderWriter.CredentialsReader;
 import model.credentialsReaderWriter.CredentialsWriter;
-import model.cipher.EncrypterDecrypter;
+import model.cipher.Cipher;
 import model.dbReader.DatabaseReader;
 import model.generator.ExcelGenerator;
 import model.parser.ExcelParser;
@@ -14,7 +14,7 @@ public class Main
 
     public static void main(String[] args) throws Exception
     {
-        EncrypterDecrypter ed = new EncrypterDecrypter();
+        Cipher ed = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(ed);
         XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);
         ExcelParser exlParser = new ExcelParser(workbook);

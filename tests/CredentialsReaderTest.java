@@ -1,6 +1,6 @@
 
-import model.cipher.EncrypterDecrypter;
-import model.cipher.EncrypterDecrypterException;
+import model.cipher.Cipher;
+import model.cipher.CipherException;
 import model.credentialsReaderWriter.*;
 import org.junit.Test;
 
@@ -23,9 +23,9 @@ public class CredentialsReaderTest
     }
 
     @Test
-    public void GetCredentials_WhenFileNotExist_ShouldGetCredentialsFromStdin() throws EncrypterDecrypterException
+    public void GetCredentials_WhenFileNotExist_ShouldGetCredentialsFromStdin() throws CipherException
     {
-        EncrypterDecrypter en = new EncrypterDecrypter();
+        Cipher en = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(en);
         CredentialsReader srv = new CredentialsReader(cw,en);
         SimulateStdinInputs();
@@ -36,7 +36,7 @@ public class CredentialsReaderTest
     @Test
     public void GetCredentialsFromFile_WhenFileIsEmpty_ShouldGetCredentialsFromStdin() throws Exception
     {
-        EncrypterDecrypter en = new EncrypterDecrypter();
+        Cipher en = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(en);
         CredentialsReader srv = new CredentialsReader(cw,en);
         String fileName = "testFiles/the-file-name.txt";
@@ -48,9 +48,9 @@ public class CredentialsReaderTest
     }
 
     @Test
-    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()throws EncrypterDecrypterException
+    public void GetCredentialsFromFile_WhenFileIsCorrect_ReturnsCorrectContent()throws CipherException
     {
-        EncrypterDecrypter en = new EncrypterDecrypter();
+        Cipher en = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(en);
         CredentialsReader srv = new CredentialsReader(cw,en);
 

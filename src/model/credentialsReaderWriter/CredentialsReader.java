@@ -1,8 +1,8 @@
 package model.credentialsReaderWriter;
 
 import javassist.bytecode.stackmap.TypeData;
-import model.cipher.EncrypterDecrypter;
-import model.cipher.EncrypterDecrypterException;
+import model.cipher.Cipher;
+import model.cipher.CipherException;
 
 import java.io.*;
 import java.util.Scanner;
@@ -15,9 +15,9 @@ public class CredentialsReader
     private String credFilePath;
     private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
     private CredentialsWriter credentialsWriter;
-    private EncrypterDecrypter encrypterDecrypter;
+    private Cipher encrypterDecrypter;
 
-    public CredentialsReader(CredentialsWriter cWriter,EncrypterDecrypter ed)
+    public CredentialsReader(CredentialsWriter cWriter,Cipher ed)
     {
         credentialsWriter=cWriter;
         encrypterDecrypter = ed;
@@ -43,7 +43,7 @@ public class CredentialsReader
             logger.log(Level.WARNING,"Failed to open file with credentials");
             ReadCredentialsFromStdinAndSave();
         }
-        catch (EncrypterDecrypterException e)
+        catch (CipherException e)
         {
             logger.log(Level.WARNING,"Decryption failed.");
             ReadCredentialsFromStdinAndSave();
@@ -89,7 +89,7 @@ public class CredentialsReader
         credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName="+credentials.databaseName;
     }
 
-    private void LoadCredentials(String[] credentialsArray) throws EncrypterDecrypterException
+    private void LoadCredentials(String[] credentialsArray) throws CipherException
     {
         credentials.username = credentialsArray[0];
         credentials.password = encrypterDecrypter.decrypt(credentialsArray[1]);

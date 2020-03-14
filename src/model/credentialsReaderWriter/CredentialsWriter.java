@@ -1,8 +1,8 @@
 package model.credentialsReaderWriter;
 
 import javassist.bytecode.stackmap.TypeData;
-import model.cipher.EncrypterDecrypter;
-import model.cipher.EncrypterDecrypterException;
+import model.cipher.Cipher;
+import model.cipher.CipherException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 
 public class CredentialsWriter
 {
-    EncrypterDecrypter td ;
-    public CredentialsWriter(EncrypterDecrypter ed)
+    Cipher td ;
+    public CredentialsWriter(Cipher ed)
     {
         td  = ed ;
     }
@@ -32,7 +32,7 @@ public class CredentialsWriter
             writer.write(credentialsSaveFormat);
             writer.close();
         }
-        catch(IOException | EncrypterDecrypterException e)
+        catch(IOException | CipherException e)
         {
             logger.log(Level.SEVERE,"Error: Failed to save file \n"+e);
         }
