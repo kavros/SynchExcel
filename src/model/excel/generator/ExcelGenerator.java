@@ -104,7 +104,7 @@ public class ExcelGenerator
     }
 
 
-    private void UpdateQuantity(String barcode) throws Exception
+    private void UpdateQuantity(String barcode)
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         Double qValDb = databaseReader.GetDataFromWarehouse().Get(barcode).quantity;
@@ -123,7 +123,7 @@ public class ExcelGenerator
                 );
     }
 
-    private void InsertRowLast(int lastRow, String bDbVal) throws Exception
+    private void InsertRowLast(int lastRow, String bDbVal)
     {
         DatabaseData dbData = databaseReader.GetDataFromWarehouse();
         Double qValDb = dbData.Get(bDbVal).quantity;
@@ -151,7 +151,7 @@ public class ExcelGenerator
         System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
     }
 
-    private void UpdateLastPrcPr(String barcode) throws Exception
+    private void UpdateLastPrcPr(String barcode)
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
