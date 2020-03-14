@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 
 public class CredentialsWriter
 {
-    Cipher td ;
-    public CredentialsWriter(Cipher ed)
+    Cipher cipher ;
+    public CredentialsWriter(Cipher cipher)
     {
-        td  = ed ;
+        this.cipher  = cipher ;
     }
 
     private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
@@ -27,7 +27,7 @@ public class CredentialsWriter
 
         try( BufferedWriter writer = new BufferedWriter(new FileWriter(credFilePath)) )
         {
-            String encrypted = td.encrypt(credentials.password);
+            String encrypted = cipher.encrypt(credentials.password);
             String credentialsSaveFormat = credentials.username+","+encrypted+","+credentials.hostname+","+credentials.databaseName;
             writer.write(credentialsSaveFormat);
             writer.close();
