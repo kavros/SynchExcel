@@ -1,7 +1,7 @@
 package model.excel.generator;
 
-import model.database.DatabaseData;
-import model.database.DatabaseReader;
+import model.database.reader.DatabaseData;
+import model.database.reader.DatabaseReader;
 import model.excel.constants.ExcelColumns;
 import model.excel.parser.ExcelData;
 import model.excel.parser.ExcelParser;

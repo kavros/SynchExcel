@@ -1,4 +1,4 @@
-package model.database;
+package model.database.reader;
 
 import java.util.HashMap;
 import java.util.Set;

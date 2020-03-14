@@ -1,6 +1,6 @@
-import model.database.DatabaseData;
-import model.database.DatabaseRow;
-import model.database.DatabaseReader;
+import model.database.reader.DatabaseData;
+import model.database.reader.DatabaseRow;
+import model.database.reader.DatabaseReader;
 import model.excel.generator.ExcelGenerator;
 import model.excel.parser.ExcelData;
 import model.excel.parser.ExcelParser;

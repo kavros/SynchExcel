@@ -1,6 +1,9 @@
 
 import model.cipher.Cipher;
 import model.cipher.CipherException;
+import model.database.credentials.Credentials;
+import model.database.credentials.CredentialsReader;
+import model.database.credentials.CredentialsWriter;
 import model.logins.*;
 import org.junit.Test;
 

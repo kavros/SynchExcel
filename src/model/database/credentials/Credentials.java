@@ -1,4 +1,4 @@
-package model.logins;
+package model.database.credentials;
 
 public class Credentials
 {

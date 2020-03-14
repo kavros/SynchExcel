@@ -1,8 +1,8 @@
 
-import model.logins.Credentials;
-import model.logins.CredentialsReader;
-import model.database.DatabaseData;
-import model.database.DatabaseReader;
+import model.database.credentials.Credentials;
+import model.database.credentials.CredentialsReader;
+import model.database.reader.DatabaseData;
+import model.database.reader.DatabaseReader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import static org.powermock.api.easymock.PowerMock.replay;
 
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DriverManager.class, model.database.DatabaseReader.class})
+@PrepareForTest({DriverManager.class, DatabaseReader.class})
 public class DatabaseReaderTest
 {
     private CredentialsReader credReader;
@@ -54,7 +54,7 @@ public class DatabaseReaderTest
     @Test
     public void GetDataFromWarehouse_WhenDbReturnsResultSetExist_ThenReturnsResults() throws Exception
     {
-        model.database.DatabaseReader dbServer =  new model.database.DatabaseReader(credReader);
+        DatabaseReader dbServer =  new DatabaseReader(credReader);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");
@@ -77,7 +77,7 @@ public class DatabaseReaderTest
     @Test
     public void GetDataFromWarehouse_WhenCalledTwice_ThenCallDatabaseOnce() throws Exception
     {
-        model.database.DatabaseReader dbServer =  new model.database.DatabaseReader(credReader);
+        DatabaseReader dbServer =  new DatabaseReader(credReader);
         ResultSet resultSet = mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString(1)).thenReturn("4313");
