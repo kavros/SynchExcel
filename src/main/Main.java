@@ -1,10 +1,10 @@
 package main;
-import model.credentialsReaderWriter.CredentialsReader;
-import model.credentialsReaderWriter.CredentialsWriter;
+import model.logins.CredentialsReader;
+import model.logins.CredentialsWriter;
 import model.cipher.Cipher;
-import model.dbReader.DatabaseReader;
-import model.generator.ExcelGenerator;
-import model.parser.ExcelParser;
+import model.database.DatabaseReader;
+import model.excel.generator.ExcelGenerator;
+import model.excel.parser.ExcelParser;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 

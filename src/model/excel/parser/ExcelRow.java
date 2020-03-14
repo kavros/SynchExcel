@@ -1,4 +1,4 @@
-package model.parser;
+package model.excel.parser;
 
 public class ExcelRow
 {

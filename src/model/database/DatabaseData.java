@@ -1,4 +1,4 @@
-package model.dbReader;
+package model.database;
 
 import java.util.HashMap;
 import java.util.Set;

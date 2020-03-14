@@ -1,4 +1,4 @@
-package model.credentialsReaderWriter;
+package model.logins;
 
 public class Credentials
 {

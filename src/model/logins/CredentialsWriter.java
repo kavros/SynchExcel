@@ -1,4 +1,4 @@
-package model.credentialsReaderWriter;
+package model.logins;
 
 import javassist.bytecode.stackmap.TypeData;
 import model.cipher.Cipher;

@@ -1,6 +1,6 @@
 import model.ExcelColumns;
-import model.parser.ExcelParser;
-import model.parser.ExcelRow;
+import model.excel.parser.ExcelParser;
+import model.excel.parser.ExcelRow;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;

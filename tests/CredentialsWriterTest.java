@@ -1,9 +1,9 @@
-import model.credentialsReaderWriter.Credentials;
-import model.credentialsReaderWriter.CredentialsWriter;
+import model.logins.Credentials;
+import model.logins.CredentialsWriter;
 import model.cipher.Cipher;
 import model.cipher.CipherException;
-import model.dbReader.DatabaseReader;
-import model.parser.ExcelParser;
+import model.database.DatabaseReader;
+import model.excel.parser.ExcelParser;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import static org.mockito.Mockito.mock;

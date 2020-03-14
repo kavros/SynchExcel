@@ -1,4 +1,4 @@
-package model.dbReader;
+package model.database;
 
 public class DatabaseRow
 {

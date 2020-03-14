@@ -1,7 +1,7 @@
-package model.dbReader;
+package model.database;
 
-import model.credentialsReaderWriter.Credentials;
-import model.credentialsReaderWriter.CredentialsReader;
+import model.logins.Credentials;
+import model.logins.CredentialsReader;
 import java.sql.*;
 
 public class DatabaseReader

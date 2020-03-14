@@ -1,4 +1,4 @@
-package model.parser;
+package model.excel.parser;
 
 import model.ExcelColumns;
 import org.apache.poi.ss.usermodel.Cell;

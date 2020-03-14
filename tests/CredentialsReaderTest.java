@@ -1,7 +1,7 @@
 
 import model.cipher.Cipher;
 import model.cipher.CipherException;
-import model.credentialsReaderWriter.*;
+import model.logins.*;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
