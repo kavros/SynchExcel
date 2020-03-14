@@ -1,6 +1,6 @@
 package model.excel.parser;
 
-import model.ExcelColumns;
+import model.excel.constants.ExcelColumns;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;

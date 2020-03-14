@@ -1,4 +1,4 @@
-import model.ExcelColumns;
+import model.excel.constants.ExcelColumns;
 import model.excel.parser.ExcelParser;
 import model.excel.parser.ExcelRow;
 import org.apache.poi.ss.usermodel.Row;

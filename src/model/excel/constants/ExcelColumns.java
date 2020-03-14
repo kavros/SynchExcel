@@ -1,4 +1,4 @@
-package model;
+package model.excel.constants;
 
 public final class ExcelColumns
 {
