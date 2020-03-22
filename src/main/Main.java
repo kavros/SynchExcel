@@ -16,6 +16,7 @@ public class Main
 
     public static void main(String[] args) throws Exception
     {
+        logger.info("Application started");
         Cipher ed = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(ed);
         XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);

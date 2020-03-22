@@ -1,6 +1,5 @@
 package model.excel.generator;
 
-import main.Main;
 import model.database.reader.DatabaseData;
 import model.database.reader.DatabaseReader;
 import model.excel.constants.ExcelColumns;
@@ -24,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ExcelGenerator
 {
-    public static final String outExcel     = "./excel/b.xlsx";
+    public static final String OUTPUT_FILE_NAME = "./excel/b.xlsx";
     private final DatabaseReader databaseReader;
     private final ExcelParser exlParser;
     private final XSSFWorkbook workbook;
@@ -38,7 +37,7 @@ public class ExcelGenerator
         this.workbook = workbook;
     }
 
-    public void GenerateExcel() throws Exception
+    public void GenerateExcel()
     {
         ExcelData excelData = exlParser.GetExcelData();
         DatabaseData dbData = databaseReader.GetDataFromWarehouse();
@@ -67,9 +66,9 @@ public class ExcelGenerator
     public void SaveExcel() throws IOException
     {
         if(exlParser.GetExcelData() == null)
-            System.err.println("SaveExcel failed because parser returns null");
+            logger.error("SaveExcel failed because parser returns null");
 
-        FileOutputStream output_file = new FileOutputStream(new File(outExcel));
+        FileOutputStream output_file = new FileOutputStream(new File(OUTPUT_FILE_NAME));
         workbook.write(output_file);
     }
 
@@ -97,7 +96,7 @@ public class ExcelGenerator
     {
         if(r == null)
         {
-            System.err.println("Error: row cannot be null");
+            logger.error("Error: row cannot be null");
             System.exit(-1);
         }
         Cell c = r.getCell(index);
@@ -120,12 +119,12 @@ public class ExcelGenerator
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(barcode);
-        logger.info
-                (
-                        "Updated entry ("+barcode+","+productName+") quantity from "
-                        + exlEntry.quantity + " to " + qValDb+ " at line "
-                        + (exlEntry.row+1)
-                );
+        String updateInfo = "Updated entry ("+barcode+","+productName+") quantity from "
+            + exlEntry.quantity + " to " + qValDb+ " at line "
+            + (exlEntry.row+1);
+
+        logger.info (updateInfo);
+
     }
 
     private void InsertCells(int lastRow, String bDbVal)
@@ -156,7 +155,8 @@ public class ExcelGenerator
                 .createCell(ExcelColumns.PRODUCT_CODE)
                 .setCellValue(dbData.Get(bDbVal).productCode);
 
-        logger.info("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
+        String addInfo ="Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1);
+        logger.info(addInfo);
     }
 
     private void UpdateLastPrcPr(String barcode)
@@ -173,8 +173,8 @@ public class ExcelGenerator
 
         Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.LAST_PRICE);
         c.setCellValue(lastPrcPrDb);
-
-        logger.info("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
+        String updateInfo ="Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1);
+        logger.info(updateInfo);
     }
 
     private void UpdatedStatusCol( String barcode)

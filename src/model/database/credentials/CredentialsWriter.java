@@ -1,9 +1,8 @@
 package model.database.credentials;
 
-import javassist.bytecode.stackmap.TypeData;
 import model.cipher.Cipher;
 import model.cipher.CipherException;
-
+import org.slf4j.LoggerFactory;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,8 +16,8 @@ public class CredentialsWriter
     {
         this.cipher  = cipher ;
     }
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CredentialsWriter.class);
 
-    private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
 
     public void SaveCredentials(Credentials credentials, String credFilePath)
     {
@@ -34,7 +33,7 @@ public class CredentialsWriter
         }
         catch(IOException | CipherException e)
         {
-            logger.log(Level.SEVERE,"Error: Failed to save file \n"+e);
+            logger.error("Failed to save file \n"+e);
         }
     }
 }
