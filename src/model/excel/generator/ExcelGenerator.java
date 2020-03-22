@@ -1,5 +1,6 @@
 package model.excel.generator;
 
+import main.Main;
 import model.database.reader.DatabaseData;
 import model.database.reader.DatabaseReader;
 import model.excel.constants.ExcelColumns;
@@ -11,6 +12,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +28,7 @@ public class ExcelGenerator
     private final DatabaseReader databaseReader;
     private final ExcelParser exlParser;
     private final XSSFWorkbook workbook;
+    private static final Logger logger = LoggerFactory.getLogger(ExcelGenerator.class);
 
     public ExcelGenerator( DatabaseReader databaseReader,
                           ExcelParser exlParser, XSSFWorkbook workbook)
@@ -116,7 +120,7 @@ public class ExcelGenerator
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(barcode);
-        System.out.println
+        logger.info
                 (
                         "Updated entry ("+barcode+","+productName+") quantity from "
                         + exlEntry.quantity + " to " + qValDb+ " at line "
@@ -152,7 +156,7 @@ public class ExcelGenerator
                 .createCell(ExcelColumns.PRODUCT_CODE)
                 .setCellValue(dbData.Get(bDbVal).productCode);
 
-        System.out.println("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
+        logger.info("Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1));
     }
 
     private void UpdateLastPrcPr(String barcode)
@@ -170,7 +174,7 @@ public class ExcelGenerator
         Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.LAST_PRICE);
         c.setCellValue(lastPrcPrDb);
 
-        System.out.println("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
+        logger.info("Updated entry ("+barcode+","+productName+") purchase price from " + exlEntry.lastPrcPr + " to " + lastPrcPrDb + " at line " + (exlEntry.row+1) );
     }
 
     private void UpdatedStatusCol( String barcode)
