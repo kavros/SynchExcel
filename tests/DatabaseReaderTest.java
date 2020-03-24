@@ -33,7 +33,7 @@ public class DatabaseReaderTest
         credentials.SetDbUrl("url");
         credentials.SetPassword("pass");
         credentials.SetUsername("kef");
-        when(credReader.GetCredentials(DatabaseReader.credFilePath)).thenReturn(credentials);
+        when(credReader.GetCredentials(DatabaseReader.CRED_FILE_PATH)).thenReturn(credentials);
         statement = mock(Statement.class);
         when(connection.createStatement()).thenReturn(statement);
         mockStatic(DriverManager.class);

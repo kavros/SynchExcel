@@ -1,19 +1,16 @@
 package model.database.credentials;
 
-import javassist.bytecode.stackmap.TypeData;
 import model.cipher.Cipher;
 import model.cipher.CipherException;
-
+import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CredentialsReader
 {
     Credentials credentials = new Credentials();
     private String credFilePath;
-    private static final Logger logger = Logger.getLogger( TypeData.ClassName.class.getName() );
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CredentialsReader.class);
     private CredentialsWriter credentialsWriter;
     private Cipher encrypterDecrypter;
 
@@ -31,7 +28,7 @@ public class CredentialsReader
             String line = reader.readLine();
             if( !IsLineInInValidFormat(line) )
             {
-                logger.log(Level.WARNING,"Credentials file format is invalid.");
+                logger.warn("Credentials file format is invalid.");
                 ReadCredentialsFromStdinAndSave();
             }
             else
@@ -40,12 +37,12 @@ public class CredentialsReader
             }
         }
         catch (IOException e) {
-            logger.log(Level.WARNING,"Failed to open file with credentials");
+            logger.warn("Failed to open file with credentials");
             ReadCredentialsFromStdinAndSave();
         }
         catch (CipherException e)
         {
-            logger.log(Level.WARNING,"Decryption failed.");
+            logger.warn("Decryption failed.");
             ReadCredentialsFromStdinAndSave();
         }
 
@@ -77,14 +74,14 @@ public class CredentialsReader
     private void GetCredentialsFromUser()
     {
         Scanner scan = new Scanner(System.in);
-
-        System.out.print("Username:");
+        logger.info("Please enter user credentials");
+        logger.info("Username:");
         credentials.username = scan.next();
-        System.out.print("Password:");
+        logger.info("Password:");
         credentials.password = scan.next();
-        System.out.print("Hostname:");
+        logger.info("Hostname:");
         credentials.hostname = scan.next();
-        System.out.print("Database name:");
+        logger.info("Database name:");
         credentials.databaseName = scan.next();
         credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName="+credentials.databaseName;
     }

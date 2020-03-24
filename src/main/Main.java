@@ -6,14 +6,17 @@ import model.database.reader.DatabaseReader;
 import model.excel.generator.ExcelGenerator;
 import model.excel.parser.ExcelParser;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main
 {
     public static final String inputExcel   = "./excel/a.xlsx";
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception
     {
+        logger.info("Application started");
         Cipher ed = new Cipher();
         CredentialsWriter cw = new CredentialsWriter(ed);
         XSSFWorkbook workbook = new  XSSFWorkbook(inputExcel);

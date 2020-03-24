@@ -2,13 +2,17 @@ package model.database.reader;
 
 import model.database.credentials.Credentials;
 import model.database.credentials.CredentialsReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 public class DatabaseReader
 {
     private final CredentialsReader credManager;
     private DatabaseData dbData;
-    public static final String credFilePath = "./credentials.txt";
+    public static final String CRED_FILE_PATH = "./credentials.txt";
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseReader.class);
 
     public DatabaseReader(CredentialsReader _credManager) throws Exception
     {
@@ -21,7 +25,7 @@ public class DatabaseReader
         if(dbData.Size() != 0)
             return dbData;
 
-        Credentials credentials = credManager.GetCredentials(credFilePath);
+        Credentials credentials = credManager.GetCredentials(CRED_FILE_PATH);
         try (Connection conn =
                      DriverManager.getConnection(credentials.GetDbURL(), credentials.GetUsername(), credentials.GetPassword());)
         {
@@ -40,7 +44,7 @@ public class DatabaseReader
         }
         catch (SQLException e)
         {
-            System.err.println("Failed to get data from database");
+            logger.error("Failed to get data from database");
             e.printStackTrace();
         }
         return dbData;
