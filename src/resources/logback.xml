@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d] [%p] %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <Append>true</Append>
+        <File>./excel/logs_history.txt</File>
+        <encoder>
+            <pattern>[%d] [%p] %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+    </appender>
+    <logger name="com.endeca.itl.web.metrics" level="INFO"/>
+    <logger name="com.endeca" level="INFO"/>
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
