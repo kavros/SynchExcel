@@ -9,8 +9,9 @@ import javax.crypto.*;
 import javax.crypto.spec.DESedeKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Component;
 
-
+@Component("cipher")
 public class Cipher
 {
     private static final String UNICODE_FORMAT = "UTF8";

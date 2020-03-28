@@ -3,21 +3,27 @@ package model.database.credentials;
 import model.cipher.Cipher;
 import model.cipher.CipherException;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.Scanner;
 
+@Component("credentialsReader")
 public class CredentialsReader
 {
     Credentials credentials = new Credentials();
     private String credFilePath;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CredentialsReader.class);
+    @Autowired
     private CredentialsWriter credentialsWriter;
-    private Cipher encrypterDecrypter;
+    @Autowired
+    private Cipher cipher;
 
     public CredentialsReader(CredentialsWriter cWriter,Cipher ed)
     {
         credentialsWriter=cWriter;
-        encrypterDecrypter = ed;
+        cipher = ed;
     }
 
     public Credentials GetCredentials(String filePath)
@@ -89,7 +95,7 @@ public class CredentialsReader
     private void LoadCredentials(String[] credentialsArray) throws CipherException
     {
         credentials.username = credentialsArray[0];
-        credentials.password = encrypterDecrypter.decrypt(credentialsArray[1]);
+        credentials.password = cipher.decrypt(credentialsArray[1]);
         credentials.hostname = credentialsArray[2];
         credentials.databaseName = credentialsArray[3];
         credentials.dbURL = "jdbc:sqlserver://" + credentials.hostname + ";" + "databaseName=" + credentials.databaseName;

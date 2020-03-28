@@ -4,17 +4,20 @@ import model.database.credentials.Credentials;
 import model.database.credentials.CredentialsReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.sql.*;
 
+@Component("databaseReader")
 public class DatabaseReader
 {
+    @Autowired
     private final CredentialsReader credManager;
     private DatabaseData dbData;
     public static final String CRED_FILE_PATH = "./credentials.txt";
     private static final Logger logger = LoggerFactory.getLogger(DatabaseReader.class);
 
-    public DatabaseReader(CredentialsReader _credManager) throws Exception
+    public DatabaseReader(CredentialsReader _credManager)
     {
         dbData = new DatabaseData();
         credManager = _credManager;
