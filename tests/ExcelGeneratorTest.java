@@ -67,7 +67,7 @@ public class ExcelGeneratorTest
         dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook = new XSSFWorkbook();
-        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
+        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13",20.0);
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
@@ -84,10 +84,11 @@ public class ExcelGeneratorTest
         String barcode = "43.13";
         double price = 1.0;
         Row row = workbook.getSheetAt(0).getRow(0);
-        assertTrue(row.getCell(4).getStringCellValue().equals(barcode) );
-        assertTrue(row.getCell(6).getNumericCellValue() == quantity );
-        assertTrue(row.getCell(5).getStringCellValue().equals(productName));
-        assertTrue(row.getCell(2).getNumericCellValue() == price);
+        assertTrue(row.getCell(ExcelColumns.BARCODE).getStringCellValue().equals(barcode) );
+        assertTrue(row.getCell(ExcelColumns.STORAGE_QUANTITY).getNumericCellValue() == quantity );
+        assertTrue(row.getCell(ExcelColumns.PRODUCT_DESCRIPTION).getStringCellValue().equals(productName));
+        assertTrue(row.getCell(ExcelColumns.LAST_PRICE).getNumericCellValue() == price);
+        assertTrue(row.getCell(ExcelColumns.STORE_QUANTITY).getNumericCellValue() == 20.0);
     }
 
     @Test
