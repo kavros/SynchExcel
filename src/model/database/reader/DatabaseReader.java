@@ -55,22 +55,29 @@ public class DatabaseReader
 
     private String GetProductsQuery()
     {
-        String storageId = "2";
-        return "select sFactCode,sstRemain1,sLastPrcPr,sname,sCode " +
-                "        FROM SSTORE " +
-                "        JOIN smast on sstore.sfileId=smast.sfileid " +
-                "        where spaFileIdNo="+ storageId;
+        return "select sFactCode,apothiki2.sstRemain1,sLastPrcPr,sname,sCode,apothiki1.sstRemain1"+
+                " from ("+
+                "   select sFactCode,sstRemain1,sLastPrcPr,sname,sCode,sstore.sfileId,spaFileIdNo"+
+                "   FROM SSTORE"+
+                "   JOIN smast on sstore.sfileId=smast.sfileid where spaFileIdNo=2"+
+                ")as apothiki2"+
+                " JOIN"+
+                " SSTORE as apothiki1"+
+                " on apothiki2.sfileId=apothiki1.sfileid"+
+                " where apothiki1.spaFileIdNo=1";
     }
 
     private void AddProduct(ResultSet res) throws SQLException
     {
         double lastPrcPr    = res.getDouble(3);
-        double quantity     = res.getDouble(2);
+        double quantity_2     = res.getDouble(2);
         String barcode      = res.getString(1);
         String productName  = res.getString(4);
         String productCode  = res.getString(5);
+        double quantity_1   =    res.getDouble(6);
 
-        DatabaseRow val = new DatabaseRow(quantity,lastPrcPr,productName,productCode);
+        DatabaseRow val = new DatabaseRow(quantity_2,lastPrcPr,productName,productCode,quantity_1);
         dbData.Add(barcode,val);
+        System.out.println(val);
     }
 }

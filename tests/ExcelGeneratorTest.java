@@ -1,6 +1,7 @@
 import model.database.reader.DatabaseData;
 import model.database.reader.DatabaseRow;
 import model.database.reader.DatabaseReader;
+import model.excel.constants.ExcelColumns;
 import model.excel.generator.ExcelGenerator;
 import model.excel.parser.ExcelData;
 import model.excel.parser.ExcelParser;
@@ -66,7 +67,7 @@ public class ExcelGeneratorTest
         dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook = new XSSFWorkbook();
-        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
+        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
@@ -96,7 +97,7 @@ public class ExcelGeneratorTest
         dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow dbDetails = new DatabaseRow(10,1.1,"bread","43.13");
+        DatabaseRow dbDetails = new DatabaseRow(10,1.1,"bread","43.13",10.0);
         ExcelRow excelDetails = new ExcelRow(0,1.0,0.0);
         dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
@@ -111,10 +112,11 @@ public class ExcelGeneratorTest
 
         generator.GenerateExcel();
 
-        assertTrue(row.getCell(4).getStringCellValue().equals(barcode));
-        assertTrue(row.getCell(6).getNumericCellValue() == 10.0 );
-        assertTrue(row.getCell(5).getStringCellValue().equals(productName));
-        assertTrue(row.getCell(2).getNumericCellValue() == 1.1);
+        assertTrue(row.getCell(ExcelColumns.BARCODE).getStringCellValue().equals(barcode));
+        assertTrue(row.getCell(ExcelColumns.QUANTITY_2).getNumericCellValue() == 10.0 );
+        assertTrue(row.getCell(ExcelColumns.PRODUCT_DESCRIPTION).getStringCellValue().equals(productName));
+        assertTrue(row.getCell(ExcelColumns.LAST_PRICE).getNumericCellValue() == 1.1);
+        assertTrue(row.getCell(ExcelColumns.QUANTITY_1).getNumericCellValue() == 10.0);
     }
 
     @Test
@@ -124,8 +126,8 @@ public class ExcelGeneratorTest
         dbData    = new DatabaseData();
         excelData = new ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
-        DatabaseRow product2Details = new DatabaseRow(1.0,1.0,"paper","43.13");
+        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
+        DatabaseRow product2Details = new DatabaseRow(1.0,1.0,"paper","43.13",0.0);
         ExcelRow excelDetails = new ExcelRow(0, 1.0, 1.0);
         dbData.Add("43.13",productDetails);
         dbData.Add("43.14",product2Details);
@@ -148,8 +150,8 @@ public class ExcelGeneratorTest
         dbData    = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13");
-        DatabaseRow product2Details = new DatabaseRow(0.0,1.0,"paper","43.13");
+        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
+        DatabaseRow product2Details = new DatabaseRow(0.0,1.0,"paper","43.13",0.0);
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.Add("43.13",productDetails);
         dbData.Add("43.14",product2Details);
@@ -174,10 +176,10 @@ public class ExcelGeneratorTest
 
         Sheet sheet = workbook.createSheet("test");
         Row row = sheet.createRow(0);
-        row.createCell(4).setCellValue(barcode);
-        row.createCell(6).setCellValue(quantity);
-        row.createCell(5).setCellValue(productName);
-        row.createCell(2).setCellValue(price);
+        row.createCell(ExcelColumns.BARCODE).setCellValue(barcode);
+        row.createCell(ExcelColumns.QUANTITY_2).setCellValue(quantity);
+        row.createCell(ExcelColumns.PRODUCT_DESCRIPTION).setCellValue(productName);
+        row.createCell(ExcelColumns.LAST_PRICE).setCellValue(price);
     }
 
 }

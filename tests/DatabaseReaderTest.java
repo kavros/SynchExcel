@@ -60,6 +60,7 @@ public class DatabaseReaderTest
         when(resultSet.getString(1)).thenReturn("4313");
         when(resultSet.getString(4)).thenReturn("Bread");
         when(resultSet.getDouble(2)).thenReturn(2.0);
+        when(resultSet.getDouble(6)).thenReturn(1.0);
         when(resultSet.getDouble(3)).thenReturn(1.0);
         when(resultSet.getString(5)).thenReturn("43.13");
         when(statement
@@ -70,8 +71,9 @@ public class DatabaseReaderTest
 
         assertTrue (result.Get("4313").lastPrcPr == 1.0);
         assertTrue (result.Get("4313").productName.equals("Bread"));
-        assertTrue (result.Get("4313").quantity == 2.0 );
+        assertTrue (result.Get("4313").quantity_2 == 2.0 );
         assertTrue (result.Get("4313").productCode.equals("43.13"));
+        assertTrue (result.Get("4313").quantity_1 == 1);
     }
 
     @Test

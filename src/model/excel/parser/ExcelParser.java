@@ -42,7 +42,7 @@ public class ExcelParser
             currRow++;
             Row row = rowIterator.next();
             String bVal = GetBarcode(row.getCell(ExcelColumns.BARCODE));
-            Double qVal = GetNumericValue(row.getCell(ExcelColumns.QUANTITY));
+            Double qVal = GetNumericValue(row.getCell(ExcelColumns.QUANTITY_2));
             Double lastPrcPr = GetNumericValue(row.getCell(ExcelColumns.LAST_PRICE));
 
             if (bVal != null && qVal != null)
