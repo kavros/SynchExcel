@@ -48,7 +48,7 @@ public class ExcelGenerator
 
         for(String bDbVal:dbData.GetBarcodes())
         {
-            Double qValDb = dbData.Get(bDbVal).quantity_2;
+            Double qValDb = dbData.Get(bDbVal).storageQuantity;
             boolean isBarcodeInExcel = (excelData.Get(bDbVal) != null);
 
             if (isBarcodeInExcel)
@@ -76,11 +76,11 @@ public class ExcelGenerator
     {
 
         ExcelRow exlEntry = exlParser.GetExcelData().Get(bDbVal);
-        Double qValDb = databaseReader.GetDataFromWarehouse().Get(bDbVal).quantity_2;
-        boolean isQuantityChanged = ( Double.compare(qValDb,exlEntry.quantity_2) != 0 );
+        Double qValDb = databaseReader.GetDataFromWarehouse().Get(bDbVal).storageQuantity;
+        boolean isQuantityChanged = ( Double.compare(qValDb,exlEntry.storageQuantity) != 0 );
         if ( isQuantityChanged )
         {
-            UpdateQuantity(bDbVal);
+            UpdateStorageQuantity(bDbVal);
         }
 
         Double lastPrcPrDb  = databaseReader.GetDataFromWarehouse().Get(bDbVal).lastPrcPr;
@@ -91,33 +91,33 @@ public class ExcelGenerator
             UpdateLastPrcPr(bDbVal);
         }
 
-        UpdateQuantity_1(bDbVal);
+        UpdateStoreQuantity(bDbVal);
     }
 
-    private void UpdateQuantity_1(String barcode)
+    private void UpdateStoreQuantity(String barcode)
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        Double q1ValDb = databaseReader.GetDataFromWarehouse().Get(barcode).quantity_1;
+        Double q1ValDb = databaseReader.GetDataFromWarehouse().Get(barcode).storeQuantity;
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
 
-        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.QUANTITY_1);
+        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.STORE_QUANTITY);
         c.setCellValue(q1ValDb);
     }
 
-    private void UpdateQuantity(String barcode)
+    private void UpdateStorageQuantity(String barcode)
     {
         XSSFSheet sheet = workbook.getSheetAt(0);
-        Double qValDb = databaseReader.GetDataFromWarehouse().Get(barcode).quantity_2;
+        Double qValDb = databaseReader.GetDataFromWarehouse().Get(barcode).storageQuantity;
         String productName = databaseReader.GetDataFromWarehouse().Get(barcode).productName;
         ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
 
-        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.QUANTITY_2);
+        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.STORAGE_QUANTITY);
         c.setCellValue(qValDb);
 
         UpdatedStatusCol(barcode);
 
-        String updateInfo = "Updated entry ("+barcode+","+productName+") quantity_2 from "
-            + exlEntry.quantity_2 + " to " + qValDb+ " at line "
+        String updateInfo = "Updated storage quantity ("+barcode+","+productName+") from "
+            + exlEntry.storageQuantity + " to " + qValDb+ " at line "
             + (exlEntry.row+1);
         logger.info (updateInfo);
     }
@@ -140,7 +140,7 @@ public class ExcelGenerator
     private void InsertCells(int lastRow, String bDbVal)
     {
         DatabaseData dbData = databaseReader.GetDataFromWarehouse();
-        Double qValDb = dbData.Get(bDbVal).quantity_2;
+        Double qValDb = dbData.Get(bDbVal).storageQuantity;
         String productName =  dbData.Get(bDbVal).productName;
         XSSFSheet sheet = workbook.getSheetAt(0);
         XSSFRow endOfSheet = sheet.createRow(lastRow+1);
@@ -150,8 +150,8 @@ public class ExcelGenerator
             .setCellValue(bDbVal);
 
         endOfSheet
-                .createCell(ExcelColumns.QUANTITY_2)
-                .setCellValue(dbData.Get(bDbVal).quantity_2);
+                .createCell(ExcelColumns.STORAGE_QUANTITY)
+                .setCellValue(dbData.Get(bDbVal).storageQuantity);
 
         endOfSheet
                 .createCell(ExcelColumns.PRODUCT_DESCRIPTION)
@@ -166,8 +166,8 @@ public class ExcelGenerator
                 .setCellValue(dbData.Get(bDbVal).productCode);
 
         endOfSheet
-                .createCell(ExcelColumns.QUANTITY_1)
-                .setCellValue(dbData.Get(bDbVal).quantity_1);
+                .createCell(ExcelColumns.STORE_QUANTITY)
+                .setCellValue(dbData.Get(bDbVal).storeQuantity);
 
         String addInfo ="Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1);
         logger.info(addInfo);
@@ -199,7 +199,7 @@ public class ExcelGenerator
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy");
         LocalDate localDate = LocalDate.now();
 
-        c2.setCellValue("Updated quantity_2 on "+dtf.format(localDate));
+        c2.setCellValue("Updated storage quantity on "+dtf.format(localDate));
     }
 
 

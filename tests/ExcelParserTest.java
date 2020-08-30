@@ -18,14 +18,14 @@ public class ExcelParserTest
         Row row = sheet.createRow(0);
         row.createCell(ExcelColumns.BARCODE).setCellValue("43.13");
         row.createCell(ExcelColumns.LAST_PRICE).setCellValue(1.00f);
-        row.createCell(ExcelColumns.QUANTITY_2).setCellValue(6);
+        row.createCell(ExcelColumns.STORAGE_QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelRow result =  parser.GetExcelData().Get("43.13");
 
         ExcelRow expectedResult = new ExcelRow(0, 6.0, 1.0);
         assertTrue(result.lastPrcPr.equals( expectedResult.lastPrcPr ));
-        assertTrue(result.quantity_2.equals( expectedResult.quantity_2));
+        assertTrue(result.storageQuantity.equals( expectedResult.storageQuantity));
         assertTrue(result.row ==  expectedResult.row );
     }
 
@@ -37,14 +37,14 @@ public class ExcelParserTest
         Row row = sheet.createRow(0);
         row.createCell(ExcelColumns.BARCODE).setCellValue(new Double("9999000869"));
         row.createCell(ExcelColumns.LAST_PRICE).setCellValue(1.0);
-        row.createCell(ExcelColumns.QUANTITY_2).setCellValue(6);
+        row.createCell(ExcelColumns.STORAGE_QUANTITY).setCellValue(6);
         ExcelParser parser = new ExcelParser(workbook);
 
         ExcelRow result =  parser.GetExcelData().Get("9999000869");
 
         ExcelRow expectedResult = new ExcelRow(0, 6.0, 1.0);
         assertTrue(result.lastPrcPr.equals( expectedResult.lastPrcPr ));
-        assertTrue(result.quantity_2.equals( expectedResult.quantity_2));
+        assertTrue(result.storageQuantity.equals( expectedResult.storageQuantity));
         assertTrue(result.row ==  expectedResult.row );
     }
 }

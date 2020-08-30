@@ -70,13 +70,13 @@ public class DatabaseReader
     private void AddProduct(ResultSet res) throws SQLException
     {
         double lastPrcPr    = res.getDouble(3);
-        double quantity_2     = res.getDouble(2);
+        double storageQuantity     = res.getDouble(2);
         String barcode      = res.getString(1);
         String productName  = res.getString(4);
         String productCode  = res.getString(5);
-        double quantity_1   =    res.getDouble(6);
+        double storeQuantity   =    res.getDouble(6);
 
-        DatabaseRow val = new DatabaseRow(quantity_2,lastPrcPr,productName,productCode,quantity_1);
+        DatabaseRow val = new DatabaseRow(storageQuantity,lastPrcPr,productName,productCode,storeQuantity);
         dbData.Add(barcode,val);
         System.out.println(val);
     }

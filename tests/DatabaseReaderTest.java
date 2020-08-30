@@ -71,9 +71,9 @@ public class DatabaseReaderTest
 
         assertTrue (result.Get("4313").lastPrcPr == 1.0);
         assertTrue (result.Get("4313").productName.equals("Bread"));
-        assertTrue (result.Get("4313").quantity_2 == 2.0 );
+        assertTrue (result.Get("4313").storageQuantity == 2.0 );
         assertTrue (result.Get("4313").productCode.equals("43.13"));
-        assertTrue (result.Get("4313").quantity_1 == 1);
+        assertTrue (result.Get("4313").storeQuantity == 1);
     }
 
     @Test

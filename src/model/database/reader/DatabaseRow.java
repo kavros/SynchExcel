@@ -2,29 +2,29 @@ package model.database.reader;
 
 public class DatabaseRow
 {
-    public final double quantity_2;
+    public final double storageQuantity;
     public final double lastPrcPr;
     public final String productName;
     public final String productCode;
-    public final double quantity_1;
+    public final double storeQuantity;
 
-    public DatabaseRow(double q2, double l, String p, String c, double q1)
+    public DatabaseRow(double _storageQuantity, double _lastPrcPr, String _productName, String _productCode, double _storeQuantity)
     {
-        quantity_2 = q2;
-        quantity_1 = q1;
-        lastPrcPr = l;
-        productName = p;
-        productCode = c;
+        storageQuantity = _storageQuantity;
+        storeQuantity   = _storeQuantity;
+        lastPrcPr       = _lastPrcPr;
+        productName     = _productName;
+        productCode     = _productCode;
     }
 
     @Override
     public String toString() {
         return "DatabaseRow{" +
-                "quantity_2=" + quantity_2 +
+                "storageQuantity=" + storageQuantity +
                 ", lastPrcPr=" + lastPrcPr +
                 ", productName='" + productName + '\'' +
                 ", productCode='" + productCode + '\'' +
-                ", quantity_1=" + quantity_1 +
+                ", storeQuantity=" + storeQuantity +
                 '}';
     }
 }

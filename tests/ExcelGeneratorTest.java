@@ -113,10 +113,10 @@ public class ExcelGeneratorTest
         generator.GenerateExcel();
 
         assertTrue(row.getCell(ExcelColumns.BARCODE).getStringCellValue().equals(barcode));
-        assertTrue(row.getCell(ExcelColumns.QUANTITY_2).getNumericCellValue() == 10.0 );
+        assertTrue(row.getCell(ExcelColumns.STORAGE_QUANTITY).getNumericCellValue() == 10.0 );
         assertTrue(row.getCell(ExcelColumns.PRODUCT_DESCRIPTION).getStringCellValue().equals(productName));
         assertTrue(row.getCell(ExcelColumns.LAST_PRICE).getNumericCellValue() == 1.1);
-        assertTrue(row.getCell(ExcelColumns.QUANTITY_1).getNumericCellValue() == 10.0);
+        assertTrue(row.getCell(ExcelColumns.STORE_QUANTITY).getNumericCellValue() == 10.0);
     }
 
     @Test
@@ -177,7 +177,7 @@ public class ExcelGeneratorTest
         Sheet sheet = workbook.createSheet("test");
         Row row = sheet.createRow(0);
         row.createCell(ExcelColumns.BARCODE).setCellValue(barcode);
-        row.createCell(ExcelColumns.QUANTITY_2).setCellValue(quantity);
+        row.createCell(ExcelColumns.STORAGE_QUANTITY).setCellValue(quantity);
         row.createCell(ExcelColumns.PRODUCT_DESCRIPTION).setCellValue(productName);
         row.createCell(ExcelColumns.LAST_PRICE).setCellValue(price);
     }
