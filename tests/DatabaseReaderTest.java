@@ -63,6 +63,7 @@ public class DatabaseReaderTest
         when(resultSet.getDouble(6)).thenReturn(1.0);
         when(resultSet.getDouble(3)).thenReturn(1.0);
         when(resultSet.getString(5)).thenReturn("43.13");
+        when(resultSet.getFloat(7)).thenReturn(13.0f);
         when(statement
                 .executeQuery(Mockito.anyString())).thenReturn(resultSet);
         replay(DriverManager.class);
@@ -74,6 +75,7 @@ public class DatabaseReaderTest
         assertTrue (result.Get("4313").storageQuantity == 2.0 );
         assertTrue (result.Get("4313").productCode.equals("43.13"));
         assertTrue (result.Get("4313").storeQuantity == 1);
+        assertTrue (result.Get("4313").vatCode == 13);
     }
 
     @Test

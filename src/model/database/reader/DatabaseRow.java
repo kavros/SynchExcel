@@ -7,14 +7,17 @@ public class DatabaseRow
     public final String productName;
     public final String productCode;
     public final double storeQuantity;
+    public final float vatCode;
 
-    public DatabaseRow(double _storageQuantity, double _lastPrcPr, String _productName, String _productCode, double _storeQuantity)
+    public DatabaseRow(double _storageQuantity, double _lastPrcPr, String _productName, String _productCode,
+                       double _storeQuantity, float _vatCode)
     {
         storageQuantity = _storageQuantity;
         storeQuantity   = _storeQuantity;
         lastPrcPr       = _lastPrcPr;
         productName     = _productName;
         productCode     = _productCode;
+        vatCode = _vatCode;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class DatabaseRow
                 ", productName='" + productName + '\'' +
                 ", productCode='" + productCode + '\'' +
                 ", storeQuantity=" + storeQuantity +
+                ", fpa="+ vatCode +
                 '}';
     }
 }

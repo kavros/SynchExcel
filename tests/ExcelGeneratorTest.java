@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -67,7 +68,9 @@ public class ExcelGeneratorTest
         dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook = new XSSFWorkbook();
-        DatabaseRow dbDetails = new DatabaseRow(1.0,1.0,"bread","43.13",20.0);
+        DatabaseRow dbDetails = new DatabaseRow(
+                1.0,1.0,"bread",
+                "43.13",20.0, 0.13f);
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
@@ -98,7 +101,8 @@ public class ExcelGeneratorTest
         dbData = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow dbDetails = new DatabaseRow(10,1.1,"bread","43.13",10.0);
+        DatabaseRow dbDetails = new DatabaseRow(10,1.1,
+                "bread","43.13",10.0,0.13f);
         ExcelRow excelDetails = new ExcelRow(0,1.0,0.0);
         dbData.Add("43.13",dbDetails);
         excelData.Add(excelDetails,"43.13");
@@ -115,9 +119,10 @@ public class ExcelGeneratorTest
 
         assertTrue(row.getCell(ExcelColumns.BARCODE).getStringCellValue().equals(barcode));
         assertTrue(row.getCell(ExcelColumns.STORAGE_QUANTITY).getNumericCellValue() == 10.0 );
-        assertTrue(row.getCell(ExcelColumns.PRODUCT_DESCRIPTION).getStringCellValue().equals(productName));
+        assertEquals(row.getCell(ExcelColumns.PRODUCT_DESCRIPTION).getStringCellValue(), productName);
         assertTrue(row.getCell(ExcelColumns.LAST_PRICE).getNumericCellValue() == 1.1);
         assertTrue(row.getCell(ExcelColumns.STORE_QUANTITY).getNumericCellValue() == 10.0);
+        assertEquals("0.13", row.getCell(ExcelColumns.PRODUCT_VAT_CODE).getStringCellValue());
     }
 
     @Test
@@ -127,8 +132,12 @@ public class ExcelGeneratorTest
         dbData    = new DatabaseData();
         excelData = new ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
-        DatabaseRow product2Details = new DatabaseRow(1.0,1.0,"paper","43.13",0.0);
+        DatabaseRow productDetails = new DatabaseRow(
+                1.0,1.0,"bread",
+                "43.13",0.0, 13f);
+        DatabaseRow product2Details = new DatabaseRow(
+                1.0,1.0,"paper",
+                "43.13",0.0,13f);
         ExcelRow excelDetails = new ExcelRow(0, 1.0, 1.0);
         dbData.Add("43.13",productDetails);
         dbData.Add("43.14",product2Details);
@@ -151,8 +160,12 @@ public class ExcelGeneratorTest
         dbData    = new DatabaseData();
         excelData = new  ExcelData();
         workbook  = new XSSFWorkbook();
-        DatabaseRow productDetails = new DatabaseRow(1.0,1.0,"bread","43.13",0.0);
-        DatabaseRow product2Details = new DatabaseRow(0.0,1.0,"paper","43.13",0.0);
+        DatabaseRow productDetails = new DatabaseRow(
+                1.0,1.0, "bread",
+                "43.13",0.0,13f);
+        DatabaseRow product2Details = new DatabaseRow(
+                0.0,1.0, "paper",
+                "43.13",0.0,13f);
         ExcelRow excelDetails = new ExcelRow(0,1.0,1.0);
         dbData.Add("43.13",productDetails);
         dbData.Add("43.14",product2Details);

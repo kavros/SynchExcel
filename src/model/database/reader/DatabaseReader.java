@@ -55,15 +55,16 @@ public class DatabaseReader
 
     private String GetProductsQuery()
     {
-        return "select sFactCode,apothiki2.sstRemain1,sLastPrcPr,sname,sCode,apothiki1.sstRemain1"+
+        return "select sFactCode,apothiki2.sstRemain1,sLastPrcPr,sname,sCode,apothiki1.sstRemain1, FpaData"+
                 " from ("+
-                "   select sFactCode,sstRemain1,sLastPrcPr,sname,sCode,sstore.sfileId,spaFileIdNo"+
+                "   select sFactCode,sstRemain1,sLastPrcPr,sname,sCode,sstore.sfileId,spaFileIdNo,sVATCode"+
                 "   FROM SSTORE"+
                 "   JOIN smast on sstore.sfileId=smast.sfileid where spaFileIdNo=2"+
                 ")as apothiki2"+
                 " JOIN"+
                 " SSTORE as apothiki1"+
                 " on apothiki2.sfileId=apothiki1.sfileid"+
+                " JOIN VAT on apothiki2.sVATCode = vat.FpaCode"+
                 " where apothiki1.spaFileIdNo=1";
     }
 
@@ -75,8 +76,9 @@ public class DatabaseReader
         String productName  = res.getString(4);
         String productCode  = res.getString(5);
         double storeQuantity   =    res.getDouble(6);
+        float fpa              = res.getFloat(7);
 
-        DatabaseRow val = new DatabaseRow(storageQuantity,lastPrcPr,productName,productCode,storeQuantity);
+        DatabaseRow val = new DatabaseRow(storageQuantity,lastPrcPr,productName,productCode,storeQuantity,fpa);
         dbData.Add(barcode,val);
         System.out.println(val);
     }

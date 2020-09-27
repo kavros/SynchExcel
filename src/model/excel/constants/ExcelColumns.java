@@ -9,4 +9,5 @@ public final class ExcelColumns
     public static final int UPDATE_STATUS = 1;
     public static final int PRODUCT_CODE = 4;
     public static final int PRODUCT_DESCRIPTION = 5;
+    public static final int PRODUCT_VAT_CODE = 14;
 }

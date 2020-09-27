@@ -7,6 +7,7 @@ import model.excel.parser.ExcelData;
 import model.excel.parser.ExcelParser;
 import model.excel.parser.ExcelRow;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -92,6 +93,7 @@ public class ExcelGenerator
         }
 
         UpdateStoreQuantity(bDbVal);
+        UpdateVatCode(bDbVal);
     }
 
     private void UpdateStoreQuantity(String barcode)
@@ -102,6 +104,15 @@ public class ExcelGenerator
 
         Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.STORE_QUANTITY);
         c.setCellValue(q1ValDb);
+    }
+
+    private void UpdateVatCode(String barcode) {
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        float vatCode = databaseReader.GetDataFromWarehouse().Get(barcode).vatCode;
+        ExcelRow exlEntry = exlParser.GetExcelData().Get(barcode);
+
+        Cell c = GetCell(sheet.getRow(exlEntry.row), ExcelColumns.PRODUCT_VAT_CODE);
+        c.setCellValue(String.valueOf(vatCode));
     }
 
     private void UpdateStorageQuantity(String barcode)
@@ -168,6 +179,10 @@ public class ExcelGenerator
         endOfSheet
                 .createCell(ExcelColumns.STORE_QUANTITY)
                 .setCellValue(dbData.Get(bDbVal).storeQuantity);
+
+        endOfSheet
+                .createCell(ExcelColumns.PRODUCT_VAT_CODE)
+                .setCellValue(dbData.Get(bDbVal).vatCode);
 
         String addInfo ="Added entry ("+ bDbVal+ ","+productName+","+qValDb+")at line "+(lastRow+1);
         logger.info(addInfo);
