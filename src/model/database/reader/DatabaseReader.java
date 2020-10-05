@@ -80,6 +80,5 @@ public class DatabaseReader
 
         DatabaseRow val = new DatabaseRow(storageQuantity,lastPrcPr,productName,productCode,storeQuantity,fpa);
         dbData.Add(barcode,val);
-        System.out.println(val);
     }
 }
