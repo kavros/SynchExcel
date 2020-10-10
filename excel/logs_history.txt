@@ -1,0 +1,25 @@
+[2020-10-10 13:45:33,377] [INFO] Application started
+[2020-10-10 13:45:41,759] [INFO] Updated storage quantity (5201005079373,AMITA MOΣION 330gr 24TEM) from 24.0 to 2.0 at line 1308
+[2020-10-10 13:45:41,760] [INFO] Updated entry (5201005079373,AMITA MOΣION 330gr 24TEM) purchase price from 0.67 to 0.64 at line 1308
+[2020-10-10 13:45:41,768] [INFO] Added entry (5998711723491,ΣOKOΛ. MILKA KAPAMEΛA 100GRX15,4.0)at line 1376
+[2020-10-10 13:45:41,777] [INFO] Added entry (8711800114157,PRONTO KPEMA 12X250ML,2.0)at line 1377
+[2020-10-10 13:45:41,781] [INFO] Updated storage quantity (5900259094704,SNACKS DORITOS NACHO 100GR 27TMX) from 0.0 to 4.0 at line 895
+[2020-10-10 13:45:41,782] [INFO] Updated entry (5900259094704,SNACKS DORITOS NACHO 100GR 27TMX) purchase price from 0.62 to 0.68 at line 895
+[2020-10-10 13:58:33,174] [INFO] Application started
+[2020-10-10 13:58:39,733] [INFO] Updated storage quantity (5201005079373,AMITA MOΣION 330gr 24TEM) from 24.0 to 2.0 at line 1308
+[2020-10-10 13:58:39,734] [INFO] Updated entry (5201005079373,AMITA MOΣION 330gr 24TEM) purchase price from 0.67 to 0.64 at line 1308
+[2020-10-10 13:58:39,744] [INFO] Added entry (5998711723491,ΣOKOΛ. MILKA KAPAMEΛA 100GRX15,4.0)at line 1376
+[2020-10-10 13:58:39,750] [INFO] Added entry (8711800114157,PRONTO KPEMA 12X250ML,2.0)at line 1377
+[2020-10-10 13:58:39,753] [INFO] Updated storage quantity (5900259094704,SNACKS DORITOS NACHO 100GR 27TMX) from 0.0 to 4.0 at line 895
+[2020-10-10 13:58:39,755] [INFO] Updated entry (5900259094704,SNACKS DORITOS NACHO 100GR 27TMX) purchase price from 0.62 to 0.68 at line 895
+[2020-10-10 14:05:30,881] [WARN] Credentials file format is invalid.
+[2020-10-10 14:05:30,892] [INFO] Please enter user credentials
+[2020-10-10 14:05:30,892] [INFO] Username:
+[2020-10-10 14:05:30,893] [INFO] Password:
+[2020-10-10 14:05:30,893] [INFO] Hostname:
+[2020-10-10 14:05:30,894] [INFO] Database name:
+[2020-10-10 14:05:31,317] [ERROR] Failed to save file 
+model.cipher.CipherException: 
+[2020-10-10 14:05:38,690] [INFO] Added entry (43.14,paper,1.0)at line 2
+[2020-10-10 14:05:38,750] [INFO] Updated storage quantity (43.13,bread) from 1.0 to 10.0 at line 1
+[2020-10-10 14:05:38,751] [INFO] Updated entry (43.13,bread) purchase price from 0.0 to 1.1 at line 1
