@@ -85,6 +85,9 @@ public class ExcelParser
         }
         else if (c.getCellType() == CellType.STRING)
         {
+            if(c.getStringCellValue().equals("9999000820")){
+                System.err.println("Error");
+            }
             btVal = c.getStringCellValue();
         }
 
@@ -100,6 +103,12 @@ public class ExcelParser
         if (c.getCellType() == CellType.NUMERIC )
         {
             qtVal = c.getNumericCellValue();
+        }else if(c.getCellType() == CellType.STRING){
+            try {
+                qtVal = Double.parseDouble(c.getStringCellValue().replace(",", "."));
+            }catch (NumberFormatException nfe) {
+                return null;
+            }
         }
 
         return qtVal;
