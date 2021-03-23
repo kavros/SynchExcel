@@ -85,9 +85,6 @@ public class ExcelParser
         }
         else if (c.getCellType() == CellType.STRING)
         {
-            if(c.getStringCellValue().equals("9999000820")){
-                System.err.println("Error");
-            }
             btVal = c.getStringCellValue();
         }
 
